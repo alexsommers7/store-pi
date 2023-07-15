@@ -1,34 +1,90 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# StorePI
 
-## Getting Started
+StorePI is a free, open-source REST and GraphQL API that was created for use in e-commerce prototyping, Front-End Developer talent evaluations, and anything else you can think of.
 
-First, run the development server:
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12907395-876b1330-5f7c-4897-ab79-0603acc76801?action=collection%2Ffork&collection-url=entityId%3D12907395-876b1330-5f7c-4897-ab79-0603acc76801%26entityType%3Dcollection%26workspaceId%3D526243f7-f864-4c95-a9d4-92825249cad6#?env%5BProd%3A%20StorePI%5D=W3sia2V5IjoiVVJMIiwidmFsdWUiOiJodHRwczovL3N0b3JlcGkuaGVyb2t1YXBwLmNvbSIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJwYXNzd29yZCIsInZhbHVlIjoicGFzc3dvcmQiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5Ijoiand0IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiYW55In1d)
 
-```bash
+🔗 **[Full Documentation](https://storepi.herokuapp.com)**
+
+## Resources
+
+- Products
+- Categories
+- Reviews
+- Users
+- Carts
+- Purchases
+- Wishlist
+- JWT Authentication
+
+## Database Interaction
+
+All endpoints act as real-world endpoints, but without actually writing anything to the database. In the event that you are creating or updating a resource, the response will still contain the updated data despite not persisting it.
+
+## CORS
+
+Cross-origin resource sharing is enabled for all incoming requests.
+
+## Rate Limiting
+
+The rate limit for a given IP address is 50 requests per minute. The number of requests you have remaining can be viewed in the `X-Ratelimit-Remaining` response header of any request.
+
+## Authorization
+
+Certain requests require a JWT for authorization. Requests that do require the token are indicated as such by the icon. As a general rule, any REST or GraphQL request that is reading or writing to a current user's resources will require the bearer token.
+
+For REST calls, a token can be obtained via the log in endpoint. For GraphQL calls, you can obtain a token via the login mutation. In both situations, the token will be returned in the response body and will be valid for 90 days.
+
+## GraphQL
+
+StorePI includes a GraphQL API powered by Apollo Server, offering compatibility with any GraphQL client, including the popular Apollo Client.
+
+Every request has its equivalent GraphQL query/mutation accessible at https://storepi.herokuapp.com/graphql. You may pass in the same query parameters as REST calls, with the exception of fields.
+
+To explore and test all available queries and mutations, visit the [Apollo Sandbox](https://studio.apollographql.com/sandbox/explorer/?endpoint=https://storepi.herokuapp.com/graphql).
+
+### Prerequisites
+
+Node v16.14.0
+
+### Installs dependencies, compiles, and hot-reloads for development
+
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installs dependencies, compiles, and hot-reloads server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+npm run dev:server
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Installs dependencies, compiles, and hot-reloads client
 
-## Learn More
+```
+npm run dev:client
+```
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+MIT License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Copyright (c) 2022 Alex Sommers
 
-## Deploy on Vercel
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
