@@ -5,7 +5,7 @@ import { NavLink } from '@/_components/navigation/navLink';
 
 export function Navigation() {
   return (
-    <nav className='sticky z-40 rounded-sm bg-inherit top-0 min-[1151px]:px-8 py-5 border-b-2 border-b-stone-900'>
+    <nav className='sticky z-40 rounded-sm bg-inherit top-0 py-5 border-b-2 border-b-stone-900'>
       <div className='flex items-center justify-between max-w-[90rem] mx-auto px-6'>
         <Link href='/'>
           <h1 className='text-xl'>
