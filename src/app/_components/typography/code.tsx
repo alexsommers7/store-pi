@@ -24,7 +24,7 @@ export function Code({ code }: SectionHeadingProps) {
   };
 
   return (
-    <pre className='relative language-javascript p-3 bg-indigo-400/10'>
+    <pre className='relative language-javascript p-3 bg-indigo-400/10 max-h-[400px] overflow-y-auto scrollbar-thin'>
       <button
         type='button'
         className='absolute top-3 right-4'

@@ -112,7 +112,7 @@ export default function Introduction() {
           due to the nature of GraphQL queries.
         </p>
 
-        <div className='overflow-x-auto'>
+        <div className='overflow-x-auto scrollbar-thin'>
           <table className='table-auto text-left min-w-[814px]'>
             <thead>
               <tr className='border-b-2 border-b-stone-900'>

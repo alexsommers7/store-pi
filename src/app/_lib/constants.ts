@@ -6,10 +6,3 @@ export const HTTPMethods = {
   PUT: 'PUT',
   DELETE: 'DELETE',
 };
-
-export const HTTPColors = {
-  GET: 'green',
-  POST: 'blue',
-  PUT: 'orange',
-  DELETE: 'red',
-};

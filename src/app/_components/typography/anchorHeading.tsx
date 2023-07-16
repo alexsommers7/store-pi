@@ -4,9 +4,10 @@ import { useState, useRef, useEffect, MouseEvent } from 'react';
 import Link from 'next/link';
 import { Lock } from '@/_components/icons/lock';
 import { ConfirmationIcon } from '@/_components/icons/confirmation';
-import { HTTPMethods, HTTPColors } from '@/_lib/constants';
+import { HTTPMethods } from '@/_lib/constants';
 import { CopyIcon } from '../icons/copy';
 import { useDocsProvider } from '@/docs/_context/index';
+import { HttpBadge } from '@/_components/typography/httpBadge';
 
 interface AnchorHeadingProps {
   anchorId: string;
@@ -28,7 +29,6 @@ export function AnchorHeading({
   children,
 }: AnchorHeadingProps) {
   const [showConfirmation, setShowConfirmation] = useState(false);
-  const httpColor = useRef(HTTPColors[httpMethod || 'GET']);
   const anchorRef = useRef<HTMLAnchorElement>(null);
   const { setActiveAnchor } = useDocsProvider();
 
@@ -67,11 +67,7 @@ export function AnchorHeading({
 
   return (
     <div className='group relative flex items-center w-max max-w-[90%] mt-8 mb-3'>
-      {httpMethod && (
-        <span className={`mr-2 translate-y-[2px] text-lg text-[${httpColor.current}]`}>
-          <strong>{httpMethod}</strong>
-        </span>
-      )}
+      {httpMethod && <HttpBadge httpMethod={httpMethod} />}
 
       <Link
         href={`#${anchorId}`}
