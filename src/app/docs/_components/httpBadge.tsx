@@ -11,10 +11,10 @@ export function HttpBadge({ httpMethod }: HttpBadgeProps) {
       colorClass = 'text-green-500';
       break;
     case 'POST':
-      colorClass = 'text-blue-500';
-      break;
-    case 'PUT':
       colorClass = 'text-yellow-500';
+      break;
+    case 'PATCH':
+      colorClass = 'text-stone-500';
       break;
     case 'DELETE':
       colorClass = 'text-red-500';
@@ -22,7 +22,7 @@ export function HttpBadge({ httpMethod }: HttpBadgeProps) {
   }
 
   return (
-    <span className={`mr-2 translate-y-[2px] text-lg ${colorClass}`}>
+    <span className={`mr-2 translate-y-[2px] text-md ${colorClass}`}>
       <strong>{httpMethod}</strong>
     </span>
   );

@@ -7,7 +7,7 @@ import { ConfirmationIcon } from '@/_components/icons/confirmation';
 import { HTTPMethods } from '@/_lib/constants';
 import { CopyIcon } from '../icons/copy';
 import { useDocsProvider } from '@/docs/_context/index';
-import { HttpBadge } from '@/_components/typography/httpBadge';
+import { HttpBadge } from '@/docs/_components/httpBadge';
 
 interface AnchorHeadingProps {
   anchorId: string;
