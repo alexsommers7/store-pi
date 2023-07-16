@@ -38,7 +38,17 @@ export const structure = [
   {
     label: 'Data Models',
     subitems: [
-      { label: 'Products', slug: 'products', anchors: [] },
+      {
+        label: 'Products',
+        slug: 'products',
+        anchors: [
+          { label: 'Get All Products', hash: 'get-products' },
+          { label: 'Get Product', hash: 'get-product' },
+          { label: 'Create New Product', hash: 'create-product' },
+          { label: 'Update Product', hash: 'update-product' },
+          { label: 'Delete Product', hash: 'delete-product' },
+        ],
+      },
       { label: 'Reviews', slug: 'reviews', anchors: [] },
       { label: 'Brands', slug: 'brands', anchors: [] },
       { label: 'Categories', slug: 'categories', anchors: [] },
