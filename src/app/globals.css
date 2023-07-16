@@ -19,10 +19,6 @@ body,
     rgb(var(--background-start-rgb));
 }
 
-.scrollbar-thin {
-  overscroll-behavior: contain;
-}
-
 .scrollbar-thin::-webkit-scrollbar {
   background-color: transparent;
   width: 3px !important;
