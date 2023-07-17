@@ -49,7 +49,19 @@ export const structure = [
           { label: 'Delete Product', hash: 'delete-product' },
         ],
       },
-      { label: 'Reviews', slug: 'reviews', anchors: [] },
+      {
+        label: 'Reviews',
+        slug: 'reviews',
+        anchors: [
+          { label: 'Get All Reviews', hash: 'get-reviews' },
+          { label: 'Get Review', hash: 'get-review' },
+          { label: `Get Product's Reviews`, hash: 'get-product-reviews' },
+          { label: 'Get Current User Reviews', hash: 'get-current-user-reviews' },
+          { label: 'Create New Review', hash: 'create-review' },
+          { label: 'Update Review', hash: 'update-review' },
+          { label: 'Delete Review', hash: 'delete-review' },
+        ],
+      },
       { label: 'Brands', slug: 'brands', anchors: [] },
       { label: 'Categories', slug: 'categories', anchors: [] },
       { label: 'Carts', slug: 'carts', anchors: [] },
@@ -60,7 +72,7 @@ export const structure = [
     ],
   },
   {
-    label: 'Developer Resources',
+    label: 'Resources',
     subitems: [
       { label: 'Contributing', slug: 'contributing', anchors: [] },
       { label: 'Postman', slug: 'postman', anchors: [] },

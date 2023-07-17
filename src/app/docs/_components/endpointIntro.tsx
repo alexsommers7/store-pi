@@ -8,6 +8,7 @@ interface EndpointIntroProps {
   httpMethod: keyof typeof HTTPMethods;
   slug: string;
   isDelete?: boolean;
+  requiresAuth?: boolean;
 }
 
 export function EndpointIntro({
@@ -16,11 +17,12 @@ export function EndpointIntro({
   httpMethod,
   slug,
   isDelete = false,
+  requiresAuth = false,
 }: EndpointIntroProps) {
   return (
     <>
       <div>
-        <AnchorHeading anchorId={anchorId} httpMethod={httpMethod}>
+        <AnchorHeading anchorId={anchorId} httpMethod={httpMethod} requiresAuth={requiresAuth}>
           <SectionSubHeading>{label}</SectionSubHeading>
         </AnchorHeading>
 
