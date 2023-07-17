@@ -84,9 +84,13 @@ export function AnchorHeading({
           <CopyIcon classString='w-4 h-4 hover:stroke-stone-400 stroke-stone-500 transition-all duration-300 absolute top-[50%] translate-y-[-50%] left-[-1.5rem] opacity-0 group-hover:opacity-100' />
         )}
 
-        <div className='flex items-baseline'>
+        <div className='flex items-center gap-[6px]'>
           {children}
-          {requiresAuth && <Lock />}
+          {requiresAuth && (
+            <span className='translate-y-[4px]'>
+              <Lock />
+            </span>
+          )}
         </div>
       </Link>
     </div>
