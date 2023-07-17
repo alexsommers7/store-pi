@@ -5,7 +5,11 @@ import { TextLink } from '@/_components/navigation/textLink';
 import { Code } from '@/_components/typography/code';
 import { Lock } from '@/_components/icons/lock';
 import { AnchorHeading } from '@/_components/typography/anchorHeading';
-import { authorizedRequestHeader, graphqlLogin, graphqlQuery } from '@/_lib/samples/sampleBodies';
+import {
+  authorizedRequestHeader,
+  graphqlLogin,
+  graphqlQuery,
+} from '@/_lib/api-samples/sampleBodies';
 
 export default function Introduction() {
   return (

@@ -2,15 +2,15 @@ import { SectionHeading } from '@/_components/typography/sectionHeading';
 import { EndpointIntro } from '@/docs/_components/endpointIntro';
 import { SampleBody } from '@/docs/_components/sampleBody';
 import { SampleResponse } from '@/docs/_components/sampleResponse';
-import { createNewProductBody, updateProductBody } from '@/_lib/samples/sampleBodies';
+import { createNewProductBody, updateProductBody } from '@/_lib/api-samples/sampleBodies';
 import {
   getAllProductsResponse,
   getProductResponse,
   createNewProductResponse,
   updateProductResponse,
-} from '@/_lib/samples/sampleResponses';
+} from '@/_lib/api-samples/sampleResponses';
 
-export default function GetProducts() {
+export default function Products() {
   return (
     <>
       <SectionHeading>Products</SectionHeading>
