@@ -26,7 +26,7 @@ export function EndpointIntro({
           <SectionSubHeading>{label}</SectionSubHeading>
         </AnchorHeading>
 
-        <p className='snippet mt-1'>
+        <p className='snippet mt-1 max-w-full scollbar-thin overflow-x-auto'>
           {apiOrigin}/{slug}
         </p>
       </div>

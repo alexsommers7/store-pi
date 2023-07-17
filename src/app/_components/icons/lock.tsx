@@ -3,7 +3,7 @@ interface LockProps {
 }
 
 export function Lock({
-  classString = 'w-[16px] h-[16px] inline-block stroke-2 stroke-indigo-400 translate-y-[-2px]',
+  classString = 'w-[16px] h-[16px] inline-block stroke-2 stroke-indigo-400 translate-y-[-3px]',
 }: LockProps) {
   return (
     <svg
