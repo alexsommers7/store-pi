@@ -1,17 +1,13 @@
 import { SectionHeading } from '@/_components/typography/sectionHeading';
-import { EndpointIntro } from '@/docs/_components/endpointIntro';
-import { SampleBody } from '@/docs/_components/sampleBody';
-import { SampleResponse } from '@/docs/_components/sampleResponse';
-import { createOrUpdateReviewBody } from '@/_lib/api-samples/sampleBodies';
-import {
-  getAllReviewsResponse,
-  getReviewResponse,
-  getProductReviewsResponse,
-  getCurrentUserReviewsResponse,
-  createOrUpdateReviewResponse,
-} from '@/_lib/api-samples/sampleResponses';
+import { StructureSubItem, structure } from '@/docs/structure';
+import { endpointMapper } from '@/docs/endpointMapper';
 
 export default function Reviews() {
+  const subitems = structure.map((item) => item.subitems).flat();
+  const reviewStructure = subitems.find((item) => item.slug === 'reviews') as StructureSubItem;
+
+  if (!reviewStructure) return null;
+
   return (
     <>
       <SectionHeading>Reviews</SectionHeading>
@@ -26,62 +22,7 @@ export default function Reviews() {
         the review.
       </p>
 
-      <EndpointIntro
-        anchorId='get-reviews'
-        label='Get All Reviews'
-        httpMethod='GET'
-        slug='reviews'
-      />
-      <SampleResponse code={getAllReviewsResponse} />
-
-      <EndpointIntro anchorId='get-review' label='Get Review' httpMethod='GET' slug='reviews/:id' />
-      <SampleResponse code={getReviewResponse} />
-
-      <EndpointIntro
-        anchorId='get-product-reviews'
-        label={`Get Product's Reviews`}
-        httpMethod='GET'
-        slug='products/:id/reviews'
-      />
-      <SampleResponse code={getProductReviewsResponse} />
-
-      <EndpointIntro
-        anchorId='get-current-user-reviews'
-        label='Get Current User Reviews'
-        httpMethod='GET'
-        slug='users/current/reviews'
-        requiresAuth
-      />
-      <SampleResponse code={getCurrentUserReviewsResponse} />
-
-      <EndpointIntro
-        anchorId='create-review'
-        label='Create New Review'
-        httpMethod='POST'
-        slug='products/:id/reviews'
-        requiresAuth
-      />
-      <SampleBody code={createOrUpdateReviewBody} />
-      <SampleResponse code={createOrUpdateReviewResponse} />
-
-      <EndpointIntro
-        anchorId='update-review'
-        label='Update Review'
-        httpMethod='POST'
-        slug='reviews/:id'
-        requiresAuth
-      />
-      <SampleBody code={createOrUpdateReviewBody} />
-      <SampleResponse code={createOrUpdateReviewResponse} />
-
-      <EndpointIntro
-        anchorId='delete-review'
-        label='Delete Review'
-        httpMethod='DELETE'
-        slug='reviews/:id'
-        requiresAuth
-        isDelete
-      />
+      {endpointMapper(reviewStructure)}
     </>
   );
 }
