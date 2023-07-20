@@ -10,7 +10,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background-repeat: no-repeat;
+  background-repeat: no-repeat !important;
 }
 
 body,
@@ -37,10 +37,10 @@ body,
 
 .snippet {
   display: inline-block;
-  padding-inline: 4px;
+  padding-inline: 5px;
   border-radius: 2px;
   tab-size: 2;
-  background: rgb(129 140 248 / 0.1);
+  background: rgb(129 140 248 / 0.18);
 }
 
 .max-h-minus-nav {
