@@ -104,6 +104,7 @@ export const structure = [
       {
         label: 'Products',
         slug: 'products',
+        desc: 'A total of 50 products exist in the database. Each product belongs to a category and its object contains properties such as pricing, review data, specs, and more.',
         anchors: [
           {
             label: 'Get All Products',
@@ -153,6 +154,7 @@ export const structure = [
       {
         label: 'Reviews',
         slug: 'reviews',
+        desc: 'Every review is associated with a user. Not every user has left a review, and some users have created multiple reviews. The review object contains properties such as rating, incentivization, verification, and more.',
         anchors: [
           {
             label: 'Get All Reviews',
@@ -255,6 +257,7 @@ export const structure = [
       {
         label: 'Carts',
         slug: 'carts',
+        desc: 'Each user has a cart associated with them. The cart object will contain a products array, the cart total (string and numeric), and more. A cart must belong to a user, with some users having empty carts.',
         anchors: [
           {
             label: 'Get All Carts',
@@ -300,6 +303,7 @@ export const structure = [
       {
         label: 'Purchases',
         slug: 'purchases',
+        desc: 'A total of 50 purchases exist in the database. Each purchase must belong to a user. Not every user has made a purchase, but some have made multiple.',
         anchors: [
           {
             label: 'Get All Purchases',
@@ -337,6 +341,7 @@ export const structure = [
       {
         label: 'Wishlists',
         slug: 'wishlists',
+        desc: 'Every user is assigned a wishlist. Some will have an empty wishlist, while others will have products in theirs.',
         anchors: [
           {
             label: 'Get Current User WIshlist',
@@ -368,6 +373,7 @@ export const structure = [
       {
         label: 'Users',
         slug: 'users',
+        desc: 'Each user object will contain general profile information, including a link to a stock photo hosted on S3.',
         anchors: [
           {
             label: 'Get All Users',
