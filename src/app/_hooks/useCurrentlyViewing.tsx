@@ -32,8 +32,8 @@ export function useCurrentlyViewing() {
     return allSlugs.includes(currentSlug);
   });
 
-  const currentSubitem =
-    currentSection?.subitems.find((subitem) => subitem.slug === currentSlug) || null;
+  const subitems = (currentSection?.subitems as StructureSubItem[]) || [];
+  const currentSubitem = subitems.find((subitem) => subitem.slug === currentSlug) || null;
 
   const currentAnchors = currentSubitem?.anchors;
   const currentAnchorLabel =
