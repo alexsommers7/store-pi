@@ -9,6 +9,7 @@ export interface INavLink {
   bold?: boolean;
   addSidebarAccent?: boolean;
   forceActive?: boolean;
+  target?: string;
 }
 
 export function NavLink({
@@ -17,6 +18,7 @@ export function NavLink({
   bold = true,
   addSidebarAccent = false,
   forceActive = false,
+  target,
 }: INavLink) {
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
@@ -29,8 +31,14 @@ export function NavLink({
     : 'relative transition-colors hover:text-indigo-300 text-indigo-400';
 
   return (
-    <Link className={isActive ? activeClasses : inactiveClasses} href={href}>
-      {bold ? <strong>{name}</strong> : <span>{name}</span>}
-    </Link>
+    <>
+      <Link
+        className={isActive ? activeClasses : inactiveClasses}
+        href={href}
+        target={target || '_self'}
+      >
+        {bold ? <strong>{name}</strong> : <span>{name}</span>}
+      </Link>
+    </>
   );
 }
