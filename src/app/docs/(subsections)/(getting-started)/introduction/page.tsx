@@ -172,7 +172,7 @@ export default function Introduction() {
                   <span className='snippet'>page</span>
                 </td>
                 <td className='p-3'>
-                  Paginate the query results. Defaults to <span className='snippet'>10</span>.
+                  Paginate the query results. Defaults to <span className='snippet'>1</span>.
                 </td>
                 <td className='p-3 wrap-break-word'>
                   <span className='snippet'>?page=2</span>

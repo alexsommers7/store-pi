@@ -1,10 +1,9 @@
 import { SectionHeading } from '@/_components/typography/sectionHeading';
-import { StructureSubItem, structure } from '@/docs/structure';
+import { getSlugStructure } from '@/docs/structure';
 import { endpointMapper } from '@/docs/endpointMapper';
 
 export default function Reviews() {
-  const subitems = structure.map((item) => item.subitems).flat();
-  const reviewStructure = subitems.find((item) => item.slug === 'reviews') as StructureSubItem;
+  const reviewStructure = getSlugStructure('reviews');
 
   if (!reviewStructure) return null;
 

@@ -1,10 +1,9 @@
 import { SectionHeading } from '@/_components/typography/sectionHeading';
-import { StructureSubItem, structure } from '@/docs/structure';
+import { getSlugStructure } from '@/docs/structure';
 import { endpointMapper } from '@/docs/endpointMapper';
 
 export default function Categories() {
-  const subitems = structure.map((item) => item.subitems).flat();
-  const categoryStructure = subitems.find((item) => item.slug === 'categories') as StructureSubItem;
+  const categoryStructure = getSlugStructure('categories');
 
   if (!categoryStructure) return null;
 

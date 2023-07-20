@@ -7,7 +7,6 @@ interface EndpointIntroProps {
   label: string;
   httpMethod: keyof typeof HTTPMethods;
   slug: string;
-  isDelete?: boolean;
   requiresAuth?: boolean;
 }
 
@@ -16,7 +15,6 @@ export function EndpointIntro({
   label,
   httpMethod,
   slug,
-  isDelete = false,
   requiresAuth = false,
 }: EndpointIntroProps) {
   return (
@@ -30,12 +28,6 @@ export function EndpointIntro({
           {apiOrigin}/{slug}
         </p>
       </div>
-
-      {isDelete && (
-        <p>
-          Returns <span className='snippet'>204 No Content</span>
-        </p>
-      )}
     </>
   );
 }

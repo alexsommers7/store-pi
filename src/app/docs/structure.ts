@@ -1,23 +1,46 @@
 import { HTTPMethods } from '@/_lib/constants';
 import {
+  addProductToCurrentUserCartBody,
+  addProductToCurrentUserWishlistBody,
   createNewProductBody,
   createOrUpdateCategoryBody,
   createOrUpdateReviewBody,
+  createPurchaseBody,
+  loginBody,
+  removeProductFromCurrentUserCartBody,
+  removeProductFromCurrentUserWishlistBody,
+  signupBody,
+  updateCurrentUserBody,
   updateProductBody,
 } from '@/_lib/api-samples/sampleBodies';
 import {
+  addProductToCurrentUserCartResponse,
+  addProductToCurrentUserWishlistResponse,
   createNewProductResponse,
   createOrUpdateCategoryResponse,
   createOrUpdateReviewResponse,
+  createPurchaseResponse,
   getAllBrandsResponse,
+  getAllCartsResponse,
   getAllCategoriesResponse,
   getAllProductsInCategoryResponse,
   getAllProductsResponse,
+  getAllPurchasesResponse,
   getAllReviewsResponse,
+  getAllUsersResponse,
+  getCartResponse,
+  getCurrentUserCartResponse,
+  getCurrentUserPurchasesResponse,
   getCurrentUserReviewsResponse,
+  getCurrentUserWishlistResponse,
   getProductResponse,
   getProductReviewsResponse,
+  getPurchaseResponse,
   getReviewResponse,
+  getUserResponse,
+  loginResponse,
+  signupResponse,
+  updateCurrentUserResponse,
   updateProductResponse,
 } from '@/_lib/api-samples/sampleResponses';
 
@@ -29,16 +52,24 @@ export interface StructureItem {
 export interface StructureSubItem {
   label: string;
   slug: string;
-  anchors: SubItemAnchor[];
+  desc?: string;
+  anchors: EndpointAnchor[] | NonEndpointAnchor[];
 }
 
-export interface SubItemAnchor {
+export interface EndpointAnchor {
   label: string;
   hash: string;
   httpMethod: keyof typeof HTTPMethods;
   slug: string;
   body?: string;
   response?: string;
+  requiresAuth?: boolean;
+  desc?: string;
+}
+
+export interface NonEndpointAnchor {
+  label: string;
+  hash: string;
 }
 
 export const structure = [
@@ -48,6 +79,7 @@ export const structure = [
       {
         label: 'Introduction',
         slug: 'introduction',
+        desc: 'A look at the purpose of this project and the technologies used.',
         anchors: [
           { label: 'Database Interaction', hash: 'database-interaction' },
           { label: 'CORS', hash: 'cors' },
@@ -57,6 +89,12 @@ export const structure = [
           { label: 'Filtering', hash: 'filtering' },
           { label: 'GraphQL', hash: 'graphql' },
         ],
+      },
+      {
+        label: 'Quick Start',
+        slug: 'quick-start',
+        desc: 'A quick glance at some common API calls to get started.',
+        anchors: [],
       },
     ],
   },
@@ -100,7 +138,7 @@ export const structure = [
             label: 'Update Product',
             hash: 'update-product',
             httpMethod: 'PATCH',
-            slug: 'products',
+            slug: 'products/:id',
             body: updateProductBody,
             response: updateProductResponse,
           },
@@ -108,7 +146,7 @@ export const structure = [
             label: 'Delete Product',
             hash: 'delete-product',
             httpMethod: 'DELETE',
-            slug: 'products',
+            slug: 'products/:id',
           },
         ],
       },
@@ -134,33 +172,42 @@ export const structure = [
             label: `Get Product's Reviews`,
             hash: 'get-product-reviews',
             httpMethod: 'GET',
-            slug: 'reviews',
+            slug: 'products/:id/reviews',
             response: getProductReviewsResponse,
           },
           {
             label: 'Get Current User Reviews',
             hash: 'get-current-user-reviews',
             httpMethod: 'GET',
-            slug: 'reviews',
+            slug: 'users/current/reviews',
             response: getCurrentUserReviewsResponse,
+            requiresAuth: true,
           },
           {
             label: 'Create New Review',
             hash: 'create-review',
             httpMethod: 'POST',
-            slug: 'reviews',
+            slug: 'products/:id/reviews',
             body: createOrUpdateReviewBody,
             response: createOrUpdateReviewResponse,
+            requiresAuth: true,
           },
           {
             label: 'Update Review',
             hash: 'update-review',
             httpMethod: 'PATCH',
-            slug: 'reviews',
+            slug: 'reviews/:id',
             body: createOrUpdateReviewBody,
             response: createOrUpdateReviewResponse,
+            requiresAuth: true,
           },
-          { label: 'Delete Review', hash: 'delete-review', httpMethod: 'DELETE', slug: 'reviews' },
+          {
+            label: 'Delete Review',
+            hash: 'delete-review',
+            httpMethod: 'DELETE',
+            slug: 'reviews/:id',
+            requiresAuth: true,
+          },
         ],
       },
       {
@@ -205,19 +252,207 @@ export const structure = [
           },
         ],
       },
-      { label: 'Carts', slug: 'carts', anchors: [] },
-      { label: 'Purchases', slug: 'purchases', anchors: [] },
-      { label: 'Wishlists', slug: 'wishlists', anchors: [] },
-      { label: 'Users', slug: 'users', anchors: [] },
-      { label: 'Authentication', slug: 'authentication', anchors: [] },
+      {
+        label: 'Carts',
+        slug: 'carts',
+        anchors: [
+          {
+            label: 'Get All Carts',
+            hash: 'get-carts',
+            httpMethod: 'GET',
+            slug: 'carts',
+            response: getAllCartsResponse,
+          },
+          {
+            label: 'Get Cart',
+            hash: 'get-cart',
+            httpMethod: 'GET',
+            slug: 'carts/:id',
+            response: getCartResponse,
+          },
+          {
+            label: 'Get Current User Cart',
+            hash: 'get-current-user-cart',
+            httpMethod: 'GET',
+            slug: 'users/current/cart',
+            response: getCurrentUserCartResponse,
+            requiresAuth: true,
+          },
+          {
+            label: 'Add to Current User Cart',
+            hash: 'add-to-current-user-cart',
+            httpMethod: 'POST',
+            slug: 'users/current/cart',
+            body: addProductToCurrentUserCartBody,
+            response: addProductToCurrentUserCartResponse,
+            requiresAuth: true,
+          },
+          {
+            label: 'Remove From Current User Cart',
+            hash: 'remove-from-current-user-cart',
+            httpMethod: 'DELETE',
+            slug: 'users/current/cart',
+            body: removeProductFromCurrentUserCartBody,
+            requiresAuth: true,
+          },
+        ],
+      },
+      {
+        label: 'Purchases',
+        slug: 'purchases',
+        anchors: [
+          {
+            label: 'Get All Purchases',
+            hash: 'get-purchases',
+            httpMethod: 'GET',
+            slug: 'purchases',
+            response: getAllPurchasesResponse,
+          },
+          {
+            label: 'Get Purchase',
+            hash: 'get-purchase',
+            httpMethod: 'GET',
+            slug: 'purchases/:id',
+            response: getPurchaseResponse,
+          },
+          {
+            label: 'Get Current User Purchases',
+            hash: 'get-current-user-purchases',
+            httpMethod: 'GET',
+            slug: 'users/current/purchases',
+            response: getCurrentUserPurchasesResponse,
+            requiresAuth: true,
+          },
+          {
+            label: 'Create New Purchase',
+            hash: 'create-purchase',
+            httpMethod: 'POST',
+            slug: 'purchases',
+            body: createPurchaseBody,
+            response: createPurchaseResponse,
+            requiresAuth: true,
+          },
+        ],
+      },
+      {
+        label: 'Wishlists',
+        slug: 'wishlists',
+        anchors: [
+          {
+            label: 'Get Current User WIshlist',
+            hash: 'get-current-user-wishlist',
+            httpMethod: 'GET',
+            slug: 'users/current/wishlist',
+            response: getCurrentUserWishlistResponse,
+            requiresAuth: true,
+          },
+          {
+            label: 'Add to Current User Wishlist',
+            hash: 'add-to-current-user-wishlist',
+            httpMethod: 'POST',
+            slug: 'users/current/wishlist',
+            body: addProductToCurrentUserWishlistBody,
+            response: addProductToCurrentUserWishlistResponse,
+            requiresAuth: true,
+          },
+          {
+            label: 'Remove From Current User Wishlist',
+            hash: 'remove-from-current-user-wishlist',
+            httpMethod: 'DELETE',
+            slug: 'users/current/wishlist',
+            body: removeProductFromCurrentUserWishlistBody,
+            requiresAuth: true,
+          },
+        ],
+      },
+      {
+        label: 'Users',
+        slug: 'users',
+        anchors: [
+          {
+            label: 'Get All Users',
+            hash: 'get-users',
+            httpMethod: 'GET',
+            slug: 'users',
+            response: getAllUsersResponse,
+          },
+          {
+            label: 'Get User',
+            hash: 'get-user',
+            httpMethod: 'GET',
+            slug: 'users/:id',
+            response: getUserResponse,
+          },
+          {
+            label: 'Get Current User',
+            hash: 'get-current-user',
+            httpMethod: 'GET',
+            slug: 'users/current',
+            response: getUserResponse,
+          },
+          {
+            label: 'Update Current User',
+            hash: 'update-current-user',
+            httpMethod: 'PATCH',
+            slug: 'users/current',
+            body: updateCurrentUserBody,
+            response: updateCurrentUserResponse,
+          },
+          {
+            label: 'Delete User',
+            hash: 'delete-user',
+            httpMethod: 'DELETE',
+            slug: 'users/:id',
+          },
+          {
+            label: 'Delete Current User',
+            hash: 'delete-current-user',
+            httpMethod: 'DELETE',
+            slug: 'users/current',
+            requiresAuth: true,
+          },
+        ],
+      },
+      {
+        label: 'Authentication',
+        slug: 'authentication',
+        anchors: [
+          {
+            label: 'Sign Up',
+            hash: 'sign-up',
+            httpMethod: 'POST',
+            slug: 'users/login',
+            body: loginBody,
+            response: loginResponse,
+            desc: 'This endpoint will not include a valid JWT to be used for subsequent requests as it would in a real-world application. This is because the new user is not actually persisted to the database. If you need a token to access protected endpoints, use the log in endpoint as described below.',
+          },
+          {
+            label: 'Log In',
+            hash: 'log-in',
+            httpMethod: 'POST',
+            slug: 'users/signup',
+            body: signupBody,
+            response: signupResponse,
+            desc: `In order to provide a variety in the data, there are multiple user accounts available. The structure of each user's email address is [firstName]@example.com, and each user's password is simply 'password'. You may log in as any of the following users: Jodi, Amy, Jean, Cody, or Daisy.`,
+          },
+        ],
+      },
     ],
   },
   {
     label: 'Resources',
     subitems: [
-      { label: 'Contributing', slug: 'contributing', anchors: [] },
-      { label: 'Postman', slug: 'postman', anchors: [] },
-      { label: 'GraphQL Playground', slug: 'graphql-playground', anchors: [] },
+      {
+        label: 'Postman Docs',
+        slug: 'https://documenter.getpostman.com/view/12907395/UyxjF694',
+        anchors: [],
+      },
     ],
   },
 ];
+
+export const getAllSubitems = (): StructureSubItem[] =>
+  structure.map((item) => item.subitems).flat();
+
+export const getSlugStructure = (slug: string) =>
+  getAllSubitems().find((item) => item.slug === slug) as StructureSubItem;
