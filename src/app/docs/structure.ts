@@ -104,7 +104,7 @@ export const structure = [
       {
         label: 'Products',
         slug: 'products',
-        desc: 'A total of 50 products exist in the database. Each product belongs to a category and its object contains properties such as pricing, review data, specs, and more.',
+        desc: 'A total of 50 products exist in the database. Each product belongs to a category and contains properties such as pricing, review data, specs, and more.',
         anchors: [
           {
             label: 'Get All Products',
@@ -154,7 +154,7 @@ export const structure = [
       {
         label: 'Reviews',
         slug: 'reviews',
-        desc: 'Every review is associated with a user. Not every user has left a review, and some users have created multiple reviews. The review object contains properties such as rating, incentivization, verification, and more.',
+        desc: 'Every review is associated with a user. Each review contains properties such as rating, incentivization, verification, and more.',
         anchors: [
           {
             label: 'Get All Reviews',
@@ -215,6 +215,7 @@ export const structure = [
       {
         label: 'Categories',
         slug: 'categories',
+        desc: 'There are six common e-commerce product categories available, each with multiple items belonging to it.',
         anchors: [
           {
             label: 'Get All Categories',
@@ -257,7 +258,7 @@ export const structure = [
       {
         label: 'Carts',
         slug: 'carts',
-        desc: 'Each user has a cart associated with them. The cart object will contain a products array, the cart total (string and numeric), and more. A cart must belong to a user, with some users having empty carts.',
+        desc: 'Each user has a cart associated with them. The cart will contain a products array, the cart total (string and numeric), and more. A cart must belong to a user.',
         anchors: [
           {
             label: 'Get All Carts',
@@ -422,6 +423,7 @@ export const structure = [
       {
         label: 'Authentication',
         slug: 'authentication',
+        desc: 'Log in as a user to view their cart, wishlist, reviews, and purchases.',
         anchors: [
           {
             label: 'Sign Up',
