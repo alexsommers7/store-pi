@@ -6,6 +6,7 @@ import { structure } from '@/docs/structure';
 import { HamburgerIcon } from '@/_components/icons/hamburger';
 import { CloseIcon } from '@/_components/icons/close';
 import { useCurrentlyViewing } from '@/_hooks/useCurrentlyViewing';
+import { usePathname } from 'next/navigation';
 
 const commonClasses =
   'fixed min-[1151px]:sticky w-full min-[600px]:w-[280px] top-[70px] left-0 p-6 overflow-y-auto h-full scrollbar-thin max-h-minus-nav ease-in-out duration-200 will-change-transform z-30';
@@ -17,7 +18,8 @@ export function DocsSidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const { currentlyViewing } = useCurrentlyViewing();
   const { currentSubitem, currentAnchorLabel } = currentlyViewing;
-  const [prevSubItem, setPrevSubItem] = useState(currentSubitem);
+  const pathname = usePathname();
+  const [prevPath, setPrevPath] = useState(pathname);
 
   const sidebarClasses = `${commonClasses} ${isOpen ? openClasses : closedClasses}`;
 
@@ -28,9 +30,9 @@ export function DocsSidebar() {
 
   // close sidebar on route change
   useEffect(() => {
-    prevSubItem && prevSubItem !== currentSubitem && setIsOpen(false);
-    setPrevSubItem(currentSubitem);
-  }, [prevSubItem, currentSubitem]);
+    prevPath && prevPath !== pathname && setIsOpen(false);
+    setPrevPath(pathname);
+  }, [pathname, prevPath]);
 
   return (
     <>
