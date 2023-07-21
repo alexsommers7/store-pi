@@ -44,7 +44,7 @@ export function DocsSidebar() {
         >
           <HamburgerIcon />
           {currentSubitem && currentAnchorLabel && (
-            <span className='ml-2 text-white text-xs'>
+            <span className='ml-2 text-white text-sm text-left'>
               {currentSubitem.label} {'>'} {currentAnchorLabel}
             </span>
           )}

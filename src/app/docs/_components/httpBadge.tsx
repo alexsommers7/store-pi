@@ -22,7 +22,7 @@ export function HttpBadge({ httpMethod }: HttpBadgeProps) {
   }
 
   return (
-    <span className={`mr-2 translate-y-[2px] text-md ${colorClass}`}>
+    <span className={`translate-y-[2px] text-md ${colorClass}`}>
       <strong>{httpMethod}</strong>
     </span>
   );
