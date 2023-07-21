@@ -4,7 +4,7 @@ interface SectionSubHeadingProps {
 
 export function SectionSubHeading({ children }: SectionSubHeadingProps) {
   return (
-    <h2 className='text-2xl text-white'>
+    <h2 className='text-2xl text-white text-left'>
       <strong>{children}</strong>
     </h2>
   );
