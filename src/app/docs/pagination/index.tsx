@@ -9,7 +9,7 @@ export function DocsPagination() {
 
   return (
     <div className='flex justify-between flex-wrap gap-y-6 py-10 px-4 min-[1151px]:p-10'>
-      {prevSlug && (
+      {prevSlug && !prevSlug.slug.startsWith('https') && (
         <Link
           href={`/docs/${prevSlug.slug}`}
           className='p-4 mr-auto bg-indigo-400/10 hover:bg-indigo-300/10 text-indigo-400 hover:text-indigo-300 transition-all rounded-sm'
@@ -34,7 +34,7 @@ export function DocsPagination() {
         </Link>
       )}
 
-      {nextSlug && (
+      {nextSlug && !nextSlug.slug.startsWith('https') && (
         <Link
           href={`/docs/${nextSlug.slug}`}
           className='p-4 ml-auto bg-indigo-400/10 hover:bg-indigo-300/10 text-indigo-400 hover:text-indigo-300 transition-all rounded-sm'
