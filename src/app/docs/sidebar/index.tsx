@@ -9,7 +9,7 @@ import { useCurrentlyViewing } from '@/_hooks/useCurrentlyViewing';
 import { usePathname } from 'next/navigation';
 
 const commonClasses =
-  'fixed min-[1151px]:sticky w-full min-[600px]:w-[280px] top-[70px] left-0 p-6 overflow-y-auto h-full scrollbar-thin max-h-minus-nav ease-in-out duration-200 will-change-transform z-30';
+  'fixed min-[1151px]:sticky w-full min-[600px]:w-[280px] top-[70px] left-0 px-6 pt-6 pb-10 overflow-y-auto h-full scrollbar-thin max-h-minus-nav ease-in-out duration-200 will-change-transform z-30';
 const openClasses = 'visible translate-x-0 bg-zinc-900';
 const closedClasses =
   'invisible min-[1151px]:visible translate-x-[-110vw] min-[1151px]:translate-x-0';
