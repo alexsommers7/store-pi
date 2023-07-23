@@ -12,7 +12,7 @@ import {
   signupBody,
   updateCurrentUserBody,
   updateProductBody,
-} from '@/_lib/api-samples/sampleBodies';
+} from '@/_lib/api-samples/sample-bodies';
 import {
   addProductToCurrentUserCartResponse,
   addProductToCurrentUserWishlistResponse,
@@ -42,7 +42,7 @@ import {
   signupResponse,
   updateCurrentUserResponse,
   updateProductResponse,
-} from '@/_lib/api-samples/sampleResponses';
+} from '@/_lib/api-samples/sample-responses';
 
 export interface StructureItem {
   label: string;
@@ -85,8 +85,8 @@ export const structure = [
           { label: 'CORS', hash: 'cors' },
           { label: 'Rate Limiting', hash: 'rate-limiting' },
           { label: 'Authorization', hash: 'authorization' },
-          { label: 'Query Parameters', hash: 'query-parameters' },
-          { label: 'Filtering', hash: 'filtering' },
+          { label: 'Organizing Results', hash: 'organizing-results' },
+          { label: 'Filtering Results', hash: 'filtering-results' },
           { label: 'GraphQL', hash: 'graphql' },
         ],
       },
@@ -429,7 +429,7 @@ export const structure = [
             label: 'Sign Up',
             hash: 'sign-up',
             httpMethod: 'POST',
-            slug: 'users/login',
+            slug: 'users/signup',
             body: loginBody,
             response: loginResponse,
             desc: 'This endpoint will not include a valid JWT to be used for subsequent requests as it would in a real-world application. This is because the new user is not actually persisted to the database. If you need a token to access protected endpoints, use the log in endpoint as described below.',
@@ -438,7 +438,7 @@ export const structure = [
             label: 'Log In',
             hash: 'log-in',
             httpMethod: 'POST',
-            slug: 'users/signup',
+            slug: 'users/login',
             body: signupBody,
             response: signupResponse,
             desc: `In order to provide a variety in the data, there are multiple user accounts available. The structure of each user's email address is [firstName]@example.com, and each user's password is simply 'password'. You may log in as any of the following users: Jodi, Amy, Jean, Cody, or Daisy.`,

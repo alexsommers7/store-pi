@@ -1,6 +1,6 @@
 'use client';
 
-import { OnThisPageLink } from '@/docs/onThisPage/link';
+import { OnThisPageLink } from '@/docs/on-this-page/link';
 import { useCurrentlyViewing } from '@/_hooks/useCurrentlyViewing';
 
 export function OnThisPage() {

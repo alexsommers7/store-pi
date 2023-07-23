@@ -1,6 +1,6 @@
 import { DocsProvider } from '@/docs/_context/index';
 import { DocsSidebar } from '@/docs/sidebar/index';
-import { OnThisPage } from '@/docs/onThisPage/index';
+import { OnThisPage } from '@/docs/on-this-page/index';
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -3,70 +3,55 @@ export const getAllProductsResponse = `"status": "success",
 "total": 50,
 "data": [
 	{
-		"reviews_average": 4.63,
-		"reviews_quantity": 8,
+		"product_id": 1,
 		"best_seller": true,
 		"in_stock": true,
-		"features": [...],
-		"images": [...],
 		"sku": 1,
 		"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e92",
-			"name": "Electronics"
-		},
+		"category_id": 1,
 		"brand": "HP",
 		"regular_price": 149.95,
 		"sale_price": 129.95,
 		"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
-		"specs": [...],
 		"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/electronics/1a.jpg",
 		"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m",
-		"id": "6213d55cf8b9765ec0fbbcaa"
+		"specs": [...],
+		"features": [...],
+		"images": [...]
 	},
 	{
-		"reviews_average": 4.5,
-		"reviews_quantity": 4,
+		"product_id": 6,
 		"best_seller": false,
 		"in_stock": true,
-		"features": [...],
-		"images": [...],
-		"sku": 2,
-		"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e92",
-			"name": "Electronics"
-		},
-		"brand": "Acer",
-		"regular_price": 369.99,
-		"sale_price": 249.99,
-		"description": "Bring on the blitz. Turbo-charged refresh rates will fuel your need for gaming speed with this captivating 27 inch dislay.",
+		"sku": 6,
+		"name": "Flowerbomb Ruby Orchid Eau de Parfum",
+		"category_id": 5,
+		"brand": "Viktor and Rolf",
+		"regular_price": 88.99,
+		"sale_price": 88.99,
+		"description": "The heart of this luxurious perfume features two accords: the ruby orchid and the red vanilla bean accord, giving the fragrance a unequivocal sensuality, enhanced by the fresh scent of peach, floral, and vanilla fragrance.",
+		"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/health_and_beauty/1a.jpg",
+		"slug": "flowerbomb-ruby-orchid-eau-de-parfum",
 		"specs": [...],
-		"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/electronics/2a.jpg",
-		"slug": "acer-predator-xb3-27-in.-monitor-full-hd",
-		"id": "6213d55cf8b9765ec0fbbcad"
+		"features": [...],
+		"images": [...]
 	},
 	{
-		"reviews_average": 4.67,
-		"reviews_quantity": 6,
+		"product_id": 7,
 		"best_seller": false,
-		"in_stock": false,
-		"features": [...],
-		"images": [...],
-		"sku": 3,
-		"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e93",
-			"name": "Men's Clothing"
-		},
-		"brand": "Susulv MCL",
+		"in_stock": true,
+		"sku": 7,
+		"name": "World Rug Gallery Modern Large Floral Flowers Indoor Outdoor Rug",
+		"category_id": 6,
+		"brand": "World Rug Gallery",
 		"regular_price": 119.99,
-		"sale_price": 119.99,
-		"description": "Cool, slim fit, top quality casual style shirt, perfect and comfortable for daily wear or relaxing weekends.",
+		"sale_price": 47.99,
+		"description": "Experience comfort, durability, and versatility with this World Rug Gallery Modern Large Floral Flowers Indoor Outdoor rug.",
+		"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/home/1a.jpg",
+		"slug": "world-rug-gallery-modern-large-floral-flowers-indoor-outdoor-rug",
 		"specs": [...],
-		"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/mens_clothing/1a.jpg",
-		"slug": "susulv-mcl-men-shirt-men's-large-size-long-sleeve-lapel-zipper-shirt",
-		"id": "6213d55cf8b9765ec0fbbcb0"
+		"features": [...],
+		"images": [...]
 	},
 	... 
 ]`;
@@ -81,10 +66,7 @@ export const getProductResponse = `"status": "success",
 		"images": [...],
 		"sku": 1,
 		"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e92",
-			"name": "Electronics"
-		},
+		"category_id": 1,
 		"brand": "HP",
 		"regular_price": 149.95,
 		"sale_price": 129.95,
@@ -92,29 +74,26 @@ export const getProductResponse = `"status": "success",
 		"specs": [...],
 		"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/electronics/1a.jpg",
 		"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m",
-		"id": "6213d55cf8b9765ec0fbbcaa"
+		"product_id": 1
 }
 `;
 
 export const createNewProductResponse = `"status": "success",
 "data": {
-	"reviews_average": 4.5,
+	"reviews_average": 0,
 	"reviews_quantity": 0,
 	"best_seller": false,
 	"in_stock": true,
 	"features": [],
 	"images": [],
-	"sku": 1234,
+	"sku": 72,
 	"name": "...",
-	"category": {
-		"_id": "6213d49cb7f67e0d64774e92",
-		"name": "Electronics"
-	},
+	"category_id": 1,
 	"brand": "...",
 	"regular_price": 99.95,
 	"sale_price": 79.95,
 	"description": "...",
-	"id": "634a49847857d50016d56ae1"
+	"product_id": 89
 }
 `;
 
@@ -128,17 +107,14 @@ export const updateProductResponse = `"status": "success",
 	"images": [...],
 	"sku": 1,
 	"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-	"category": {
-		"_id": "6213d49cb7f67e0d64774e92",
-		"name": "Electronics"
-	},
+	"category_id": 1,
 	"brand": "HP",
 	"regular_price": 159.95,
 	"sale_price": 139.95,
 	"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
 	"specs": [...],
 	"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/electronics/1a.jpg",
-	"id": "6213d55cf8b9765ec0fbbcaa"
+	"product_id": 1
 }
 `;
 
@@ -152,14 +128,10 @@ export const getAllReviewsResponse = `"status": "success",
 		"verified": true,
 		"review": "The monitor was easy to set up and all the cables were included in the box to connect it. The stand itself is very minimalistic and has height base tilt swivel adjustment. The speakers in it are decent for them being monitor speakers, much better than the previous version. The color accuracy was true straight out of the box and didn't require any adjustments, unlike the previous one I bought from this series. The only down side to the whole monitor are the monitor controls, which are on the back and are hard to reach.",
 		"rating": 4,
-		"user": {
-			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-9.jpg",
-			"_id": "6213d79b3a57cb555079db71",
-			"name": "Marco Lawrence"
-		},
-		"product": "6213d55cf8b9765ec0fbbcad",
+		"user_id": 9,
+		"product_id": 3,
 		"created_at": "2023-01-14T20:54:23.463Z",
-		"id": "63c79151aba0c344e4a221e4"
+		"review_id": 199
 	},
 	{
 		"recommends": true,
@@ -167,14 +139,10 @@ export const getAllReviewsResponse = `"status": "success",
 		"verified": true,
 		"review": "Bought this as a gift for my boyfriend for Christmas and he loved it! Plush came in great condition and has good detailing to it. If you're a fan of the character and series it's a must buy for any plushie collection.",
 		"rating": 5,
-		"user": {
-			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-11.jpg",
-			"_id": "6213d79b3a57cb555079db73",
-			"name": "Casey Zimmerman"
-		},
-		"product": "625c50fcc1198f626cc41849",
+		"user_id": 11,
+		"product_id": 41,
 		"created_at": "2023-01-14T02:42:07.449Z",
-		"id": "63c79151aba0c344e4a221d7"
+		"review_id": "63c79151aba0c344e4a221d7"
 	},
 	{
 		"recommends": true,
@@ -182,14 +150,14 @@ export const getAllReviewsResponse = `"status": "success",
 		"verified": true,
 		"review": "Awesome robe, I didn't want a heavyweight boxers rope. This one is light to wear around the house in all seasons. I work from home and wear this lightweight robe everyday.",
 		"rating": 4,
-		"user": {
+		"user_id": {
 			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-17.jpg",
 			"_id": "6213d79b3a57cb555079db79",
 			"name": "Bennie Walton"
 		},
-		"product": "625c50fcc1198f626cc41841",
+		"product_id": "625c50fcc1198f626cc41841",
 		"created_at": "2023-01-06T17:20:46.665Z",
-		"id": "63c79152aba0c344e4a2220c"
+		"review_id": "63c79152aba0c344e4a2220c"
 	}
 	...
 ]
@@ -202,14 +170,14 @@ export const getReviewResponse = `"status": "success",
 	"verified": false,
 	"review": "Beautiful chairs, they are very comfy as well! When you first sit in them they are on the tougher side but after a few seconds it softens up. I would highly recommend these chairs. Easy to put together - the packaging was supreme and the shipping was super quick! Highly impressed all around!",
 	"rating": 5,
-	"user": {
+	"user_id": {
 		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-4.jpg",
 		"_id": "6213d79b3a57cb555079db6c",
 		"name": "Shari Castro"
 	},
-	"product": "625c50fcc1198f626cc41851",
+	"product_id": "625c50fcc1198f626cc41851",
 	"created_at": "2022-01-19T23:51:51.587Z",
-	"id": "625c762ee84c84320ca30be3"
+	"review_id": "625c762ee84c84320ca30be3"
 }
 `;
 
@@ -223,14 +191,14 @@ export const getProductReviewsResponse = `"status": "success",
 		"verified": false,
 		"review": "Exactly what it looked like in the picture. Size and color is perfect. Highly recommend!",
 		"rating": 5,
-		"user": {
+		"user_id": {
 			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-6.jpg",
 			"_id": "6213d79b3a57cb555079db6e",
 			"name": "Daisy Gregory"
 		},
-		"product": "6213d55cf8b9765ec0fbbccb",
+		"product_id": "6213d55cf8b9765ec0fbbccb",
 		"created_at": "2022-07-23T23:42:46.797Z",
-		"id": "623641df96433b10a833b05e"
+		"review_id": "623641df96433b10a833b05e"
 	},
 	{
 		"recommends": true,
@@ -238,14 +206,14 @@ export const getProductReviewsResponse = `"status": "success",
 		"verified": false,
 		"review": "Nice colors and fits just right! Glad that it's non-slip and that I'll be able to wash it.",
 		"rating": 5,
-		"user": {
+		"user_id": {
 			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-8.jpg",
 			"_id": "6213d79b3a57cb555079db70",
 			"name": "Candace Burns"
 		},
-		"product": "6213d55cf8b9765ec0fbbccb",
+		"product_id": "6213d55cf8b9765ec0fbbccb",
 		"created_at": "2020-10-13T05:54:49.004Z",
-		"id": "625c762ee84c84320ca30bee"
+		"review_id": "625c762ee84c84320ca30bee"
 	},
 	{
 		"recommends": true,
@@ -253,14 +221,14 @@ export const getProductReviewsResponse = `"status": "success",
 		"verified": false,
 		"review": "Non-slip works great! Just wish it were a bit more durable but overall a solid purchase.",
 		"rating": 4,
-		"user": {
+		"user_id": {
 			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-19.jpg",
 			"_id": "6213d79b3a57cb555079db7b",
 			"name": "Perry Jimenez"
 		},
-		"product": "6213d55cf8b9765ec0fbbccb",
+		"product_id": "6213d55cf8b9765ec0fbbccb",
 		"created_at": "2022-07-21T08:37:29.410Z",
-		"id": "63c79152aba0c344e4a2221a"
+		"review_id": "63c79152aba0c344e4a2221a"
 	},
 	...
 ]
@@ -275,15 +243,15 @@ export const getCurrentUserReviewsResponse = `"status": "success",
 		"verified": true,
 		"review": "Perfect monitor if you Know how to calibrate it! HDR isn't great though. Worth it once you calibrate with RGB color hues & saturation. So good many settings.",
 		"rating": 4,
-		"user": {
+		"user_id": {
 			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
 			"_id": "6213d79b3a57cb555079db6a",
 			"name": "Dorothy Jennings"
 		},
-		"product": {
+		"product_id": {
 			"sku": 2,
 			"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
-			"category": {
+			"category_id": {
 				"_id": "6213d49cb7f67e0d64774e92",
 				"name": "Electronics"
 			},
@@ -292,7 +260,7 @@ export const getCurrentUserReviewsResponse = `"status": "success",
 			"id": "6213d55cf8b9765ec0fbbcad"
 		},
 		"created_at": "2022-04-19T18:28:52.446Z",
-		"id": "623641df96433b10a833b058"
+		"review_id": "623641df96433b10a833b058"
 	},
 	{
 		"recommends": true,
@@ -300,15 +268,15 @@ export const getCurrentUserReviewsResponse = `"status": "success",
 		"verified": false,
 		"review": "I've had this couch for about 2 weeks now. I wanted to try it out and give an honest review. Its so beautiful and durable. I love that the cushion is very comfortable and yet durable. I dont think it will cave in any time soon. Soft velvet fabric used gives a soft feel. It arrived without any damages. It is actually a bigger couch than I initially thought. Do not hesitate to buy this you will not regret it. Assembly is very easy and takes less than 10 minutes. I would recommend this sofa based on looks as well as comfort.",
 		"rating": 5,
-		"user": {
+		"user_id": {
 			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
 			"_id": "6213d79b3a57cb555079db6a",
 			"name": "Dorothy Jennings"
 		},
-		"product": {
+		"product_id": {
 			"sku": 10,
 			"name": "Morden Fort Modern Contemporary Love Seat",
-			"category": {
+			"category_id": {
 				"_id": "6213d49cb7f67e0d64774e97",
 				"name": "Home"
 			},
@@ -317,7 +285,7 @@ export const getCurrentUserReviewsResponse = `"status": "success",
 			"id": "625c50fcc1198f626cc41829"
 		},
 		"created_at": "2022-03-29T17:56:59.705Z",
-		"id": "625c762ee84c84320ca30bb7"
+		"review_id": "625c762ee84c84320ca30bb7"
 	},
 	{
 		"recommends": false,
@@ -325,15 +293,15 @@ export const getCurrentUserReviewsResponse = `"status": "success",
 		"verified": false,
 		"review": "Unfortunately, my microfleece top didn't hold up in the washing machine. After only 2 washes the stitching along a part of the neck opening came undone. I was very disappointed because the top was very soft and comfortable to wear. I expected better from this brand. I ordered the black in one size larger than what I would usually wear based on other reviews re: sizing.",
 		"rating": 3,
-		"user": {
+		"user_id": {
 			"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
 			"_id": "6213d79b3a57cb555079db6a",
 			"name": "Dorothy Jennings"
 		},
-		"product": {
+		"product_id": {
 			"sku": 4,
 			"name": "Women's Tek Gear Microfleece Crewneck Top",
-			"category": {
+			"category_id": {
 				"_id": "6213d49cb7f67e0d64774e94",
 				"name": "Women's Clothing"
 			},
@@ -342,7 +310,7 @@ export const getCurrentUserReviewsResponse = `"status": "success",
 			"id": "6213d55cf8b9765ec0fbbcb6"
 		},
 		"created_at": "2022-08-06T21:35:23.677Z",
-		"id": "625c762ee84c84320ca30bb1"
+		"review_id": "625c762ee84c84320ca30bb1"
 	},
 	...
 ]
@@ -355,18 +323,18 @@ export const createOrUpdateReviewResponse = `"status": "success",
 	"verified": false,
 	"review": "...",
 	"rating": 5,
-	"product": {
+	"product_id": {
 		"sku": 1,
 		"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e92",
+		"category_id": {
+			"_id": "1"
 			"name": "Electronics"
 		},
 		"id": "6213d55cf8b9765ec0fbbcaa"
 	},
-	"user": "6213d79b3a57cb555079db6a",
+	"user_id": "6213d79b3a57cb555079db6a",
 	"created_at": "2020-01-13T20:16:08.347Z",
-	"id": "634f83e48eb7ac0016e8cd4f"
+	"review_id": "634f83e48eb7ac0016e8cd4f"
 }
 `;
 
@@ -421,8 +389,8 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 		"images": [...],
 		"sku": 1,
 		"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e92",
+		"category_id": {
+			"_id": "1"
 			"name": "Electronics"
 		},
 		"brand": "HP",
@@ -443,8 +411,8 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 		"images": [...],
 		"sku": 2,
 		"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e92",
+		"category_id": {
+			"_id": "1"
 			"name": "Electronics"
 		},
 		"brand": "Acer",
@@ -465,8 +433,8 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 		"images": [...],
 		"sku": 8,
 		"name": "Amazfit GTS 2 Mini Smart Watch",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e92",
+		"category_id": {
+			"_id": "1"
 			"name": "Electronics"
 		},
 		"brand": "Amazfit",
@@ -495,7 +463,7 @@ export const getAllCartsResponse = `"status": "success",
 "total": 19,
 "data": [
 	{
-		"user": {
+		"user_id": {
 			"_id": "6213d79b3a57cb555079db70",
 			"name": "Candace Burns"
 		},
@@ -522,7 +490,7 @@ export const getAllCartsResponse = `"status": "success",
 		"id": "623641e496433b10a833b0bc"
 	},
 	{
-		"user": {
+		"user_id": {
 			"_id": "6213d79b3a57cb555079db71",
 			"name": "Marco Lawrence"
 		},
@@ -534,7 +502,7 @@ export const getAllCartsResponse = `"status": "success",
 		"id": "623641e496433b10a833b0bf"
 	},
 	{
-		"user": {
+		"user_id": {
 			"_id": "6213d79b3a57cb555079db7c",
 			"name": "Tracy Flores"
 		},
@@ -551,7 +519,7 @@ export const getAllCartsResponse = `"status": "success",
 
 export const getCartResponse = `"status": "success",
 "data": {
-	"user": {
+	"user_id": {
 		"_id": "6213d79b3a57cb555079db72",
 		"name": "Dustin Fernandez"
 	},
@@ -609,7 +577,7 @@ export const getCurrentUserCartResponse = `"status": "success",
 
 export const addProductToCurrentUserCartResponse = `"status": "success",
 "data": {
-	"user": {
+	"user_id": {
 		"_id": "6213d79b3a57cb555079db6a",
 		"name": "Dorothy Jennings"
 	},
@@ -642,7 +610,7 @@ export const getAllPurchasesResponse = `"status": "success",
 "data": [
 	{
 		"paid": true,
-		"user": {
+		"user_id": {
 			"_id": "6213d79b3a57cb555079db6e",
 			"name": "Daisy Gregory"
 		},
@@ -682,7 +650,7 @@ export const getAllPurchasesResponse = `"status": "success",
 {
 	"paid": true,
 	"_id": "627816ed796f4e5ca4288d13",
-	"user": {
+	"user_id": {
 		"_id": "6213d79b3a57cb555079db71",
 		"name": "Marco Lawrence"
 	},
@@ -722,7 +690,7 @@ export const getAllPurchasesResponse = `"status": "success",
 {
 	"paid": true,
 	"_id": "627816ed796f4e5ca4288d0b",
-	"user": {
+	"user_id": {
 		"_id": "6213d79b3a57cb555079db6e",
 		"name": "Daisy Gregory"
 	},
@@ -767,7 +735,7 @@ export const getPurchaseResponse = `"status": "success",
 "data": {
 	"paid": true,
 	"_id": "627816ed796f4e5ca4288d08",
-	"user": {
+	"user_id": {
 		"_id": "6213d79b3a57cb555079db6e",
 		"name": "Daisy Gregory"
 	},
@@ -811,7 +779,7 @@ export const getCurrentUserPurchasesResponse = `"status": "success",
 "data": [
 	{
 		"paid": true,
-		"user": {
+		"user_id": {
 			"_id": "6213d79b3a57cb555079db6a",
 			"name": "Dorothy Jennings"
 		},
@@ -895,7 +863,7 @@ export const getCurrentUserWishlistResponse = `"status": "success",
 		{
 			"sku": 29,
 			"name": "FlashPatch Rejuvenating Eye Gels",
-			"category": {
+			"category_id": {
 				"_id": "6213d49cb7f67e0d64774e96",
 				"name": "Health & Beauty"
 			},
@@ -905,7 +873,7 @@ export const getCurrentUserWishlistResponse = `"status": "success",
 		{
 			"sku": 26,
 			"name": "Atmosphere Nonstick Aluminum 12-Pc. Cookware Set",
-			"category": {
+			"category_id": {
 				"_id": "6213d49cb7f67e0d64774e97",
 				"name": "Home"
 			},
@@ -915,7 +883,7 @@ export const getCurrentUserWishlistResponse = `"status": "success",
 		{
 			"sku": 35,
 			"name": "Women's Plaid Single-Breasted Walker Coat",
-			"category": {
+			"category_id": {
 				"_id": "6213d49cb7f67e0d64774e94",
 				"name": "Women's Clothing"
 			},
@@ -938,8 +906,8 @@ export const addProductToCurrentUserWishlistResponse = `"status": "success",
 		"images": [...],
 		"sku": 29,
 		"name": "FlashPatch Rejuvenating Eye Gels",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e96",
+		"category_id": {
+			"_id": "1"
 			"name": "Health & Beauty"
 		},
 		"brand": "Patchology",
@@ -960,8 +928,8 @@ export const addProductToCurrentUserWishlistResponse = `"status": "success",
 		"images": [...],
 		"sku": 26,
 		"name": "Atmosphere Nonstick Aluminum 12-Pc. Cookware Set",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e97",
+		"category_id": {
+			"_id": "1"
 			"name": "Home"
 		},
 		"brand": "Brooklyn Steel Co",
@@ -982,8 +950,8 @@ export const addProductToCurrentUserWishlistResponse = `"status": "success",
 		"images": [...],
 		"sku": 35,
 		"name": "Women's Plaid Single-Breasted Walker Coat",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e94",
+		"category_id": {
+			"_id": "1"
 			"name": "Women's Clothing"
 		},
 		"brand": "Calvin Klein",
@@ -1004,8 +972,8 @@ export const addProductToCurrentUserWishlistResponse = `"status": "success",
 		"images": [...],
 		"sku": 3,
 		"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt",
-		"category": {
-			"_id": "6213d49cb7f67e0d64774e93",
+		"category_id": {
+			"_id": "1"
 			"name": "Men's Clothing"
 		},
 		"brand": "Susulv MCL",
@@ -1081,7 +1049,7 @@ export const getUserResponse = `"status": "success",
 
 export const updateCurrentUserResponse = `"status": "success",
 "data": {
-	"user": {
+	"user_id": {
 		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
 		"role": "user",
 		"wishlist": [
@@ -1099,7 +1067,7 @@ export const updateCurrentUserResponse = `"status": "success",
 export const signupResponse = `"status": "success",
 "token": "JWT would be here in the real world",
 "data": {
-	"user": {
+	"user_id": {
 		"photo": "default.jpg",
 		"role": "user",
 		"active": true,
@@ -1114,7 +1082,7 @@ export const signupResponse = `"status": "success",
 export const loginResponse = `"status": "success",
 "token": "...",
 "data": {
-	"user": {
+	"user_id": {
 		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
 		"role": "user",
 		"wishlist": [
