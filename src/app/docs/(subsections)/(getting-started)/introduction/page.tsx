@@ -5,11 +5,15 @@ import { TextLink } from '@/_components/navigation/textLink';
 import { Code } from '@/_components/typography/code';
 import { Lock } from '@/_components/icons/lock';
 import { AnchorHeading } from '@/_components/typography/anchorHeading';
+import { GenericTable } from '@/_components/table';
+import { TableHead } from '@/_components/table/head';
+import { TableRow } from '@/_components/table/row';
+import { TableCell } from '@/_components/table/cell';
 import {
   authorizedRequestHeader,
   graphqlLogin,
   graphqlQuery,
-} from '@/_lib/api-samples/sampleBodies';
+} from '@/_lib/api-samples/sample-bodies';
 
 export default function Introduction() {
   return (
@@ -19,8 +23,9 @@ export default function Introduction() {
       <p>
         StorePI is a free, open-source REST and GraphQL API that was created for use in e-commerce
         prototyping, Front-End Developer talent evaluations, and anything else you can think of. The
-        API and accompanying documentation was built with <span className='snippet'>Next.js</span>,
-        <span className='snippet'>Tailwind CSS</span>, and <span className='snippet'>Vercel</span>.
+        API and accompanying documentation was built with <span className='snippet'>Next.js</span>,{' '}
+        <span className='snippet'>Typescript</span>, <span className='snippet'>Tailwind CSS</span>,{' '}
+        <span className='snippet'>Vercel</span>, and <span className='snippet'>Supabase</span>.
       </p>
 
       <p>
@@ -106,8 +111,8 @@ export default function Introduction() {
       </div>
 
       <div>
-        <AnchorHeading anchorId='query-parameters'>
-          <SectionSubHeading>Query Parameters</SectionSubHeading>
+        <AnchorHeading anchorId='organizing-results'>
+          <SectionSubHeading>Organizing Results</SectionSubHeading>
         </AnchorHeading>
 
         <p className='mb-6'>
@@ -117,100 +122,144 @@ export default function Introduction() {
         </p>
 
         <div className='overflow-x-auto scrollbar-thin'>
-          <table className='table-auto text-left min-w-[814px]'>
-            <thead>
-              <tr className='border-b-2 border-b-stone-900'>
-                <th className='uppercase p-3 w-1/6'>Parameter</th>
-                <th className='uppercase p-3 w-3/6'>Description</th>
-                <th className='uppercase p-3 w-2/6'>Example</th>
-              </tr>
-            </thead>
+          <GenericTable>
+            <TableHead>
+              <th className='uppercase p-3 w-1/6'>Parameter</th>
+              <th className='uppercase p-3 w-3/6'>Description</th>
+              <th className='uppercase p-3 w-2/6'>Example</th>
+            </TableHead>
+
             <tbody>
-              <tr className='border-b-2 border-b-stone-900'>
-                <td className='p-3'>
+              <TableRow>
+                <TableCell>
                   <span className='snippet'>sort</span>
-                </td>
-                <td className='p-3'>
+                </TableCell>
+                <TableCell wrap>
                   Sort the query results by one or more fields (comma-delimited). Sorting defaults
-                  to
-                  <span className='snippet'>sku</span> (ascending) then{' '}
-                  <span className='snippet'>created_at</span> (descending). Use{' '}
-                  <span className='snippet'>-</span> to indicate descending order.
-                </td>
-                <td className='p-3 wrap-break-word'>
-                  <span className='snippet'>?sort=-reviews_average,sale_price</span>
-                </td>
-              </tr>
+                  to chronological order. Use <span className='snippet'>-</span> to indicate
+                  descending order.
+                </TableCell>
+                <TableCell>
+                  <span className='snippet'>?sort=-sale_price,-regular_price</span>
+                </TableCell>
+              </TableRow>
 
-              <tr className='border-b-2 border-b-stone-900'>
-                <td className='p-3'>
+              <TableRow>
+                <TableCell>
                   <span className='snippet'>fields</span>
-                </td>
-                <td className='p-3'>
-                  Filter the query results to specific fields (comma-delimited). Use{' '}
-                  <span className='snippet'>-</span> to indicate exclusion.
-                </td>
-                <td className='p-3 wrap-break-word'>
-                  <span className='snippet'>?fields=-user</span>
-                </td>
-              </tr>
+                </TableCell>
+                <TableCell wrap>
+                  Filter the query results to one or more specific fields (comma-delimited).
+                </TableCell>
+                <TableCell>
+                  <span className='snippet'>?fields=name,sale_price</span>
+                </TableCell>
+              </TableRow>
 
-              <tr className='border-b-2 border-b-stone-900'>
-                <td className='p-3'>
+              <TableRow>
+                <TableCell>
                   <span className='snippet'>limit</span>
-                </td>
-                <td className='p-3'>
-                  Limit the query results. Defaults to <span className='snippet'>100</span>.
-                </td>
-                <td className='p-3 wrap-break-word'>
+                </TableCell>
+                <TableCell wrap>
+                  Limit the query results. Defaults to <span className='snippet'>20</span>.
+                </TableCell>
+                <TableCell>
                   <span className='snippet'>?limit=10</span>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
 
-              <tr className='border-b-2 border-b-stone-900'>
-                <td className='p-3'>
-                  <span className='snippet'>page</span>
-                </td>
-                <td className='p-3'>
+              <TableRow>
+                <TableCell>
+                  <span className='snippet'>offset</span>
+                </TableCell>
+                <TableCell wrap>
                   Paginate the query results. Defaults to <span className='snippet'>1</span>.
-                </td>
-                <td className='p-3 wrap-break-word'>
-                  <span className='snippet'>?page=2</span>
-                </td>
-              </tr>
+                </TableCell>
+                <TableCell>
+                  <span className='snippet'>?offset=2</span>
+                </TableCell>
+              </TableRow>
             </tbody>
-          </table>
+          </GenericTable>
         </div>
       </div>
 
       <div>
-        <AnchorHeading anchorId='filtering'>
-          <SectionSubHeading>Filtering</SectionSubHeading>
+        <AnchorHeading anchorId='filtering-results'>
+          <SectionSubHeading>Filtering Results</SectionSubHeading>
         </AnchorHeading>
 
         <p className='mb-4'>
-          Most properties of a resource are valid for applying filters to a query. The exception to
-          this is virtual properties that are a byproduct of calculation (e.g. a cart&apos;s total).
-          For these properties, it is recommended to filter client-side.
+          All fields of a given resource are valid for applying filters to a query. A full list of
+          these fields can be found on each resource&apos;s page. The following operators are
+          supported:
         </p>
 
-        <p className='mb-4'>
-          Operators such as <span className='snippet'>gte</span>,{' '}
-          <span className='snippet'>lte</span>, <span className='snippet'>gt</span>, and{' '}
-          <span className='snippet'>lt</span> are supported (e.g.{' '}
-          <span className='snippet'>?sale_price[lte]=100</span>). If you&apos;re filtering by a
-          brand with multiple words, you&apos;ll need to separate the words with a - (e.g.{' '}
-          <span className='snippet'>?brand=brand-name-here</span>).
-        </p>
+        <GenericTable>
+          <TableHead>
+            <th className='uppercase p-3 w-1/6'>Parameter</th>
+            <th className='uppercase p-3 w-3/6'>Description</th>
+            <th className='uppercase p-3 w-2/6'>Example</th>
+          </TableHead>
 
-        <p>
-          The following parameters are whitelisted for duplication:{' '}
-          <span className='snippet'>reviews_average</span>,{' '}
-          <span className='snippet'>reviews_quantity</span>,{' '}
-          <span className='snippet'>regular_price</span>,{' '}
-          <span className='snippet'>sale_price</span>, <span className='snippet'>brand</span>, and{' '}
-          <span className='snippet'>category</span>.
-        </p>
+          <tbody>
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>[field]=[value]</span>
+              </TableCell>
+              <TableCell wrap>
+                Standard equality - the value must match the field&apos;s value exactly.
+              </TableCell>
+              <TableCell>
+                <span className='snippet'>?in_stock=true</span>
+              </TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>[field]_greater_than</span>
+              </TableCell>
+              <TableCell wrap>The value must be greater than the field&apos;s value.</TableCell>
+              <TableCell>
+                <span className='snippet'>?sale_price_greater_than=100</span>
+              </TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>[field]_greater_than_or_equal_to</span>
+              </TableCell>
+              <TableCell wrap>
+                The value must be greater than or equal to the field&apos;s value.
+              </TableCell>
+              <TableCell>
+                <span className='snippet'>?sale_price_greater_than_or_equal_to=100</span>
+              </TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>[field]_less_than</span>
+              </TableCell>
+              <TableCell wrap>The value must be less than the field&apos;s value.</TableCell>
+              <TableCell>
+                <span className='snippet'>?sale_price_less_than=200</span>
+              </TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>[field]_less_than_or_equal_to</span>
+              </TableCell>
+              <TableCell wrap>
+                The value must be less than or equal to the field&apos;s value.
+              </TableCell>
+              <TableCell>
+                <span className='snippet'>?sale_price_less_than_or_equal_to=200</span>
+              </TableCell>
+            </TableRow>
+          </tbody>
+        </GenericTable>
       </div>
 
       <div>

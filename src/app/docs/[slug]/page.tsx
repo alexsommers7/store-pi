@@ -1,6 +1,6 @@
 import { getSlugStructure } from '@/docs/structure';
 import { SectionHeading } from '@/_components/typography/sectionHeading';
-import { endpointMapper } from '@/docs/endpointMapper';
+import { endpointMapper } from '@/docs/endpoint-mapper';
 import { DocsPagination } from '@/docs/pagination/index';
 
 export default function Page({ params }: { params: { slug: string } }) {
