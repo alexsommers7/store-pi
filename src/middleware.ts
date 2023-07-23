@@ -2,19 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isAuthenticated } from '@/_utils/auth';
 
 export const config = {
-  matcher: ['/api/(.*)/users/:path*'],
+  matcher: ['/api/:path*'],
 };
 
-export function middleware(request: NextRequest) {
-  // enable cors
-  request.headers.set('Access-Control-Allow-Origin', '*');
-  request.headers.set('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
-  request.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
-  if (!isAuthenticated(request)) {
+  // enable cors
+  const response = NextResponse.next({});
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Credentials', 'true');
+
+  if (pathname.split('/').includes('users') && !isAuthenticated(req)) {
     return new NextResponse(JSON.stringify({ success: false, message: 'authentication failed' }), {
       status: 401,
       headers: { 'content-type': 'application/json' },
     });
   }
+
+  return response;
 }
