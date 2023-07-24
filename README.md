@@ -25,10 +25,6 @@ All endpoints act as real-world endpoints, but without actually writing anything
 
 Cross-origin resource sharing is enabled for all incoming requests.
 
-## Rate Limiting
-
-The rate limit for a given IP address is 50 requests per minute. The number of requests you have remaining can be viewed in the `X-Ratelimit-Remaining` response header of any request.
-
 ## Authorization
 
 Certain requests require a JWT for authorization. Requests that do require the token are indicated as such by the icon. As a general rule, any REST or GraphQL request that is reading or writing to a current user's resources will require the bearer token.

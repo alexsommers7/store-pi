@@ -71,18 +71,6 @@ export default function Introduction() {
       </div>
 
       <div>
-        <AnchorHeading anchorId='rate-limiting'>
-          <SectionSubHeading>Rate Limiting</SectionSubHeading>
-        </AnchorHeading>
-
-        <p>
-          The rate limit for a given IP address is 50 requests per minute. The number of requests
-          you have remaining can be viewed in the{' '}
-          <span className='snippet'>X-Ratelimit-Remaining</span> response header of any request.
-        </p>
-      </div>
-
-      <div>
         <AnchorHeading anchorId='authorization'>
           <SectionSubHeading>Authorization</SectionSubHeading>
         </AnchorHeading>
