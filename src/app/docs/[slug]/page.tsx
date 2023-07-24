@@ -2,6 +2,7 @@ import { getSlugStructure } from '@/docs/structure';
 import { SectionHeading } from '@/_components/typography/sectionHeading';
 import { endpointMapper } from '@/docs/endpoint-mapper';
 import { DocsPagination } from '@/docs/pagination/index';
+import { AvailableFields } from '@/docs/_components/availableFields';
 
 export default function Page({ params }: { params: { slug: string } }) {
   const sectionStructure = getSlugStructure(params.slug);
@@ -15,6 +16,8 @@ export default function Page({ params }: { params: { slug: string } }) {
         <SectionHeading>{label}</SectionHeading>
 
         {desc && <p>{desc}</p>}
+
+        <AvailableFields tableName={label} />
 
         {endpointMapper(sectionStructure)}
       </section>
