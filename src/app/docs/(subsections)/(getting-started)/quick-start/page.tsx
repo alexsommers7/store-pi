@@ -28,8 +28,8 @@ export default function Introduction() {
       <p className='text-left'>
         Get a specific product&apos;s reviews{' '}
         <TextLink
-          href={`${apiOrigin}/products/25/reviews`}
-          label={`${apiOrigin}/products/25/reviews`}
+          href={`${apiOrigin}/products/18/reviews`}
+          label={`${apiOrigin}/products/18/reviews`}
           newTab
         />
       </p>
