@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_utils/supabase';
+import supabase from '@/_supabase/create-client';
 import { addFeaturesToQuery } from './api-features';
 
 export async function supabaseGetWithFeatures(resource: string, searchParams: URLSearchParams) {
