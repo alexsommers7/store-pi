@@ -78,46 +78,6 @@ export const getProductResponse = `"status": "success",
 }
 `;
 
-export const createNewProductResponse = `"status": "success",
-"data": {
-	"reviews_average": 0,
-	"reviews_quantity": 0,
-	"best_seller": false,
-	"in_stock": true,
-	"features": [],
-	"images": [],
-	"sku": 72,
-	"name": "...",
-	"category_id": 1,
-	"brand": "...",
-	"regular_price": 99.95,
-	"sale_price": 79.95,
-	"description": "...",
-	"product_id": 89
-}
-`;
-
-export const updateProductResponse = `"status": "success",
-"data": {
-	"reviews_average": 4.63,
-	"reviews_quantity": 8,
-	"best_seller": true,
-	"in_stock": true,
-	"features": [...],
-	"images": [...],
-	"sku": 1,
-	"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-	"category_id": 1,
-	"brand": "HP",
-	"regular_price": 159.95,
-	"sale_price": 139.95,
-	"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
-	"specs": [...],
-	"image_main": "https://storepi-media.s3.us-west-1.amazonaws.com/img/products/electronics/1a.jpg",
-	"product_id": 1
-}
-`;
-
 export const getAllReviewsResponse = `"status": "success",
 "results": 100,
 "total": 160,
@@ -341,11 +301,10 @@ export const createOrUpdateReviewResponse = `"status": "success",
 export const getAllBrandsResponse = `"status": "success",
 "results": 47,
 "data": [
-	"Abystyle",
-	"Acer",
-	"Adidas",
-	"Amazfit",
-	"Brooklyn Steel Co",
+	{ "id": 1, "name": "Abystyle" },
+	{ "id": 2, "name": "Adidas" },
+	{ "id": 3, "name": "Amazfit" },
+	{ "id": 4, "name": "Brooklyn Steel Co" },
 	...
 ]
 `;
@@ -448,14 +407,6 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 	}
 	...
 ]
-`;
-
-export const createOrUpdateCategoryResponse = `"status": "success",
-"data": {
-	"item_count": 0,
-	"_id": "63520d186ffa520016c6c08a",
-	"name": "..."
-}
 `;
 
 export const getAllCartsResponse = `"status": "success",
@@ -731,7 +682,7 @@ export const getAllPurchasesResponse = `"status": "success",
 ]
 `;
 
-export const getPurchaseResponse = `"status": "success",
+export const getCurrentUserPurchaseResponse = `"status": "success",
 "data": {
 	"paid": true,
 	"_id": "627816ed796f4e5ca4288d08",
@@ -988,51 +939,7 @@ export const addProductToCurrentUserWishlistResponse = `"status": "success",
 ]
 `;
 
-export const getAllUsersResponse = `"status": "success",
-"results": 20,
-"total": 20,
-"data": [
-	{
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
-		"role": "user",
-		"wishlist": [
-			"625c50fcc1198f626cc4183c",
-			"625c50fcc1198f626cc41839",
-			"625c50fcc1198f626cc41842"
-		],
-		"_id": "6213d79b3a57cb555079db6a",
-		"name": "Dorothy Jennings",
-		"email": "dorothy@example.com"
-	},
-	{
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-4.jpg",
-		"role": "user",
-		"wishlist": [],
-		"_id": "6213d79b3a57cb555079db6c",
-		"name": "Shari Castro",
-		"email": "shari@example.com"
-	},
-	{
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-3.jpg",
-		"role": "user",
-		"wishlist": [
-			"625c50fcc1198f626cc41854",
-			"625c50fcc1198f626cc41853",
-			"625c50fcc1198f626cc41851",
-			"625c50fcc1198f626cc4184f",
-			"625c50fcc1198f626cc4184c",
-			"625c50fcc1198f626cc41849",
-			"625c50fcc1198f626cc41845"
-		],
-		"_id": "6213d79b3a57cb555079db6b",
-		"name": "Jodi Warner",
-		"email": "jodi@example.com"
-	},
-	...
-]
-`;
-
-export const getUserResponse = `"status": "success",
+export const getCurrentUserResponse = `"status": "success",
 "data": {
 	"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
 	"role": "user",

@@ -2,8 +2,6 @@ import { HTTPMethods } from '@/_lib/constants';
 import {
   addProductToCurrentUserCartBody,
   addProductToCurrentUserWishlistBody,
-  createNewProductBody,
-  createOrUpdateCategoryBody,
   createOrUpdateReviewBody,
   createPurchaseBody,
   loginBody,
@@ -11,13 +9,10 @@ import {
   removeProductFromCurrentUserWishlistBody,
   signupBody,
   updateCurrentUserBody,
-  updateProductBody,
 } from '@/_lib/api-samples/sample-bodies';
 import {
   addProductToCurrentUserCartResponse,
   addProductToCurrentUserWishlistResponse,
-  createNewProductResponse,
-  createOrUpdateCategoryResponse,
   createOrUpdateReviewResponse,
   createPurchaseResponse,
   getAllBrandsResponse,
@@ -25,9 +20,7 @@ import {
   getAllCategoriesResponse,
   getAllProductsInCategoryResponse,
   getAllProductsResponse,
-  getAllPurchasesResponse,
   getAllReviewsResponse,
-  getAllUsersResponse,
   getCartResponse,
   getCurrentUserCartResponse,
   getCurrentUserPurchasesResponse,
@@ -35,13 +28,12 @@ import {
   getCurrentUserWishlistResponse,
   getProductResponse,
   getProductReviewsResponse,
-  getPurchaseResponse,
+  getCurrentUserPurchaseResponse,
   getReviewResponse,
-  getUserResponse,
+  getCurrentUserResponse,
   loginResponse,
   signupResponse,
   updateCurrentUserResponse,
-  updateProductResponse,
 } from '@/_lib/api-samples/sample-responses';
 
 export interface StructureItem {
@@ -83,7 +75,6 @@ export const structure = [
         anchors: [
           { label: 'Database Interaction', hash: 'database-interaction' },
           { label: 'CORS', hash: 'cors' },
-          { label: 'Rate Limiting', hash: 'rate-limiting' },
           { label: 'Authorization', hash: 'authorization' },
           { label: 'Organizing Results', hash: 'organizing-results' },
           { label: 'Filtering Results', hash: 'filtering-results' },
@@ -114,6 +105,13 @@ export const structure = [
             response: getAllProductsResponse,
           },
           {
+            label: 'Get All Products in Category',
+            hash: 'get-category-products',
+            httpMethod: 'GET',
+            slug: 'categories/:id/products',
+            response: getAllProductsInCategoryResponse,
+          },
+          {
             label: 'Get Product',
             hash: 'get-product',
             httpMethod: 'GET',
@@ -126,28 +124,6 @@ export const structure = [
             httpMethod: 'GET',
             slug: 'brands',
             response: getAllBrandsResponse,
-          },
-          {
-            label: 'Create New Product',
-            hash: 'create-product',
-            httpMethod: 'POST',
-            slug: 'products',
-            body: createNewProductBody,
-            response: createNewProductResponse,
-          },
-          {
-            label: 'Update Product',
-            hash: 'update-product',
-            httpMethod: 'PATCH',
-            slug: 'products/:id',
-            body: updateProductBody,
-            response: updateProductResponse,
-          },
-          {
-            label: 'Delete Product',
-            hash: 'delete-product',
-            httpMethod: 'DELETE',
-            slug: 'products/:id',
           },
         ],
       },
@@ -224,35 +200,6 @@ export const structure = [
             slug: 'categories',
             response: getAllCategoriesResponse,
           },
-          {
-            label: 'Get All Products in Category',
-            hash: 'get-category-products',
-            httpMethod: 'GET',
-            slug: 'categories/:id/products',
-            response: getAllProductsInCategoryResponse,
-          },
-          {
-            label: 'Create New Category',
-            hash: 'create-category',
-            httpMethod: 'POST',
-            slug: 'categories',
-            body: createOrUpdateCategoryBody,
-            response: createOrUpdateCategoryResponse,
-          },
-          {
-            label: 'Update Category',
-            hash: 'update-category',
-            httpMethod: 'PATCH',
-            slug: 'categories/:id',
-            body: createOrUpdateCategoryBody,
-            response: createOrUpdateCategoryResponse,
-          },
-          {
-            label: 'Delete Category',
-            hash: 'delete-category',
-            httpMethod: 'DELETE',
-            slug: 'categories/:id',
-          },
         ],
       },
       {
@@ -307,18 +254,11 @@ export const structure = [
         desc: 'A total of 50 purchases exist in the database. Each purchase must belong to a user. Not every user has made a purchase, but some have made multiple.',
         anchors: [
           {
-            label: 'Get All Purchases',
-            hash: 'get-purchases',
+            label: 'Get Current User Purchase',
+            hash: 'get-current-user-purchase',
             httpMethod: 'GET',
-            slug: 'purchases',
-            response: getAllPurchasesResponse,
-          },
-          {
-            label: 'Get Purchase',
-            hash: 'get-purchase',
-            httpMethod: 'GET',
-            slug: 'purchases/:id',
-            response: getPurchaseResponse,
+            slug: 'users/current/purchases/:id',
+            response: getCurrentUserPurchaseResponse,
           },
           {
             label: 'Get Current User Purchases',
@@ -377,25 +317,11 @@ export const structure = [
         desc: 'Each user object will contain general profile information, including a link to a stock photo hosted on S3.',
         anchors: [
           {
-            label: 'Get All Users',
-            hash: 'get-users',
-            httpMethod: 'GET',
-            slug: 'users',
-            response: getAllUsersResponse,
-          },
-          {
-            label: 'Get User',
-            hash: 'get-user',
-            httpMethod: 'GET',
-            slug: 'users/:id',
-            response: getUserResponse,
-          },
-          {
             label: 'Get Current User',
             hash: 'get-current-user',
             httpMethod: 'GET',
             slug: 'users/current',
-            response: getUserResponse,
+            response: getCurrentUserResponse,
           },
           {
             label: 'Update Current User',
@@ -404,12 +330,6 @@ export const structure = [
             slug: 'users/current',
             body: updateCurrentUserBody,
             response: updateCurrentUserResponse,
-          },
-          {
-            label: 'Delete User',
-            hash: 'delete-user',
-            httpMethod: 'DELETE',
-            slug: 'users/:id',
           },
           {
             label: 'Delete Current User',
