@@ -6,20 +6,18 @@ export async function GET(request: Request, context: Context) {
   try {
     const { params } = context;
     const { resource, resource_id } = params;
+    const { searchParams } = new URL(request.url);
 
-    const { data, error } = await supabase.from(resource).select().eq('id', resource_id);
+    const { data, error } = await supabase
+      .from(resource)
+      .select(searchParams.get('fields') || '*', { count: 'planned' })
+      .eq('id', resource_id)
+      .maybeSingle();
 
-    if (error) {
+    if (error || !data) {
       return NextResponse.json(
-        { error: `Failed to fetch from ${resource}.`, params },
-        { status: 500 }
-      );
-    }
-
-    if (!data || !data.length) {
-      return NextResponse.json(
-        { error: `Resource with id ${resource_id} not found.` },
-        { status: 404 }
+        { error: `Failed to fetch id ${resource_id} from ${resource}.` },
+        { status: 400 }
       );
     }
 

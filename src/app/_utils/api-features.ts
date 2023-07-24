@@ -1,4 +1,4 @@
-function getLimitParam(limitQueryParam: string | null): number {
+export function getLimitParam(limitQueryParam: string | null): number {
   const defaultLimit = 20;
 
   if (!limitQueryParam) return defaultLimit;
@@ -7,7 +7,7 @@ function getLimitParam(limitQueryParam: string | null): number {
   return isNaN(parsedLimit) ? defaultLimit : parsedLimit;
 }
 
-function getOffsetParam(offsetQueryParam: string | null): number {
+export function getOffsetParam(offsetQueryParam: string | null): number {
   const defaultOffset = 0;
 
   if (!offsetQueryParam) return defaultOffset;
@@ -16,7 +16,7 @@ function getOffsetParam(offsetQueryParam: string | null): number {
   return isNaN(parsedOffset) ? defaultOffset : parsedOffset;
 }
 
-function getSortParam(sortQueryParam: string | null): Array<[string, boolean]> {
+export function getSortParam(sortQueryParam: string | null): Array<[string, boolean]> {
   if (!sortQueryParam) return [['id', true]];
 
   return sortQueryParam.split(',').map((sort) => [sort.replace('-', ''), !sort.startsWith('-')]);
