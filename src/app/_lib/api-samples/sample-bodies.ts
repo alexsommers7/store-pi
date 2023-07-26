@@ -29,24 +29,24 @@ export const addProductToCurrentUserCartBody = `// all fields are required
 `;
 
 export const removeProductFromCurrentUserCartBody = `// all fields are required
-"sku": 16
+"product_id": 16
 `;
 
 export const createPurchaseBody = `// all fields are required
 "products": [
   {
-    "item": "6213d55cf8b9765ec0fbbcaa",
+    "product_id": 1,
     "quantity": 1
   }
 ]
 `;
 
 export const addProductToCurrentUserWishlistBody = `// all fields are required
-"sku": 3
+"product_id": 3
 `;
 
 export const removeProductFromCurrentUserWishlistBody = `// all fields are required
-"sku": 1
+"product_id": 1
 `;
 
 export const updateCurrentUserBody = `"name": "..."`;
@@ -68,9 +68,7 @@ export const graphqlQuery = `const GET_ALL_PRODUCTS = gql\`
     products(limit: $limit, sort: $sort, filter: $filter) {
       id
       sku
-      reviews_average
-      reviews_quantity
-      image_main
+      sale_price
     }
   }
 \`;
@@ -78,8 +76,8 @@ export const graphqlQuery = `const GET_ALL_PRODUCTS = gql\`
 const { loading, error, data } = useQuery(GET_ALL_PRODUCTS, {
   variables: {
     limit: 10,
-    sort: '-reviews_average,sku',
-    filter: 'reviews_average[gte]=5,reviews_quantity[gte]=5',
+    sort: 'sku',
+    filter: 'sale_price[gte]=100',
   },
 });
 `;
