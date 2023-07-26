@@ -6,6 +6,7 @@ import { GenericTable } from '@/_components/table';
 import { TableHead } from '@/_components/table/head';
 import { TableRow } from '@/_components/table/row';
 import { TableCell } from '@/_components/table/cell';
+import { RollerLoader } from '@/_components/loaders/roller';
 
 interface AvailableFieldsProps {
   tableName: string;
@@ -15,8 +16,6 @@ interface Column {
   column_name: string;
   data_type: string;
 }
-
-export const revalidate = 3600; // revalidate every hour
 
 export function AvailableFields({ tableName }: AvailableFieldsProps) {
   const [columns, setColumns] = useState<Column[]>([]);
@@ -37,7 +36,7 @@ export function AvailableFields({ tableName }: AvailableFieldsProps) {
   return (
     <>
       {showFields ? (
-        <GenericTable>
+        <GenericTable shrink fade>
           <TableHead>
             <th className='uppercase p-3 w-1/2'>Field</th>
             <th className='uppercase p-3 w-3/2'>Data Type</th>
@@ -55,17 +54,13 @@ export function AvailableFields({ tableName }: AvailableFieldsProps) {
               ))}
             </tbody>
           ) : (
-            <>
-              <tbody>
-                <TableRow>
-                  <TableCell>Loading ...</TableCell>
-                </TableRow>
-              </tbody>
-            </>
+            <></>
           )}
         </GenericTable>
       ) : (
-        <></>
+        <div className='opacity-0 animate-fadeInDelay1 flex justify-center items-center mt-4 min-h-[300px]'>
+          <RollerLoader />
+        </div>
       )}
     </>
   );
