@@ -45,6 +45,7 @@ export interface StructureSubItem {
   label: string;
   slug: string;
   desc?: string;
+  isDBTable?: boolean;
   anchors: EndpointAnchor[] | NonEndpointAnchor[];
 }
 
@@ -71,6 +72,7 @@ export const structure = [
       {
         label: 'Introduction',
         slug: 'introduction',
+        isDBTable: false,
         desc: 'A look at the purpose of this project and the technologies used.',
         anchors: [
           { label: 'Database Interaction', hash: 'database-interaction' },
@@ -84,6 +86,7 @@ export const structure = [
       {
         label: 'Quick Start',
         slug: 'quick-start',
+        isDBTable: false,
         desc: 'A quick glance at some common API calls to get started.',
         anchors: [],
       },
@@ -95,6 +98,7 @@ export const structure = [
       {
         label: 'Products',
         slug: 'products',
+        isDBTable: true,
         desc: 'A total of 50 products exist in the database. Each product belongs to a category and contains properties such as pricing, review data, specs, and more.',
         anchors: [
           {
@@ -130,6 +134,7 @@ export const structure = [
       {
         label: 'Reviews',
         slug: 'reviews',
+        isDBTable: true,
         desc: 'Every review is associated with a user. Each review contains properties such as rating, incentivization, verification, and more.',
         anchors: [
           {
@@ -191,6 +196,7 @@ export const structure = [
       {
         label: 'Categories',
         slug: 'categories',
+        isDBTable: true,
         desc: 'There are six common e-commerce product categories available, each with multiple items belonging to it.',
         anchors: [
           {
@@ -205,6 +211,7 @@ export const structure = [
       {
         label: 'Carts',
         slug: 'carts',
+        isDBTable: true,
         desc: 'Each user has a cart associated with them. The cart will contain a products array, the cart total (string and numeric), and more. A cart must belong to a user.',
         anchors: [
           {
@@ -251,6 +258,7 @@ export const structure = [
       {
         label: 'Purchases',
         slug: 'purchases',
+        isDBTable: true,
         desc: 'A total of 50 purchases exist in the database. Each purchase must belong to a user. Not every user has made a purchase, but some have made multiple.',
         anchors: [
           {
@@ -282,6 +290,7 @@ export const structure = [
       {
         label: 'Wishlists',
         slug: 'wishlists',
+        isDBTable: true,
         desc: 'Every user is assigned a wishlist. Some will have an empty wishlist, while others will have products in theirs.',
         anchors: [
           {
@@ -314,6 +323,7 @@ export const structure = [
       {
         label: 'Users',
         slug: 'users',
+        isDBTable: true,
         desc: 'Each user object will contain general profile information, including a link to a stock photo hosted on S3.',
         anchors: [
           {
@@ -343,6 +353,7 @@ export const structure = [
       {
         label: 'Authentication',
         slug: 'authentication',
+        isDBTable: false,
         desc: 'Log in as a user to view their cart, wishlist, reviews, and purchases.',
         anchors: [
           {
@@ -351,7 +362,7 @@ export const structure = [
             httpMethod: 'POST',
             slug: 'users/signup',
             body: loginBody,
-            response: loginResponse,
+            response: signupResponse,
             desc: 'This endpoint will not include a valid JWT to be used for subsequent requests as it would in a real-world application. This is because the new user is not actually persisted to the database. If you need a token to access protected endpoints, use the log in endpoint as described below.',
           },
           {
@@ -360,7 +371,7 @@ export const structure = [
             httpMethod: 'POST',
             slug: 'users/login',
             body: signupBody,
-            response: signupResponse,
+            response: loginResponse,
             desc: `In order to provide a variety in the data, there are multiple user accounts available. The structure of each user's email address is [firstName]@example.com, and each user's password is simply 'password'. You may log in as any of the following users: Jodi, Amy, Jean, Cody, or Daisy.`,
           },
         ],
