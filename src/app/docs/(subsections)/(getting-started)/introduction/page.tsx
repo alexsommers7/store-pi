@@ -41,7 +41,7 @@ export default function Introduction() {
         src='/images/storepi-demo.png'
         width={1280}
         height={720}
-        className='rounded-sm'
+        className='rounded-sm opacity-0 animate-fadeIn'
         alt='StorePI demo'
       />
 
