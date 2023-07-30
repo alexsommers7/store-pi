@@ -14,6 +14,7 @@ import {
   graphqlLogin,
   graphqlQuery,
 } from '@/_lib/api-samples/sample-bodies';
+import { Tip } from '@/_components/typography/tip';
 
 export default function Introduction() {
   return (
@@ -32,9 +33,7 @@ export default function Introduction() {
         It provides resources such as <span className='snippet'>products</span>,{' '}
         <span className='snippet'>reviews</span>, <span className='snippet'>users</span>,{' '}
         <span className='snippet'>carts</span>, <span className='snippet'>purchases</span>, and
-        more. Endpoints are provided to perform CRUD operations on each of these resources -
-        supporting both end-user actions (e.g. create a new review) as well as administrative
-        actions (e.g. create a new product).
+        more. Endpoints are provided to perform CRUD operations on each of these resources.
       </p>
 
       <Image
@@ -43,6 +42,7 @@ export default function Introduction() {
         height={720}
         className='rounded-sm opacity-0 animate-fadeIn'
         alt='StorePI demo'
+        priority
       />
 
       <p>
@@ -56,7 +56,7 @@ export default function Introduction() {
         </AnchorHeading>
 
         <p>
-          All endpoints act as real-world endpoints, but without actually writing anything to the
+          Most endpoints act as real-world endpoints, but without actually writing anything to the
           database. In the event that you are creating or updating a resource, the response will
           still contain the updated data despite not persisting it.
         </p>
@@ -94,7 +94,7 @@ export default function Introduction() {
 
         <p className='mt-4'>
           In both situations, the token will be returned in the response body and will be valid for
-          90 days.
+          12 hours.
         </p>
       </div>
 
@@ -104,9 +104,10 @@ export default function Introduction() {
         </AnchorHeading>
 
         <p className='mb-6'>
-          The following query parameters can optionally be appended to all REST requests. The same
-          applies to GraphQL requests, with the exception of <span className='snippet'>fields</span>{' '}
-          due to the nature of GraphQL queries.
+          The following query parameters can optionally be appended to all{' '}
+          <span className='snippet'>GET</span> requests. The same applies to GraphQL requests, with
+          the exception of <span className='snippet'>fields</span> due to the nature of GraphQL
+          queries.
         </p>
 
         <div className='overflow-x-auto scrollbar-thin'>
@@ -169,6 +170,20 @@ export default function Introduction() {
               </TableRow>
             </tbody>
           </GenericTable>
+
+          <div className='mt-8'>
+            <Tip
+              tipText={
+                <span>
+                  If the <span className='snippet'>limit</span> or{' '}
+                  <span className='snippet'>offset</span> parameter is passed, the response json
+                  will contain a <span className='snippet'>count</span> of the total number of
+                  results, as well as a <span className='snippet'>nextOffset</span> value (if not
+                  already at the end).
+                </span>
+              }
+            />
+          </div>
         </div>
       </div>
 
@@ -180,7 +195,7 @@ export default function Introduction() {
         <p className='mb-4'>
           All fields of a given resource are valid for applying filters to a query. A full list of
           these fields can be found on each resource&apos;s page. The following operators are
-          supported:
+          supported for <span className='snippet'>GET</span> requests:
         </p>
 
         <GenericTable>
