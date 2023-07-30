@@ -7,8 +7,6 @@ interface OptionsData {
   photo?: string;
 }
 
-const tablesToInsertUponSignup = ['carts', 'wishlists'];
-
 export async function POST(request: Request) {
   try {
     const { email, password, name, photo } = await request.json();
@@ -28,28 +26,7 @@ export async function POST(request: Request) {
       },
     });
 
-    const newUserId = data?.user?.id;
-
-    // create the user in public users table
-    // this is in addition to the auth.users table that is inserted into automatically via .signUp()
-    const userRes = await supabase
-      .from('users')
-      .insert({ id: newUserId, name: data.user?.user_metadata.name });
-    const userInsertionError = userRes.error;
-
-    // create the corresponding user row in the other, pre-defined tables
-    const insertionErrors = await Promise.all(
-      tablesToInsertUponSignup.map(async (table) => {
-        try {
-          await supabase.from(table).insert({ user_id: newUserId });
-          return null;
-        } catch (error) {
-          return new Error();
-        }
-      })
-    );
-
-    if (error || !data || userInsertionError || insertionErrors.some((e) => e)) {
+    if (error || !data) {
       return NextResponse.json(
         { error: error?.message || 'User creation unsuccessful.' },
         { status: 400 }
