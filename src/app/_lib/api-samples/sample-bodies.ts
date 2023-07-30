@@ -51,11 +51,11 @@ export const removeProductFromCurrentUserWishlistBody = `// all fields are requi
 
 export const updateCurrentUserBody = `"name": "..."`;
 
-export const signupBody = `// all fields are required
+export const signupBody = `// all fields are required with the exception of photo
 "name": "...",
 "email": "...",
 "password": "...",
-"passwordConfirm": "..."
+"photo": "..."
 `;
 
 export const loginBody = `// all fields are required	

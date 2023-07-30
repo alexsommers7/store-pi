@@ -6,3 +6,6 @@ export const HTTPMethods = {
   PATCH: 'PATCH',
   DELETE: 'DELETE',
 };
+
+export const defaultUserPhotoUrl =
+  'https://storepi-media.s3.us-west-1.amazonaws.com/img/users/default.png';

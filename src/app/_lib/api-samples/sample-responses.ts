@@ -1,6 +1,5 @@
 export const getAllProductsResponse = `"status": "success",
-"results": 50,
-"total": 50,
+"count": 50,
 "data": [
 	{
 		"id": 1,
@@ -73,8 +72,7 @@ export const getProductResponse = `"status": "success",
 `;
 
 export const getAllReviewsResponse = `"status": "success",
-"results": 100,
-"total": 160,
+"count": 160,
 "data": [
 	{
 		"recommends": true,
@@ -128,8 +126,7 @@ export const getReviewResponse = `"status": "success",
 `;
 
 export const getProductReviewsResponse = `"status": "success",
-"results": 6,
-"total": 6,
+"count": 6,
 "data": [
 	{
 		"recommends": true,
@@ -169,7 +166,7 @@ export const getProductReviewsResponse = `"status": "success",
 `;
 
 export const getCurrentUserReviewsResponse = `"status": "success",
-"results": 11,
+"count": 11,
 "data": [
 	{
 		"recommends": true,
@@ -223,7 +220,7 @@ export const createOrUpdateReviewResponse = `"status": "success",
 `;
 
 export const getAllBrandsResponse = `"status": "success",
-"results": 47,
+"count": 47,
 "data": [
 	{ "id": 1, "name": "Abystyle" },
 	{ "id": 2, "name": "Adidas" },
@@ -234,8 +231,7 @@ export const getAllBrandsResponse = `"status": "success",
 `;
 
 export const getAllCategoriesResponse = `"status": "success",
-"results": 6,
-"total": 6,
+"count": 6,
 "data": [
 	{
 		"id": 1,
@@ -257,8 +253,7 @@ export const getAllCategoriesResponse = `"status": "success",
 `;
 
 export const getAllProductsInCategoryResponse = `"status": "success",
-"results": 10,
-"total": 10,
+"count": 10,
 "data": [
 	{
 		"best_seller": true,
@@ -313,7 +308,7 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 `;
 
 export const getCurrentUserCartResponse = `"status": "success",
-"results": 1,
+"count": 1,
 "data": [
 	{
 		"products": [
@@ -404,7 +399,7 @@ export const getCurrentUserPurchaseResponse = `"status": "success",
 `;
 
 export const getCurrentUserPurchasesResponse = `"status": "success",
-"results": 1,
+"count": 1,
 "data": [
 	{
 		"paid": true,
@@ -596,16 +591,83 @@ export const updateCurrentUserResponse = `"status": "success",
 }
 `;
 
-export const signupResponse = `"status": "success",
-"token": "JWT would be here in the real world",
-"data": {
-	"user_id": {
-		"photo": "default.jpg",
-		"role": "user",
-		"active": true,
-		"id": 24,
-		"name": "...",
-		"email": "..."
+export const signupResponse = `"data": {
+	"user": {
+		"id": "...",
+		"aud": "authenticated",
+		"role": "authenticated",
+		"email": "...",
+		"email_confirmed_at": "2023-07-28T01:31:13.232370811Z",
+		"phone": "",
+		"last_sign_in_at": "2023-07-28T01:31:13.234699387Z",
+		"app_metadata": {
+			"provider": "email",
+			"providers": [
+				"email"
+			]
+		},
+		"user_metadata": {
+			"name": "...",
+			"photo": "..."
+		},
+		"identities": [
+			{
+				"id": "...",
+				"user_id": "...",
+				"identity_data": {
+					"email": "...",
+					"sub": "..."
+				},
+				"provider": "email",
+				"last_sign_in_at": "2023-07-28T01:31:13.231112903Z",
+				"created_at": "2023-07-28T01:31:13.231173Z",
+				"updated_at": "2023-07-28T01:31:13.231173Z"
+			}
+		],
+		"created_at": "2023-07-28T01:31:13.228634Z",
+		"updated_at": "2023-07-28T01:31:13.236371Z"
+	},
+	"session": {
+		"access_token": "...",
+		"token_type": "bearer",
+		"expires_in": 3600,
+		"refresh_token": "...",
+		"user": {
+			"id": "...",
+			"aud": "authenticated",
+			"role": "authenticated",
+			"email": "...",
+			"email_confirmed_at": "2023-07-28T01:31:13.232370811Z",
+			"phone": "",
+			"last_sign_in_at": "2023-07-28T01:31:13.234699387Z",
+			"app_metadata": {
+				"provider": "email",
+				"providers": [
+					"email"
+				]
+			},
+			"user_metadata": {
+				"name": "...",
+				"photo": "..."
+			},
+			"identities": [
+				{
+					"id": "...",
+					"user_id": "...",
+					"identity_data": {
+						"email": "...",
+						"sub": "..."
+					},
+					"provider": "email",
+					"last_sign_in_at": "2023-07-28T01:31:13.231112903Z",
+					"created_at": "2023-07-28T01:31:13.231173Z",
+					"updated_at": "2023-07-28T01:31:13.231173Z"
+				}
+			],
+			"created_at": "2023-07-28T01:31:13.228634Z",
+			"updated_at": "2023-07-28T01:31:13.236371Z"
+		},
+		"expires_at": 1690511472
 	}
 }
 `;
