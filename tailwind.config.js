@@ -19,7 +19,7 @@ module.exports = {
       },
       animation: {
         fadeIn: 'fadeIn .3s ease-in-out forwards',
-        fadeInDelay1: 'fadeIn .3s 1s ease-in-out forwards',
+        fadeInDelay1: 'fadeIn .3s .75s ease-in-out forwards',
       },
     },
   },

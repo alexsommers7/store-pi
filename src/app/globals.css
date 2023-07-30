@@ -38,8 +38,8 @@ body,
 .snippet {
   display: inline-block;
   padding-inline: 5px;
+  line-height: normal;
   border-radius: 2px;
-  tab-size: 2;
   background: rgb(129 140 248 / 0.18);
 }
 
@@ -52,8 +52,12 @@ body,
 }
 
 @keyframes fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 /* loader */
