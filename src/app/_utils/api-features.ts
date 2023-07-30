@@ -1,4 +1,4 @@
-export function getLimitParam(limitQueryParam: string | null): number {
+function getLimitParam(limitQueryParam: string | null): number {
   const defaultLimit = 20;
 
   if (!limitQueryParam) return defaultLimit;
@@ -7,7 +7,7 @@ export function getLimitParam(limitQueryParam: string | null): number {
   return isNaN(parsedLimit) ? defaultLimit : parsedLimit;
 }
 
-export function getOffsetParam(offsetQueryParam: string | null): number {
+function getOffsetParam(offsetQueryParam: string | null): number {
   const defaultOffset = 0;
 
   if (!offsetQueryParam) return defaultOffset;
@@ -16,7 +16,7 @@ export function getOffsetParam(offsetQueryParam: string | null): number {
   return isNaN(parsedOffset) ? defaultOffset : parsedOffset;
 }
 
-export function getSortParam(sortQueryParam: string | null): Array<[string, boolean]> {
+function getSortParam(sortQueryParam: string | null): Array<[string, boolean]> {
   if (!sortQueryParam) return [['id', true]];
 
   return sortQueryParam.split(',').map((sort) => [sort.replace('-', ''), !sort.startsWith('-')]);
@@ -42,7 +42,6 @@ export function addFeaturesToQuery(query: any, searchParams: URLSearchParams) {
   // filtering (comparison operators)
   for (const [key, value] of searchParams) {
     if (excludeFromFiltering.includes(key)) continue;
-    excludeFromFiltering.push(key);
 
     const lessThan = key.endsWith('_less_than');
     const greaterThan = key.endsWith('_greater_than');
@@ -50,6 +49,8 @@ export function addFeaturesToQuery(query: any, searchParams: URLSearchParams) {
     const greaterThanOrEqualTo = key.endsWith('_greater_than_or_equal_to');
 
     if (!lessThan && !greaterThan && !lessThanOrEqualTo && !greaterThanOrEqualTo) continue;
+
+    excludeFromFiltering.push(key);
 
     const field = key.replace(
       /_(less_than|greater_than|less_than_or_equal_to|greater_than_or_equal_to)$/,
