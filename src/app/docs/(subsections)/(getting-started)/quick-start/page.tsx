@@ -26,6 +26,15 @@ export default function Introduction() {
       </p>
 
       <p className='text-left'>
+        Get products below a given price:{' '}
+        <TextLink
+          href={`${apiOrigin}/products?sale_price_less_than=400&fields=name,sale_price`}
+          label={`${apiOrigin}/products?sale_price_less_than=400&fields=name,sale_price`}
+          newTab
+        />
+      </p>
+
+      <p className='text-left'>
         Get a specific product&apos;s reviews{' '}
         <TextLink
           href={`${apiOrigin}/products/18/reviews`}

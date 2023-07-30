@@ -1,6 +1,4 @@
-import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
-import { addFeaturesToQuery } from './api-features';
+import { addFeaturesToQuery } from '@/_utils/api-features';
 
 interface ResponseJson {
   data: any;
@@ -8,21 +6,18 @@ interface ResponseJson {
   nextOffset?: number | null;
 }
 
-export async function supabaseGetWithFeatures(resource: string, searchParams: URLSearchParams) {
-  let query = supabase.from(resource).select(searchParams.get('fields') || '*', { count: 'exact' });
+export async function supabaseGetWithFeatures(query: any, searchParams: URLSearchParams) {
   query = addFeaturesToQuery(query, searchParams);
 
   const { data, error, count } = await query;
 
   if (error || !data) {
-    return NextResponse.json({ error: error?.message }, { status: 400 });
+    return { error: error?.message || 'Something went wrong.', status: 400 };
   }
 
-  const responseJson: ResponseJson = { data };
+  const responseJson: ResponseJson = { data, count };
 
   if (searchParams.get('limit') || searchParams.get('offset')) {
-    responseJson.count = count;
-
     responseJson.nextOffset =
       Number(searchParams.get('offset')) + Number(searchParams.get('limit'));
 
@@ -32,5 +27,5 @@ export async function supabaseGetWithFeatures(resource: string, searchParams: UR
     }
   }
 
-  return NextResponse.json(responseJson);
+  return responseJson;
 }

@@ -177,9 +177,8 @@ export default function Introduction() {
                 <span>
                   If the <span className='snippet'>limit</span> or{' '}
                   <span className='snippet'>offset</span> parameter is passed, the response json
-                  will contain a <span className='snippet'>count</span> of the total number of
-                  results, as well as a <span className='snippet'>nextOffset</span> value (if not
-                  already at the end).
+                  will contain a <span className='snippet'>nextOffset</span> value if not already at
+                  the end.
                 </span>
               }
             />
