@@ -165,6 +165,37 @@ export const getProductReviewsResponse = `"status": "success",
 ]
 `;
 
+export const getAllUsersResponse = `"status": "success",
+"count": 20,
+"data": [
+	{
+		"id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
+		"created_at": "2023-07-27T00:34:22.954235+00:00",
+		"updated_at": "2023-07-27T00:34:22.954235+00:00",
+		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-17.jpg",
+		"active": true,
+		"name": "Bennie Walton"
+	},
+	{
+		"id": "1b5344b3-3ea7-4085-988d-18380fc57334",
+		"created_at": "2023-07-27T00:34:22.954235+00:00",
+		"updated_at": "2023-07-27T00:34:22.954235+00:00",
+		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-4.jpg",
+		"active": true,
+		"name": "Shari Castro"
+	},
+	{
+		"id": "2007e35c-9c94-4488-906e-d5e0746fb43e",
+		"created_at": "2023-07-27T00:34:22.954235+00:00",
+		"updated_at": "2023-07-27T00:34:22.954235+00:00",
+		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-15.jpg",
+		"active": true,
+		"name": "Phil Fletcher"
+	},
+	...
+]
+`;
+
 export const getCurrentUserReviewsResponse = `"status": "success",
 "count": 11,
 "data": [

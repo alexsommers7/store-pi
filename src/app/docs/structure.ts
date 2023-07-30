@@ -28,6 +28,7 @@ import {
   getProductReviewsResponse,
   getCurrentUserPurchaseResponse,
   getReviewResponse,
+  getAllUsersResponse,
   getCurrentUserResponse,
   loginResponse,
   signupResponse,
@@ -312,6 +313,13 @@ export const structure = [
         isDBTable: true,
         desc: 'Each user object will contain general profile information, including a link to a stock photo hosted on S3.',
         anchors: [
+          {
+            label: 'Get All Users',
+            hash: 'get-users',
+            httpMethod: 'GET',
+            slug: 'users',
+            response: getAllUsersResponse,
+          },
           {
             label: 'Get Current User',
             hash: 'get-current-user',
