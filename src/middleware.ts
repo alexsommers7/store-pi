@@ -1,24 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { isAuthenticated } from '@/_utils/auth';
+import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 
 export const config = {
   matcher: ['/api/:path*'],
 };
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-
+export async function middleware(req: NextRequest) {
   // enable cors
-  const response = NextResponse.next({});
-  response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('Access-Control-Allow-Credentials', 'true');
+  const res = NextResponse.next();
+  res.headers.set('Access-Control-Allow-Origin', '*');
+  res.headers.set('Access-Control-Allow-Credentials', 'true');
 
-  if (pathname.split('/').includes('users') && !isAuthenticated(req)) {
-    return new NextResponse(JSON.stringify({ success: false, message: 'authentication failed' }), {
-      status: 401,
-      headers: { 'content-type': 'application/json' },
-    });
-  }
-
-  return response;
+  // auth
+  const supabase = createMiddlewareClient({ req, res });
+  await supabase.auth.getSession();
+  return res;
 }
