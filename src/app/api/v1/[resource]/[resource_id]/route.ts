@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import supabase from '@/_supabase/create-client';
+import { supabaseGetWithFeatures } from '@/_utils/rest-handlers';
 import { Context } from '@/_lib/types';
 
 export async function GET(request: Request, context: Context) {
@@ -8,20 +9,15 @@ export async function GET(request: Request, context: Context) {
     const { resource, resource_id } = params;
     const { searchParams } = new URL(request.url);
 
-    const { data, error } = await supabase
+    const query = supabase
       .from(resource)
       .select(searchParams.get('fields') || '*', { count: 'exact' })
       .eq('id', resource_id)
       .maybeSingle();
 
-    if (error || !data) {
-      return NextResponse.json(
-        { error: `Failed to fetch id ${resource_id} from ${resource}.` },
-        { status: 400 }
-      );
-    }
+    const responseJson = await supabaseGetWithFeatures(query, searchParams);
 
-    return NextResponse.json({ data });
+    return NextResponse.json(responseJson);
   } catch (error) {
     return new NextResponse('An unexpected error occurred.', { status: 500 });
   }
