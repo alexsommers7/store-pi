@@ -592,41 +592,6 @@ export const updateCurrentUserResponse = `"status": "success",
 `;
 
 export const signupResponse = `"data": {
-	"user": {
-		"id": "...",
-		"aud": "authenticated",
-		"role": "authenticated",
-		"email": "...",
-		"email_confirmed_at": "2023-07-28T01:31:13.232370811Z",
-		"phone": "",
-		"last_sign_in_at": "2023-07-28T01:31:13.234699387Z",
-		"app_metadata": {
-			"provider": "email",
-			"providers": [
-				"email"
-			]
-		},
-		"user_metadata": {
-			"name": "...",
-			"photo": "..."
-		},
-		"identities": [
-			{
-				"id": "...",
-				"user_id": "...",
-				"identity_data": {
-					"email": "...",
-					"sub": "..."
-				},
-				"provider": "email",
-				"last_sign_in_at": "2023-07-28T01:31:13.231112903Z",
-				"created_at": "2023-07-28T01:31:13.231173Z",
-				"updated_at": "2023-07-28T01:31:13.231173Z"
-			}
-		],
-		"created_at": "2023-07-28T01:31:13.228634Z",
-		"updated_at": "2023-07-28T01:31:13.236371Z"
-	},
 	"session": {
 		"access_token": "...",
 		"token_type": "bearer",
@@ -672,15 +637,46 @@ export const signupResponse = `"data": {
 }
 `;
 
-export const loginResponse = `"status": "success",
-"token": "...",
-"data": {
-	"user_id": {
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
-		"role": "user",
-		"id": 3,
-		"name": "Dorothy Jennings",
-		"email": "dorothy@example.com",
+export const loginResponse = `"data": {
+	"session": {
+		"access_token": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlBSVkZGT2RhTWpXYlVVMW8iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjkwNzE5MDU4LCJpYXQiOjE2OTA2NzU4NTgsImlzcyI6Imh0dHBzOi8vd2t6eXJyYnp5eWxqdHZrYXlqeW4uc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6ImMwZGY3MDY4LWI4NWUtNGVhNy1hNjljLTI4NjI3MmVlMDgzYiIsImVtYWlsIjoiY2FuZGFjZUBleGFtcGxlLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnt9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNjkwNjc1ODU4fV0sInNlc3Npb25faWQiOiIxNDUzNDdlOS02MjgxLTRmNjEtOWI4Yy1lZDE2YzFhMDNmMjQifQ.Uz-N_SShMLWl9KJW8bz5XnW5Q0vm2lmRG7cB6HG9DE0",
+		"token_type": "bearer",
+		"expires_in": 43200,
+		"refresh_token": "9S3THlcWestAL3IQ8Fi1tg",
+		"user": {
+			"id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+			"aud": "authenticated",
+			"role": "authenticated",
+			"email": "candace@example.com",
+			"email_confirmed_at": "2023-07-26T23:51:23.362501Z",
+			"phone": "",
+			"confirmed_at": "2023-07-26T23:51:23.362501Z",
+			"last_sign_in_at": "2023-07-30T00:10:58.223440391Z",
+			"app_metadata": {
+				"provider": "email",
+				"providers": [
+					"email"
+				]
+			},
+			"user_metadata": {},
+			"identities": [
+				{
+					"id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+					"user_id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+					"identity_data": {
+						"email": "candace@example.com",
+						"sub": "c0df7068-b85e-4ea7-a69c-286272ee083b"
+					},
+					"provider": "email",
+					"last_sign_in_at": "2023-07-26T23:51:23.360882Z",
+					"created_at": "2023-07-26T23:51:23.360919Z",
+					"updated_at": "2023-07-26T23:51:23.360919Z"
+				}
+			],
+			"created_at": "2023-07-26T23:51:23.359971Z",
+			"updated_at": "2023-07-30T00:10:58.225014Z"
+		},
+		"expires_at": 1690719058
 	}
 }
 `;

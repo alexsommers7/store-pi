@@ -7,6 +7,8 @@ interface OptionsData {
   photo?: string;
 }
 
+const tablesToInsertUponSignup = ['carts', 'wishlsits'];
+
 export async function POST(request: Request) {
   try {
     const { email, password, name, photo } = await request.json();
@@ -26,23 +28,31 @@ export async function POST(request: Request) {
       },
     });
 
-    const res = await supabase
-      .from('users')
-      .insert({ id: data.user?.id, name: data.user?.user_metadata.name });
-    const userInsertionError = res.error;
+    const newUserId = data?.user?.id;
 
-    if (error || userInsertionError || !data) {
+    // create the user in public users table (in addition to the auth.users table)
+    const userRes = await supabase
+      .from('users')
+      .insert({ id: newUserId, name: data.user?.user_metadata.name });
+    const userInsertionError = userRes.error;
+
+    // create the user in the other tables
+    const insertionErrors = await Promise.all(
+      tablesToInsertUponSignup.map(async (table) => {
+        const res = await supabase.from(table).insert({ user_id: newUserId });
+        return res.error;
+      })
+    );
+
+    if (error || userInsertionError || !data || insertionErrors.length) {
       return NextResponse.json({ error: error?.message }, { status: 400 });
     }
-
-    // TODO: insert new row into cart table
-
-    // TODO: insert new row into wishlists table
 
     if (data.user && !data.user.user_metadata.photo) {
       data.user.user_metadata.photo = defaultUserPhotoUrl;
     }
-    return NextResponse.json({ data });
+
+    return NextResponse.json({ data: data.session });
   } catch (error) {
     return new NextResponse('An unexpected error occurred.', { status: 500 });
   }

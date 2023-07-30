@@ -18,7 +18,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error?.message }, { status: 400 });
     }
 
-    return NextResponse.json({ data });
+    return NextResponse.json({ data: data.session });
   } catch (error) {
     return new NextResponse('An unexpected error occurred.', { status: 500 });
   }
