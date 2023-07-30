@@ -10,7 +10,7 @@ export async function GET(request: Request, context: Context) {
 
     const { data, error } = await supabase
       .from(resource)
-      .select(searchParams.get('fields') || '*', { count: 'planned' })
+      .select(searchParams.get('fields') || '*', { count: 'exact' })
       .eq('id', resource_id)
       .maybeSingle();
 
