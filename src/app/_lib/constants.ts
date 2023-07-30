@@ -1,4 +1,7 @@
-export const apiOrigin = 'https://storepi.vercel.app/api/v1';
+export const apiOrigin =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:3000/api/v1'
+    : 'https://storepi.vercel.app/api/v1';
 
 export const HTTPMethods = {
   GET: 'GET',
