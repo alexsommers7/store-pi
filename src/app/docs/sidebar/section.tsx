@@ -18,7 +18,7 @@ export function SidebarSection({ section }: SidebarSectionProps) {
             <li key={slug} className='flex items-center'>
               <NavLink
                 name={label}
-                href={isExternal ? slug : `/docs/${slug}`}
+                href={isExternal || slug.startsWith('http') ? slug : `/docs/${slug}`}
                 target={isExternal ? '_blank' : '_self'}
                 bold={false}
                 addSidebarAccent

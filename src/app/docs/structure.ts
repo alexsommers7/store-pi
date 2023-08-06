@@ -320,7 +320,7 @@ export const structure = [
             httpMethod: 'DELETE',
             slug: 'users/current',
             requiresAuth: true,
-            note: 'If attempting to delete an original user, this endpoint will not delete the user from the database, but it will remove the user from the browser session and log them out - removing all items from Local Storage.',
+            note: 'If attempting to delete an original user, this endpoint will not delete the user from the database, but it will remove the user from the browser session and log them out - removing the auth cookie.',
           },
         ],
       },
@@ -345,7 +345,7 @@ export const structure = [
             httpMethod: 'POST',
             slug: 'logout',
             requiresAuth: true,
-            desc: 'Inside a browser context, this endpoint will remove the logged in user from the browser session and log them out - removing all items from Local Storage.',
+            desc: 'Inside a browser context, this endpoint will remove the logged in user from the browser session and log them out - removing the auth cookie.',
           },
           {
             label: 'Sign Up',
@@ -364,6 +364,15 @@ export const structure = [
   {
     label: 'Resources',
     subitems: [
+      {
+        label: 'Demo',
+        slug: `${
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3000'
+            : 'https://storepi.vercel.app'
+        }/demo`,
+        anchors: [],
+      },
       {
         label: 'Postman Docs',
         slug: 'https://documenter.getpostman.com/view/12907395/UyxjF694',

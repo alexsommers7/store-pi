@@ -70,6 +70,8 @@ export default function Demo() {
                 id='email'
                 type='email'
                 name='email'
+                value='testtester@gmail.com'
+                readOnly
                 className='border border-stone-500 rounded-md p-2 text-black'
               />
             </div>
@@ -80,6 +82,8 @@ export default function Demo() {
                 id='password'
                 type='password'
                 name='password'
+                value='password'
+                readOnly
                 className='border border-stone-500 rounded-md p-2 text-black'
               />
             </div>
