@@ -5,7 +5,7 @@ import {
   supabaseGetWithFeatures,
   authorizationError,
 } from '@/_utils/rest-handlers';
-import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/functions';
+import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/server-functions';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 

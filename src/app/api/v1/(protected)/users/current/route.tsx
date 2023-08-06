@@ -5,7 +5,7 @@ import {
   authorizationError,
   modifiedOriginalResourceError,
 } from '@/_utils/rest-handlers';
-import { isOriginalResource } from '@/_supabase/functions';
+import { isOriginalResource } from '@/_supabase/server-functions';
 import { catchError } from '@/_utils/rest-handlers';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';

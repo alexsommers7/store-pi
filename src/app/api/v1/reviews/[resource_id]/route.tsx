@@ -10,7 +10,7 @@ import { Context } from '@/_lib/types';
 import {
   generateForeignTableSelectionWhenApplicable,
   isOriginalResource,
-} from '@/_supabase/functions';
+} from '@/_supabase/server-functions';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 

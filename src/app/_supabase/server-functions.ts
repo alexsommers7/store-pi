@@ -1,14 +1,7 @@
-import { cache } from 'react';
 import { resourcesWithForeignTables } from '@/_lib/constants';
 import { Product } from '@/_lib/types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-
-export const getColumnsWithType = cache(async (table: string) => {
-  const supabase = createRouteHandlerClient({ cookies });
-
-  return await supabase.rpc('get_cols_with_type', { tname: table });
-});
 
 export const generateForeignTableSelectionWhenApplicable = (
   resource: string,

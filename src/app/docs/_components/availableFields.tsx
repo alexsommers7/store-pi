@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getColumnsWithType } from '@/_supabase/functions';
+import { getColumnsWithType } from '@/_supabase/client-functions';
 import { GenericTable } from '@/_components/table';
 import { TableHead } from '@/_components/table/head';
 import { TableRow } from '@/_components/table/row';

@@ -9,7 +9,7 @@ import {
 import {
   generateForeignTableSelectionWhenApplicable,
   addPluralityWhenApplicable,
-} from '@/_supabase/functions';
+} from '@/_supabase/server-functions';
 import { publicAndPrivateRead, foreignTableMap } from '@/_lib/constants';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';

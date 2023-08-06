@@ -8,7 +8,7 @@ import {
 import {
   calculateOrderTotal,
   generateForeignTableSelectionWhenApplicable,
-} from '@/_supabase/functions';
+} from '@/_supabase/server-functions';
 import { Product } from '@/_lib/types';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';

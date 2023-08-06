@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { Context } from '@/_lib/types';
 import { supabaseGetWithFeatures, catchError } from '@/_utils/rest-handlers';
-import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/functions';
+import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/server-functions';
 import { columnMap } from '@/_lib/constants';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
