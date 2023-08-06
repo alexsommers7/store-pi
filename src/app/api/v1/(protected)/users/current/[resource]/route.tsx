@@ -13,11 +13,12 @@ import {
   addPluralityWhenApplicable,
 } from '@/_supabase/functions';
 import { publicAndPrivateRead, foreignTableMap } from '@/_lib/constants';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export async function GET(request: Request, context: Context) {
   try {
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
+    const supabase = createRouteHandlerClient({ cookies });
 
     const { params } = context;
     let { resource } = params;
@@ -31,9 +32,9 @@ export async function GET(request: Request, context: Context) {
     const query = supabase.from(resource).select(selection, { count: 'exact' });
 
     // ... except for these resources
-    if (publicAndPrivateRead.includes(resource)) {
-      query.eq('user_id', userData.id);
-    }
+    // if (publicAndPrivateRead.includes(resource)) {
+    //   query.eq('user_id', userData.id);
+    // }
 
     const responseJson = await supabaseGetWithFeatures(query, searchParams);
 
@@ -47,6 +48,8 @@ export async function GET(request: Request, context: Context) {
 // if this ever expands, consider manually defining the routes, especially since plurality may not be consistent
 export async function POST(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const userData = await getUserData();
     if (!userData) return authorizationError();
 
@@ -115,6 +118,8 @@ export async function POST(request: Request, context: Context) {
 
 export async function PATCH(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const userData = await getUserData();
     if (!userData) return authorizationError();
 
