@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import supabase from '@/_supabase/create-client';
-import { supabaseGetWithFeatures } from '@/_utils/rest-handlers';
+import { supabaseGetWithFeatures, catchError } from '@/_utils/rest-handlers';
 import { Context } from '@/_lib/types';
+import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/functions';
 
 export async function GET(request: Request, context: Context) {
   try {
@@ -9,16 +10,18 @@ export async function GET(request: Request, context: Context) {
     const { resource, resource_id } = params;
     const { searchParams } = new URL(request.url);
 
-    const query = supabase
+    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+
+    let query = supabase
       .from(resource)
-      .select(searchParams.get('fields') || '*', { count: 'exact' })
+      .select(selection, { count: 'exact' })
       .eq('id', resource_id)
       .maybeSingle();
 
-    const responseJson = await supabaseGetWithFeatures(query, searchParams);
+    const responseJson = await supabaseGetWithFeatures(query, searchParams, true);
 
     return NextResponse.json(responseJson);
   } catch (error) {
-    return new NextResponse('An unexpected error occurred.', { status: 500 });
+    return catchError(error);
   }
 }

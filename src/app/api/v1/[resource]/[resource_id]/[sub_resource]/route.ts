@@ -1,19 +1,9 @@
 import { NextResponse } from 'next/server';
 import supabase from '@/_supabase/create-client';
 import { Context } from '@/_lib/types';
-import { supabaseGetWithFeatures } from '@/_utils/rest-handlers';
+import { supabaseGetWithFeatures, catchError } from '@/_utils/rest-handlers';
 import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/functions';
-
-interface ColumnMap {
-  [key: string]: string;
-}
-
-const columnMap: ColumnMap = {
-  categories: 'category_id',
-  products: 'product_id',
-  reviews: 'review_id',
-  users: 'user_id',
-};
+import { columnMap } from '@/_lib/constants';
 
 export async function GET(request: Request, context: Context) {
   try {
@@ -32,6 +22,6 @@ export async function GET(request: Request, context: Context) {
 
     return NextResponse.json(responseJson);
   } catch (error) {
-    return new NextResponse('An unexpected error occurred.', { status: 500 });
+    return catchError(error);
   }
 }
