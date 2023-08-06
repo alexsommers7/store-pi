@@ -17,13 +17,13 @@ import {
 export async function GET(request: Request, context: Context) {
   try {
     const { params } = context;
-    const { resource, resource_id } = params;
+    const { resource_id } = params;
     const { searchParams } = new URL(request.url);
 
-    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+    const selection = generateForeignTableSelectionWhenApplicable('reviews', searchParams);
 
     let query = supabase
-      .from(resource)
+      .from('reviews')
       .select(selection, { count: 'exact' })
       .eq('id', resource_id)
       .maybeSingle();

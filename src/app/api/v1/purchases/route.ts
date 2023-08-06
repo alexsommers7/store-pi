@@ -6,17 +6,15 @@ import {
   generateForeignTableSelectionWhenApplicable,
   getUserData,
 } from '@/_supabase/functions';
-import { Context, Product } from '@/_lib/types';
+import { Product } from '@/_lib/types';
 
-export async function GET(request: Request, context: Context) {
+export async function GET(request: Request) {
   try {
-    const { params } = context;
-    const { resource } = params;
     const { searchParams } = new URL(request.url);
 
-    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+    const selection = generateForeignTableSelectionWhenApplicable('purchases', searchParams);
 
-    const query = supabase.from(resource).select(selection, { count: 'exact' });
+    const query = supabase.from('purchases').select(selection, { count: 'exact' });
 
     const responseJson = await supabaseGetWithFeatures(query, searchParams);
 
