@@ -18,18 +18,27 @@ const { loading, error, data } = useQuery(LOGIN, {
   },
 });`;
 
-export const createOrUpdateReviewBody = `// all fields are required
-"review": "...",
-"rating": 5
+export const createReviewBody = `// all fields are required except for 'recommends'
+"product_id: 1,
+"content": "...",
+"rating": 5,
+"recommends": true // if this isn't provided, defaults to true for ratings >= 3, false otherwise
+`;
+
+export const updateReviewBody = `// all fields are required except for 'recommends'
+"content": "...",
+"rating": 5,
+"recommends": true
 `;
 
 export const addProductToCurrentUserCartBody = `// all fields are required
 "sku": 1,
-"quantity": 1
+"quantity": 2 // optional, defaults to 1
 `;
 
 export const removeProductFromCurrentUserCartBody = `// all fields are required
-"product_id": 16
+"product_id": 16,
+"remove": true // optional, defaults to false. If false, quantity is reduced by 1. If true, item is removed from cart
 `;
 
 export const createPurchaseBody = `// all fields are required
@@ -41,15 +50,16 @@ export const createPurchaseBody = `// all fields are required
 ]
 `;
 
-export const addProductToCurrentUserWishlistBody = `// all fields are required
+export const addOrRemoveProductToCurrentUserWishlistBody = `// all fields are required
 "product_id": 3
 `;
 
-export const removeProductFromCurrentUserWishlistBody = `// all fields are required
-"product_id": 1
+export const updateCurrentUserBody = `"data": {
+  "name": "...",
+  "photo": "..."
+},
+"password": "..."
 `;
-
-export const updateCurrentUserBody = `"name": "..."`;
 
 export const signupBody = `// all fields are required with the exception of photo
 "name": "...",

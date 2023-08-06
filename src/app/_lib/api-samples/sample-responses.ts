@@ -1,5 +1,4 @@
-export const getAllProductsResponse = `"status": "success",
-"count": 50,
+export const getAllProductsResponse = `"count": 50,
 "data": [
 	{
 		"id": 1,
@@ -8,7 +7,7 @@ export const getAllProductsResponse = `"status": "success",
 		"sku": 1,
 		"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
 		"category_id": 1,
-		"brand": "HP",
+		"brand_id": 15,
 		"regular_price": 149.95,
 		"sale_price": 129.95,
 		"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
@@ -24,7 +23,7 @@ export const getAllProductsResponse = `"status": "success",
 		"sku": 6,
 		"name": "Flowerbomb Ruby Orchid Eau de Parfum",
 		"category_id": 5,
-		"brand": "Viktor and Rolf",
+		"brand_id": 43,
 		"regular_price": 88.99,
 		"sale_price": 88.99,
 		"description": "The heart of this luxurious perfume features two accords: the ruby orchid and the red vanilla bean accord, giving the fragrance a unequivocal sensuality, enhanced by the fresh scent of peach, floral, and vanilla fragrance.",
@@ -40,7 +39,7 @@ export const getAllProductsResponse = `"status": "success",
 		"sku": 7,
 		"name": "World Rug Gallery Modern Large Floral Flowers Indoor Outdoor Rug",
 		"category_id": 6,
-		"brand": "World Rug Gallery",
+		"brand_id": 44,
 		"regular_price": 119.99,
 		"sale_price": 47.99,
 		"description": "Experience comfort, durability, and versatility with this World Rug Gallery Modern Large Floral Flowers Indoor Outdoor rug.",
@@ -52,8 +51,7 @@ export const getAllProductsResponse = `"status": "success",
 	... 
 ]`;
 
-export const getProductResponse = `"status": "success",
-"data": {
+export const getProductResponse = `"data": {
 	"id": 1,
 	"best_seller": true,
 	"in_stock": true,
@@ -62,7 +60,7 @@ export const getProductResponse = `"status": "success",
 	"sku": 1,
 	"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
 	"category_id": 1,
-	"brand": "HP",
+	"brand_id": 15,
 	"regular_price": 149.95,
 	"sale_price": 129.95,
 	"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
@@ -71,8 +69,7 @@ export const getProductResponse = `"status": "success",
 }
 `;
 
-export const getAllReviewsResponse = `"status": "success",
-"count": 160,
+export const getAllReviewsResponse = `"count": 160,
 "data": [
 	{
 		"recommends": true,
@@ -111,8 +108,7 @@ export const getAllReviewsResponse = `"status": "success",
 ]
 `;
 
-export const getReviewResponse = `"status": "success",
-"data": {
+export const getReviewResponse = `"data": {
 	"recommends": true,
 	"incentivized": false,
 	"verified": false,
@@ -125,8 +121,7 @@ export const getReviewResponse = `"status": "success",
 }
 `;
 
-export const getProductReviewsResponse = `"status": "success",
-"count": 6,
+export const getProductReviewsResponse = `"count": 6,
 "data": [
 	{
 		"recommends": true,
@@ -165,39 +160,7 @@ export const getProductReviewsResponse = `"status": "success",
 ]
 `;
 
-export const getAllUsersResponse = `"status": "success",
-"count": 20,
-"data": [
-	{
-		"id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
-		"created_at": "2023-07-27T00:34:22.954235+00:00",
-		"updated_at": "2023-07-27T00:34:22.954235+00:00",
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-17.jpg",
-		"active": true,
-		"name": "Bennie Walton"
-	},
-	{
-		"id": "1b5344b3-3ea7-4085-988d-18380fc57334",
-		"created_at": "2023-07-27T00:34:22.954235+00:00",
-		"updated_at": "2023-07-27T00:34:22.954235+00:00",
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-4.jpg",
-		"active": true,
-		"name": "Shari Castro"
-	},
-	{
-		"id": "2007e35c-9c94-4488-906e-d5e0746fb43e",
-		"created_at": "2023-07-27T00:34:22.954235+00:00",
-		"updated_at": "2023-07-27T00:34:22.954235+00:00",
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-15.jpg",
-		"active": true,
-		"name": "Phil Fletcher"
-	},
-	...
-]
-`;
-
-export const getCurrentUserReviewsResponse = `"status": "success",
-"count": 11,
+export const getCurrentUserReviewsResponse = `"count": 11,
 "data": [
 	{
 		"recommends": true,
@@ -236,8 +199,7 @@ export const getCurrentUserReviewsResponse = `"status": "success",
 ]
 `;
 
-export const createOrUpdateReviewResponse = `"status": "success",
-"data": {
+export const createOrUpdateReviewResponse = `"data": {
 	"recommends": true,
 	"incentivized": false,
 	"verified": false,
@@ -250,19 +212,17 @@ export const createOrUpdateReviewResponse = `"status": "success",
 }
 `;
 
-export const getAllBrandsResponse = `"status": "success",
-"count": 47,
+export const getAllBrandsResponse = `"count": 44,
 "data": [
 	{ "id": 1, "name": "Abystyle" },
-	{ "id": 2, "name": "Adidas" },
-	{ "id": 3, "name": "Amazfit" },
-	{ "id": 4, "name": "Brooklyn Steel Co" },
+	{ "id": 2, "name": "Acer" },
+	{ "id": 3, "name": "Adidas" },
+	{ "id": 4, "name": "Amazfit" },
 	...
 ]
 `;
 
-export const getAllCategoriesResponse = `"status": "success",
-"count": 6,
+export const getAllCategoriesResponse = `"count": 6,
 "data": [
 	{
 		"id": 1,
@@ -283,8 +243,7 @@ export const getAllCategoriesResponse = `"status": "success",
 ]
 `;
 
-export const getAllProductsInCategoryResponse = `"status": "success",
-"count": 10,
+export const getAllProductsInCategoryResponse = `"count": 10,
 "data": [
 	{
 		"best_seller": true,
@@ -294,7 +253,7 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 		"sku": 1,
 		"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
 		"category_id": 1,
-		"brand": "HP",
+		"brand_id": 15,
 		"regular_price": 149.95,
 		"sale_price": 129.95,
 		"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
@@ -310,7 +269,7 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 		"sku": 3,
 		"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
 		"category_id": 1,
-		"brand": "Acer",
+		"brand_id": 2,
 		"regular_price": 369.99,
 		"sale_price": 249.99,
 		"description": "Bring on the blitz. Turbo-charged refresh rates will fuel your need for gaming speed with this captivating 27 inch dislay.",
@@ -326,7 +285,7 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 		"sku": 8,
 		"name": "Amazfit GTS 2 Mini Smart Watch",
 		"category_id": 1,
-		"brand": "Amazfit",
+		"brand_id": 4,
 		"regular_price": 99.99,
 		"sale_price": 69.99,
 		"description": "Get an intelligent little pal to remind you of the incoming calls, text messages, apps, and calendars, alarm clock, weather forecast, and support control the music playback & camera on your smartphone.",
@@ -338,61 +297,101 @@ export const getAllProductsInCategoryResponse = `"status": "success",
 ]
 `;
 
-export const getCurrentUserCartResponse = `"status": "success",
-"count": 1,
+export const getAllProductsInBrandResponse = `"count": 2,
 "data": [
 	{
-		"products": [
-			{
-				"item": {
-					"id": 5,
-					"sku": 5,
-					"name": "Women's Tek Gear Microfleece Crewneck Top",
-					"brand": "Tek Gear",
-					"regular_price": 24.99,
-					"sale_price": 11.99,
-					"slug": "women's-tek-gear-microfleece-crewneck-top"
-				},
-				"quantity": 1
-			},
-			...
-		],
-		"created_at": "2020-03-15T09:35:15.369Z",
-		"total": 80.17,
-		"total_pretty": "$80.17",
-		"item_count": 3,
-		"id": 4
+		"id": 20,
+		"best_seller": true,
+		"in_stock": false,
+		"sku": 20,
+		"name": "Foiled Jersey Sleeveless Gown",
+		"category_id": 3,
+		"brand_id": 20,
+		"regular_price": 259.99,
+		"sale_price": 229.99,
+		"description": "Cut from light-catching foiled jersey, Lauren Ralph Lauren's breathtaking evening gown is designed with a sexy slit at the skirt and a waist-defining self-belt, which is accented with a rhinestone-embellished buckle.",
+		"slug": "foiled-jersey-sleeveless-gown",
+		"specs": [...],
+		"features": [...],
+		"images": [...],
+		"created_at": "2023-07-23T03:53:55.021034+00:00",
+		"updated_at": "2023-07-23T03:54:16.816558+00:00"
+	},
+	{
+		"id": 35,
+		"best_seller": false,
+		"in_stock": true,
+		"sku": 35,
+		"name": "Women's Double-Breasted Trench Coat",
+		"category_id": 3,
+		"brand_id": 20,
+		"regular_price": 190,
+		"sale_price": 93.1,
+		"description": "Lauren Ralph Lauren's signature raincoat is designed with a double-breasted silhouette that's belted at the waist for a defined figure.",
+		"slug": "women-s-double-breasted-trench-coat",
+		"specs": [...],
+		"features": [...],
+		"images": [...],
+		"created_at": "2023-07-23T03:53:55.021034+00:00",
+		"updated_at": "2023-07-23T03:54:16.816558+00:00"
 	}
-]
+],
 `;
 
-export const addProductToCurrentUserCartResponse = `"status": "success",
-"data": {
-	"user_id": 3,
-	"products": [
+export const getCurrentUserCartResponse = `"data": {
+	"id": 9,
+	"created_at": "2023-07-22T16:30:16.009774+00:00",
+	"user_id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+	"updated_at": "2023-08-04T00:43:49.076777+00:00",
+	"cart_products": [
 		{
-			"item": {
-				"id": 1,
-				"sku": 1,
-				"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-				"brand": "HP",
-				"regular_price": 149.95,
-				"sale_price": 129.95,
-				"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m"
-			},
-			"quantity": 1
-		}
-	],
-	"created_at": "2020-03-03T05:43:30.633Z",
-	"total": 129.95,
-	"total_pretty": "$129.95",
-	"item_count": 1,
-	"id": 4
+			"product_id": 3,
+			"quantity": 1,
+			"product_data": {
+				"id": 3,
+				"sku": 3,
+				"category_id": 1,
+				"images": [...],
+				"brand_id": 2,
+				"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
+				"regular_price": 369.99,
+				"sale_price": 249.99
+			}
+		},
+		{
+			"product_id": 14,
+			"quantity": 1,
+			"product_data": {
+				"id": 14,
+				"sku": 14,
+				"category_id": 2,
+				"images": [...],
+				"brand_id": 37,
+				"name": "Men's Sonoma Goods For Life Supersoft Modern-Fit Raglan Tee & Jogger Pants Pajama Set",
+				"regular_price": 54.99,
+				"sale_price": 21.6
+			}
+		},
+		{
+			"product_id": 38,
+			"quantity": 1,
+			"product_data": {
+				"id": 38,
+				"sku": 38,
+				"category_id": 4,
+				"images": [...],
+				"brand_id": 22,
+				"name": "Lakitu Sky World Expansion Toy Set",
+				"regular_price": 39.99,
+				"sale_price": 39
+			}
+		},
+		...
+	]
 }
 `;
 
-export const getCurrentUserPurchaseResponse = `"status": "success",
-"data": {
+export const getCurrentUserPurchaseResponse = `"data": {
 	"paid": true,
 	"id": 9,
 	"user_id": 7,
@@ -401,7 +400,7 @@ export const getCurrentUserPurchaseResponse = `"status": "success",
 			"item": {
 				"sku": 28,
 				"name": "Good Genes All-In-One Lactic Acid Treatment",
-				"brand": "Sunday Riley",
+				"brand_id": 38,
 				"regular_price": 142,
 				"sale_price": 122,
 				"slug": "good-genes-all-in-one-lactic-acid-treatment",
@@ -413,7 +412,7 @@ export const getCurrentUserPurchaseResponse = `"status": "success",
 			"item": {
 				"sku": 35,
 				"name": "Women's Double-Brested Trench Coat",
-				"brand": "Lauren Ralph Lauren",
+				"brand_id": 20,
 				"regular_price": 190,
 				"sale_price": 93.1,
 				"slug": "women's-double-brested-trench-coat",
@@ -429,8 +428,7 @@ export const getCurrentUserPurchaseResponse = `"status": "success",
 }
 `;
 
-export const getCurrentUserPurchasesResponse = `"status": "success",
-"count": 1,
+export const getCurrentUserPurchasesResponse = `"count": 1,
 "data": [
 	{
 		"paid": true,
@@ -440,7 +438,7 @@ export const getCurrentUserPurchasesResponse = `"status": "success",
 				"item": {
 					"sku": 2,
 					"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt",
-					"brand": "Susulv MCL",
+					"brand_id": 39,
 					"regular_price": 119.99,
 					"sale_price": 119.99,
 					"slug": "susulv-mcl-men-shirt-men's-large-size-long-sleeve-lapel-zipper-shirt",
@@ -452,7 +450,7 @@ export const getCurrentUserPurchasesResponse = `"status": "success",
 				"item": {
 					"sku": 11,
 					"name": "Red Kap Men's Long Sleeve",
-					"brand": "Red Kap",
+					"brand_id": 34,
 					"regular_price": 48.3,
 					"sale_price": 30.49,
 					"slug": "red-kap-men's-long-sleeve",
@@ -464,7 +462,7 @@ export const getCurrentUserPurchasesResponse = `"status": "success",
 				"item": {
 					"sku": 3,
 					"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
-					"brand": "Acer",
+					"brand_id": 2,
 					"regular_price": 369.99,
 					"sale_price": 249.99,
 					"slug": "acer-predator-xb3-27-in.-monitor-full-hd",
@@ -481,15 +479,14 @@ export const getCurrentUserPurchasesResponse = `"status": "success",
 ]
 `;
 
-export const createPurchaseResponse = `"status": "success",
-"data": {
+export const createPurchaseResponse = `"data": {
 	"paid": true,
 	"products": [
 		{
 			"item": {
 				"sku": 1,
 				"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-				"brand": "HP",
+				"brand_id": 15,
 				"regular_price": 149.95,
 				"sale_price": 129.95,
 				"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m",
@@ -505,120 +502,151 @@ export const createPurchaseResponse = `"status": "success",
 }
 `;
 
-export const getCurrentUserWishlistResponse = `"status": "success",
-"data": {
-	"wishlist": [
-		{
-			"sku": 30,
-			"name": "FlashPatch Rejuvenating Eye Gels",
-			"category_id": 5,
-			"id": 30
-		},
-		{
-			"sku": 27,
-			"name": "Atmosphere Nonstick Aluminum 12-Pc. Cookware Set",
-			"category_id": 6,
-			"id": 27
-		},
-		{
-			"sku": 50,
-			"name": "Women's Plaid Single-Breasted Walker Coat",
-			"category_id": 3,
-			"id": 50
-		}
-	],
-	"id": 4
-}
-`;
-
-export const addProductToCurrentUserWishlistResponse = `"status": "success",
+export const getCurrentUserWishlistResponse = `"count": 1,
 "data": [
 	{
-		"best_seller": false,
-		"in_stock": true,
-		"features": [...],
-		"images": [...],
-		"sku": 30,
-		"name": "FlashPatch Rejuvenating Eye Gels",
-		"category_id": 5,
-		"brand": "Patchology",
-		"regular_price": 50,
-		"sale_price": 42.5,
-		"description": "Puffiness? Fatigue? Dryness? Enter the fast fix for tired eyes, featuring caffeine and hydrolyzed collagen. Look like you got your full 8 hours all day, every day.",
-		"specs": [...],
-		"slug": "flashpatch-rejuvenating-eye-gels",
-		"id": 30
-	},
-	{
-		"best_seller": true,
-		"in_stock": true,
-		"features": [...],
-		"images": [...],
-		"sku": 27,
-		"name": "Atmosphere Nonstick Aluminum 12-Pc. Cookware Set",
-		"category_id": 6,
-		"brand": "Brooklyn Steel Co",
-		"regular_price": 399.99,
-		"sale_price": 299.99,
-		"description": "Bring cooking to a higher level with this striking 12-piece set from Brooklyn Steel Co.'s Atmosphere collection. Aluminum combines with multi-layer ceramic nonstick interiors for superior performance and looks, as well as easy cleanup.",
-		"specs": [...],
-		"slug": "atmosphere-nonstick-aluminum-12-pc.-cookware-set",
-		"id": 27
-	},
-	{
-		"best_seller": false,
-		"in_stock": false,
-		"features": [...],
-		"images": [...],
-		"sku": 50,
-		"name": "Women's Plaid Single-Breasted Walker Coat",
-		"category_id": 3,
-		"brand": "Calvin Klein",
-		"regular_price": 400,
-		"sale_price": 239.99,
-		"description": "Classic plaid defines this single-breasted reefer coat from Calvin Klein, fashioned with two flap pockets and an elongated silhouette.",
-		"specs": [...],
-		"slug": "women's-plaid-single-breasted-walker-coat",
-		"id": 50
-	},
-	{
-		"best_seller": false,
-		"in_stock": false,
-		"features": [...],
-		"images": [...],
-		"sku": 2,
-		"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt",
-		"category_id": 2,
-		"brand": "Susulv MCL",
-		"regular_price": 119.99,
-		"sale_price": 119.99,
-		"description": "Cool, slim fit, top quality casual style shirt, perfect and comfortable for daily wear or relaxing weekends.",
-		"specs": [...],
-		"slug": "susulv-mcl-men-shirt-men's-large-size-long-sleeve-lapel-zipper-shirt",
-		"id": 2
+		"id": 10,
+		"created_at": "2023-07-22T16:38:03.784318+00:00",
+		"user_id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+		"updated_at": "2023-07-30T03:53:20.576738+00:00",
+		"wishlist_products": [
+			{
+				"product_id": 10,
+				"product_data": {
+					"id": 10,
+					"sku": 10,
+					"category_id": 6,
+					"images": [...],
+					"brand_id": 28,
+					"name": "Morden Fort Modern Contemporary Love Seat",
+					"regular_price": 669,
+					"sale_price": 600
+				}
+			},
+			{
+				"product_id": 24,
+				"product_data": {
+					"id": 24,
+					"sku": 24,
+					"category_id": 5,
+					"images": [...],
+					"brand_id": 36,
+					"name": "Facefx 360 Anti-Aging Device",
+					"regular_price": 189,
+					"sale_price": 160.65
+				}
+			},
+			{
+				"product_id": 29,
+				"product_data": {
+					"id": 29,
+					"sku": 29,
+					"category_id": 5,
+					"images": [...],
+					"brand_id": 38,
+					"name": "6-Pc. Wake Up With Me Complete Brightening Morning Routine",
+					"regular_price": 177,
+					"sale_price": 177
+				}
+			},
+			{
+				"product_id": 50,
+				"product_data": {
+					"id": 50,
+					"sku": 50,
+					"category_id": 3,
+					"images": [...],
+					"brand_id": 6,
+					"name": "Women's Plaid Single-Breasted Walker Coat",
+					"regular_price": 400,
+					"sale_price": 239.99
+				}
+			}
+		]
 	}
 ]
 `;
 
-export const getCurrentUserResponse = `"status": "success",
-"data": {
-	"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
-	"role": "user",
-	"id": 3,
-	"name": "Dorothy Jennings",
-	"email": "dorothy@example.com",
+export const getUserResponse = `"data": {
+	"id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
+	"aud": "authenticated",
+	"role": "authenticated",
+	"email": "bennie@example.com",
+	"email_confirmed_at": "2023-07-26T23:54:05.329292Z",
+	"phone": "",
+	"confirmed_at": "2023-07-26T23:54:05.329292Z",
+	"last_sign_in_at": "2023-08-02T00:49:02.782389Z",
+	"app_metadata": {
+		"provider": "email",
+		"providers": [
+			"email"
+		]
+	},
+	"user_metadata": {
+		"name": "Bennie Walton",
+		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/default.png"
+	},
+	"identities": [
+		{
+			"id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
+			"user_id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
+			"identity_data": {
+				"email": "bennie@example.com",
+				"sub": "09fddc50-4fb9-4b6c-9864-0f7f38121efe"
+			},
+			"provider": "email",
+			"last_sign_in_at": "2023-07-26T23:54:05.32753Z",
+			"created_at": "2023-07-26T23:54:05.32757Z",
+			"updated_at": "2023-07-26T23:54:05.32757Z"
+		}
+	],
+	"created_at": "2023-07-26T23:54:05.326573Z",
+	"updated_at": "2023-08-02T00:49:08.118995Z"
 }
 `;
 
-export const updateCurrentUserResponse = `"status": "success",
-"data": {
-	"user_id": {
-		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/user-2.jpg",
-		"role": "user",
-		"id": 3,
+export const getCurrentUserResponse = `"user": {
+	"id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+	"aud": "authenticated",
+	"role": "authenticated",
+	"email": "...",
+	"email_confirmed_at": "2023-07-26T23:51:23.362501Z",
+	"phone": "",
+	"confirmed_at": "2023-07-26T23:51:23.362501Z",
+	"last_sign_in_at": "2023-08-02T00:29:41.255867Z",
+	"app_metadata": {
+		"provider": "email",
+		"providers": [
+			"email"
+		]
+	},
+	"user_metadata": {
 		"name": "...",
-		"email": "dorothy@example.com",
-	}
+		"photo": "..."
+	},
+	"identities": [
+		{
+			"id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+			"user_id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
+			"identity_data": {
+				"email": "...",
+				"sub": "c0df7068-b85e-4ea7-a69c-286272ee083b"
+			},
+			"provider": "email",
+			"last_sign_in_at": "2023-07-26T23:51:23.360882Z",
+			"created_at": "2023-07-26T23:51:23.360919Z",
+			"updated_at": "2023-07-26T23:51:23.360919Z"
+		}
+	],
+	"created_at": "2023-07-26T23:51:23.359971Z",
+	"updated_at": "2023-08-02T00:29:41.25763Z"
+}
+`;
+
+export const updateCurrentUserResponse = `"data": {
+	"photo": "...",
+	"name": "...",
+	"email": "..."
 }
 `;
 
