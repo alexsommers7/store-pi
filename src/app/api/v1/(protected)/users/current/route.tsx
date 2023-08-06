@@ -1,17 +1,18 @@
 import { NextResponse } from 'next/server';
-import supabase, { supabaseAdmin } from '@/_supabase/create-client';
+import { supabaseAdmin } from '@/_supabase/create-client';
 import {
   apiError,
   authorizationError,
   modifiedOriginalResourceError,
 } from '@/_utils/rest-handlers';
-import { getUserData, isOriginalResource } from '@/_supabase/functions';
+import { isOriginalResource } from '@/_supabase/functions';
 import { catchError } from '@/_utils/rest-handlers';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export async function GET() {
   try {
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
+    const supabase = createRouteHandlerClient({ cookies });
 
     const {
       data: { user },
@@ -25,10 +26,15 @@ export async function GET() {
 
 export async function PATCH(request: Request) {
   try {
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
+    const supabase = createRouteHandlerClient({ cookies });
 
-    if (isOriginalResource(userData.created_at)) {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.user) return authorizationError();
+
+    if (isOriginalResource(session.user.created_at)) {
       return modifiedOriginalResourceError();
     }
 
@@ -43,16 +49,21 @@ export async function PATCH(request: Request) {
 
 export async function DELETE() {
   try {
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
+    const supabase = createRouteHandlerClient({ cookies });
 
     await supabase.auth.signOut();
 
-    if (isOriginalResource(userData.created_at)) {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.user) return authorizationError();
+
+    if (isOriginalResource(session?.user.created_at)) {
       return modifiedOriginalResourceError();
     }
 
-    const { error } = await supabaseAdmin.auth.admin.deleteUser(userData.id);
+    const { error } = await supabaseAdmin.auth.admin.deleteUser(session?.user?.id || '');
 
     if (error) return apiError(error);
 

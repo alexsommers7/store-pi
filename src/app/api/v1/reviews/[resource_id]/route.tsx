@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
 import {
   catchError,
   modifiedOriginalResourceError,
@@ -10,12 +9,15 @@ import {
 import { Context } from '@/_lib/types';
 import {
   generateForeignTableSelectionWhenApplicable,
-  getUserData,
   isOriginalResource,
 } from '@/_supabase/functions';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export async function GET(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const { params } = context;
     const { resource_id } = params;
     const { searchParams } = new URL(request.url);
@@ -38,8 +40,13 @@ export async function GET(request: Request, context: Context) {
 
 export async function PATCH(request: Request, context: Context) {
   try {
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
+    const supabase = createRouteHandlerClient({ cookies });
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.user) return authorizationError();
 
     const { params } = context;
     const { resource_id } = params;
@@ -68,8 +75,13 @@ export async function PATCH(request: Request, context: Context) {
 
 export async function DELETE(request: Request, context: Context) {
   try {
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
+    const supabase = createRouteHandlerClient({ cookies });
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.user) return authorizationError();
 
     const { params } = context;
     const { resource_id } = params;
@@ -90,7 +102,7 @@ export async function DELETE(request: Request, context: Context) {
     const { error } = await supabase
       .from('reviews')
       .delete()
-      .eq('user_id', userData.id)
+      .eq('user_id', session.user.id)
       .eq('id', resource_id);
 
     if (error) return apiError(error);

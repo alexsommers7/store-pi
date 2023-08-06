@@ -24,9 +24,18 @@ export default function Demo() {
     }
   };
 
-  const getCurrentUserCart = async () => {
+  const signOut = async () => {
     try {
-      const res = await fetch('/api/v1/users/current/cart');
+      await fetch('/api/v1/logout', { method: 'POST' });
+      setResponse('204 No Content');
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const getCurrentUserResource = async (resource: string) => {
+    try {
+      const res = await fetch(`/api/v1/users/current/${resource}`);
       const json = await res.json();
 
       setResponse(JSON.stringify(json));
@@ -85,12 +94,23 @@ export default function Demo() {
           </div>
         </form>
 
-        <div className='flex gap-3'>
+        <div className='flex gap-3 flex-wrap'>
+          <button onClick={signOut} className='border border-stone-500 rounded-md p-2 mt-8'>
+            Sign Out
+          </button>
+
           <button
-            onClick={getCurrentUserCart}
+            onClick={() => getCurrentUserResource('cart')}
             className='border border-stone-500 rounded-md p-2 mt-8'
           >
             Get Current User Cart
+          </button>
+
+          <button
+            onClick={() => getCurrentUserResource('reviews')}
+            className='border border-stone-500 rounded-md p-2 mt-8'
+          >
+            Get Current User Reviews
           </button>
 
           <button onClick={addItem1ToCart} className='border border-stone-500 rounded-md p-2 mt-8'>
@@ -98,7 +118,7 @@ export default function Demo() {
           </button>
         </div>
 
-        <div className='mt-8 max-w-[40rem] overflow-x-scroll'>
+        <div className='mt-8 max-w-[40rem] overflow-x-auto'>
           <h2 className='text-2xl font-bold mb-4'>Response</h2>
           {response && <p>{response}</p>}
         </div>

@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
 import { Context } from '@/_lib/types';
 import {
   supabaseGetWithFeatures,
@@ -8,7 +7,6 @@ import {
   apiError,
 } from '@/_utils/rest-handlers';
 import {
-  getUserData,
   generateForeignTableSelectionWhenApplicable,
   addPluralityWhenApplicable,
 } from '@/_supabase/functions';
@@ -32,9 +30,13 @@ export async function GET(request: Request, context: Context) {
     const query = supabase.from(resource).select(selection, { count: 'exact' });
 
     // ... except for these resources
-    // if (publicAndPrivateRead.includes(resource)) {
-    //   query.eq('user_id', userData.id);
-    // }
+    if (publicAndPrivateRead.includes(resource)) {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      query.eq('user_id', session?.user.id);
+    }
 
     const responseJson = await supabaseGetWithFeatures(query, searchParams);
 
@@ -121,6 +123,8 @@ export async function PATCH(request: Request, context: Context) {
       data: { session },
     } = await supabase.auth.getSession();
 
+    if (!session?.user) return authorizationError();
+
     const { params } = context;
     const { resource: resourceNameSingular } = params;
     const resourceNamePlural = `${resourceNameSingular}s`;
@@ -134,7 +138,7 @@ export async function PATCH(request: Request, context: Context) {
     } = await supabase
       .from(resourceNamePlural)
       .select()
-      .eq('user_id', session?.user.id)
+      .eq('user_id', session.user.id)
       .maybeSingle();
 
     if (resourceIdError) return apiError(resourceIdError);

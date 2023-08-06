@@ -1,12 +1,15 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
 import { Context } from '@/_lib/types';
 import { supabaseGetWithFeatures, catchError } from '@/_utils/rest-handlers';
 import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/functions';
 import { columnMap } from '@/_lib/constants';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export async function GET(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const { params } = context;
     const { resource, resource_id, sub_resource } = params; // e.g. { 'categories', 1, 'products' }
     const { searchParams } = new URL(request.url);

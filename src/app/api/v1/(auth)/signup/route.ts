@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
 import { defaultUserPhotoUrl } from '@/_lib/constants';
 import { catchError } from '@/_utils/rest-handlers';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 interface OptionsData {
   name: string;
@@ -10,6 +11,8 @@ interface OptionsData {
 
 export async function POST(request: Request) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const { email, password, name, photo } = await request.json();
 
     if (!email || !password) {

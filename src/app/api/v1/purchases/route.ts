@@ -1,15 +1,22 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
-import { catchError, apiError, supabaseGetWithFeatures } from '@/_utils/rest-handlers';
+import {
+  catchError,
+  apiError,
+  supabaseGetWithFeatures,
+  authorizationError,
+} from '@/_utils/rest-handlers';
 import {
   calculateOrderTotal,
   generateForeignTableSelectionWhenApplicable,
-  getUserData,
 } from '@/_supabase/functions';
 import { Product } from '@/_lib/types';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export async function GET(request: Request) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const { searchParams } = new URL(request.url);
 
     const selection = generateForeignTableSelectionWhenApplicable('purchases', searchParams);
@@ -26,17 +33,22 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const userData = await getUserData();
-    if (!userData) return apiError('You must be logged in to perform this action.');
+    const supabase = createRouteHandlerClient({ cookies });
+
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+
+    if (!session?.user) return authorizationError();
 
     const requestBody = await request.json();
-    requestBody['user_id'] = userData.id;
+    requestBody['user_id'] = session.user.id;
 
     const total = await calculateOrderTotal(requestBody);
 
     const { data: purchaseData, error: purchaseError } = await supabase
       .from('purchases')
-      .insert({ user_id: userData.id, total })
+      .insert({ user_id: session.user.id, total })
       .select()
       .maybeSingle();
 

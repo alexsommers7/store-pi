@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
 import { supabaseGetWithFeatures, catchError } from '@/_utils/rest-handlers';
 import { Context } from '@/_lib/types';
 import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/functions';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export async function GET(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const { params } = context;
     const { resource, resource_id } = params;
     const { searchParams } = new URL(request.url);
