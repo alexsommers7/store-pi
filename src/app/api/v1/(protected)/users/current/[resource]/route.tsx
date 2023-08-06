@@ -19,7 +19,7 @@ export async function GET(request: Request, context: Context) {
   try {
     const supabase = createServerComponentClient({ cookies });
 
-    const userData = await getUserData();
+    const userData = await getUserData(supabase);
     if (!userData) return authorizationError();
 
     const { params } = context;
@@ -52,7 +52,7 @@ export async function POST(request: Request, context: Context) {
   try {
     const supabase = createServerComponentClient({ cookies });
 
-    const userData = await getUserData();
+    const userData = await getUserData(supabase);
     if (!userData) return authorizationError();
 
     const { params } = context;
@@ -122,7 +122,7 @@ export async function PATCH(request: Request, context: Context) {
   try {
     const supabase = createServerComponentClient({ cookies });
 
-    const userData = await getUserData();
+    const userData = await getUserData(supabase);
     if (!userData) return authorizationError();
 
     const { params } = context;
