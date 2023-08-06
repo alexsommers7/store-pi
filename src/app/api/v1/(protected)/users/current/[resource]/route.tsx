@@ -7,7 +7,6 @@ import {
   apiError,
 } from '@/_utils/rest-handlers';
 import {
-  getUserData,
   generateForeignTableSelectionWhenApplicable,
   addPluralityWhenApplicable,
 } from '@/_supabase/functions';
@@ -37,7 +36,7 @@ export async function GET(request: Request, context: Context) {
 
     // ... except for these resources
     if (publicAndPrivateRead.includes(resource)) {
-      query.eq('user_id', userData.id);
+      query.eq('user_id', session.user.id);
     }
 
     const responseJson = await supabaseGetWithFeatures(query, searchParams);
@@ -141,7 +140,11 @@ export async function PATCH(request: Request, context: Context) {
     const {
       data: { id },
       error: resourceIdError,
-    } = await supabase.from(resourceNamePlural).select().eq('user_id', userData.id).maybeSingle();
+    } = await supabase
+      .from(resourceNamePlural)
+      .select()
+      .eq('user_id', session.user.id)
+      .maybeSingle();
 
     if (resourceIdError) return apiError(resourceIdError);
 
