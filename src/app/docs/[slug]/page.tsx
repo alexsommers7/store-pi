@@ -1,9 +1,11 @@
 import { getSlugStructure } from '@/docs/structure';
 import { SectionHeading } from '@/_components/typography/sectionHeading';
+import { AnchorHeading } from '@/_components/typography/anchorHeading';
 import { endpointMapper } from '@/docs/endpoint-mapper';
 import { DocsPagination } from '@/docs/pagination/index';
 import { AvailableFields } from '@/docs/_components/availableFields';
 import { getAllSubitems } from '@/docs/structure';
+import { SectionSubHeading } from '@/_components/typography/sectionSubHeading';
 
 export async function generateStaticParams() {
   const subitems = getAllSubitems();
@@ -21,13 +23,16 @@ export default function Page({ params }: { params: { slug: string } }) {
       <section className='flex flex-col gap-y-6 py-4 px-6 min-[1151px]:p-10'>
         <SectionHeading>{label}</SectionHeading>
 
-        {sectionStructure.isDBTable ? (
-          <AvailableFields tableName={label} />
-        ) : (
-          <p>{sectionStructure.desc}</p>
-        )}
-
         {endpointMapper(sectionStructure)}
+
+        {sectionStructure.isDBTable && (
+          <>
+            <AnchorHeading anchorId='property-reference'>
+              <SectionSubHeading>Property Reference</SectionSubHeading>
+            </AnchorHeading>
+            <AvailableFields tableName={label} />
+          </>
+        )}
       </section>
 
       <DocsPagination />

@@ -20,6 +20,12 @@ export function OnThisPage() {
                   <OnThisPageLink name={label} href={`#${hash}`} />
                 </li>
               ))}
+
+              {currentSubitem.isDBTable ? (
+                <li>
+                  <OnThisPageLink name='Property Reference' href='#property-reference' />
+                </li>
+              ) : null}
             </ul>
           </>
         ) : null}
