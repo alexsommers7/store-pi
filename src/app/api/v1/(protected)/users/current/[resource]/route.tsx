@@ -18,9 +18,11 @@ import { cookies } from 'next/headers';
 export async function GET(request: Request, context: Context) {
   try {
     const supabase = createServerComponentClient({ cookies });
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    const userData = await getUserData(supabase);
-    if (!userData) return authorizationError();
+    if (!session) return authorizationError();
 
     const { params } = context;
     let { resource } = params;
@@ -51,9 +53,11 @@ export async function GET(request: Request, context: Context) {
 export async function POST(request: Request, context: Context) {
   try {
     const supabase = createServerComponentClient({ cookies });
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    const userData = await getUserData(supabase);
-    if (!userData) return authorizationError();
+    if (!session) return authorizationError();
 
     const { params } = context;
     const { resource: resourceNameSingular } = params;
@@ -121,9 +125,11 @@ export async function POST(request: Request, context: Context) {
 export async function PATCH(request: Request, context: Context) {
   try {
     const supabase = createServerComponentClient({ cookies });
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    const userData = await getUserData(supabase);
-    if (!userData) return authorizationError();
+    if (!session) return authorizationError();
 
     const { params } = context;
     const { resource: resourceNameSingular } = params;
