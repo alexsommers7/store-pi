@@ -14,7 +14,9 @@ import {
   graphqlLogin,
   graphqlQuery,
 } from '@/_lib/api-samples/sample-bodies';
-import { Tip } from '@/_components/typography/tip';
+import { Note } from '@/_components/typography/note';
+import { List } from '@/_components/list';
+import { spawn } from 'child_process';
 
 export default function Introduction() {
   return (
@@ -45,10 +47,18 @@ export default function Introduction() {
         priority
       />
 
-      <p>
-        If you&apos;re the Postman type, you can find that version of the REST documentation{' '}
-        <TextLink href='https://documenter.getpostman.com/view/12907395/UyxjF694' label='here' />.
-      </p>
+      <Note
+        noteText={
+          <span>
+            If you&apos;re the Postman type, you can find that version of the REST documentation{' '}
+            <TextLink
+              href='https://documenter.getpostman.com/view/12907395/UyxjF694'
+              label='here'
+            />
+            .
+          </span>
+        }
+      />
 
       <div>
         <AnchorHeading anchorId='database-interaction'>
@@ -56,11 +66,41 @@ export default function Introduction() {
         </AnchorHeading>
 
         <p>
-          Most endpoints act as real-world endpoints, but without actually writing anything to the
-          database. In the event that you are creating or updating a resource, the response will
-          still contain the updated data despite not persisting it.
+          A default dataset is provided with this API. It consists of 19 users (each with a cart and
+          wishlist), 50 products, 6 categories, 44 brands, 160 product reviews, and 50 purchases.
         </p>
       </div>
+
+      <p>
+        That said, you do have the ability to interact with the database and persist your custom
+        data with select resources. Notably, You may{' '}
+        <TextLink href='/docs/authentication#sign-up' label='sign up as a new user' /> and perform
+        any of the following actions as your new user:
+      </p>
+
+      <List>
+        <>
+          <li>Log in</li>
+          <li>Modify your profile, email, or password </li>
+          <li>Create/edit reviews</li>
+          <li>Add/remove cart items</li>
+          <li>Add/remove wishlist items</li>
+          <li>Create a new purchase</li>
+        </>
+      </List>
+
+      <Note
+        showNote={false}
+        noteText={
+          <span>
+            While creating your own user is recommended, you may also perform any of the above
+            actions as one of the users from the original dataset. When doing so, the endpoint will
+            still respond as if the request were successful, but your data will not be persisted.
+            See <TextLink href='docs/authentication#log-in' label='logging in' /> for information on
+            how to authenticate as one of these users.
+          </span>
+        }
+      />
 
       <div>
         <AnchorHeading anchorId='cors'>
@@ -172,8 +212,8 @@ export default function Introduction() {
           </GenericTable>
 
           <div className='mt-8'>
-            <Tip
-              tipText={
+            <Note
+              noteText={
                 <span>
                   If the <span className='snippet'>limit</span> or{' '}
                   <span className='snippet'>offset</span> parameter is passed, the response json
