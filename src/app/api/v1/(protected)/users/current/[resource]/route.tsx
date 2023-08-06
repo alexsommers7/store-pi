@@ -50,9 +50,6 @@ export async function POST(request: Request, context: Context) {
   try {
     const supabase = createRouteHandlerClient({ cookies });
 
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
-
     const { params } = context;
     const { resource: resourceNameSingular } = params;
     const resourceNamePlural = `${resourceNameSingular}s`;
@@ -120,8 +117,9 @@ export async function PATCH(request: Request, context: Context) {
   try {
     const supabase = createRouteHandlerClient({ cookies });
 
-    const userData = await getUserData();
-    if (!userData) return authorizationError();
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
     const { params } = context;
     const { resource: resourceNameSingular } = params;
@@ -133,7 +131,11 @@ export async function PATCH(request: Request, context: Context) {
     const {
       data: { id },
       error: resourceIdError,
-    } = await supabase.from(resourceNamePlural).select().eq('user_id', userData.id).maybeSingle();
+    } = await supabase
+      .from(resourceNamePlural)
+      .select()
+      .eq('user_id', session?.user.id)
+      .maybeSingle();
 
     if (resourceIdError) return apiError(resourceIdError);
 
