@@ -5,9 +5,36 @@ import {
   modifiedOriginalResourceError,
   apiError,
   authorizationError,
+  supabaseGetWithFeatures,
 } from '@/_utils/rest-handlers';
 import { Context } from '@/_lib/types';
-import { getUserData, isOriginalResource } from '@/_supabase/functions';
+import {
+  generateForeignTableSelectionWhenApplicable,
+  getUserData,
+  isOriginalResource,
+} from '@/_supabase/functions';
+
+export async function GET(request: Request, context: Context) {
+  try {
+    const { params } = context;
+    const { resource, resource_id } = params;
+    const { searchParams } = new URL(request.url);
+
+    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+
+    let query = supabase
+      .from(resource)
+      .select(selection, { count: 'exact' })
+      .eq('id', resource_id)
+      .maybeSingle();
+
+    const responseJson = await supabaseGetWithFeatures(query, searchParams, true);
+
+    return NextResponse.json(responseJson);
+  } catch (error) {
+    return catchError(error);
+  }
+}
 
 export async function PATCH(request: Request, context: Context) {
   try {

@@ -1,7 +1,26 @@
 import { NextResponse } from 'next/server';
 import supabase from '@/_supabase/create-client';
-import { catchError, apiError } from '@/_utils/rest-handlers';
-import { getUserData } from '@/_supabase/functions';
+import { catchError, apiError, supabaseGetWithFeatures } from '@/_utils/rest-handlers';
+import { generateForeignTableSelectionWhenApplicable, getUserData } from '@/_supabase/functions';
+import { Context } from '@/_lib/types';
+
+export async function GET(request: Request, context: Context) {
+  try {
+    const { params } = context;
+    const { resource } = params;
+    const { searchParams } = new URL(request.url);
+
+    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+
+    const query = supabase.from(resource).select(selection, { count: 'exact' });
+
+    const responseJson = await supabaseGetWithFeatures(query, searchParams);
+
+    return NextResponse.json(responseJson);
+  } catch (error) {
+    return catchError(error);
+  }
+}
 
 export async function POST(request: Request) {
   try {
