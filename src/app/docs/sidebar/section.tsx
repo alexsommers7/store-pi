@@ -1,8 +1,8 @@
 import { NavLink } from '@/_components/navigation/navLink';
-import { StructureItem } from '@/docs/structure';
+import { StructureItem } from '@/_lib/types';
 import { ExternalIcon } from '@/_components/icons/external';
 
-export interface SidebarSectionProps {
+interface SidebarSectionProps {
   section: StructureItem;
 }
 

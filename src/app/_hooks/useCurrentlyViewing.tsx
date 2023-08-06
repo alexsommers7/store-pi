@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useDocsProvider } from '@/docs/_context';
-import { structure, StructureSubItem } from '@/docs/structure';
-import { useSlugPagination, PaginationSlug } from '@/docs/pagination/useSlugPagination';
+import { structure } from '@/docs/structure';
+import { StructureSubItem, PaginationSlug } from '@/_lib/types';
+import { useSlugPagination } from '@/docs/pagination/useSlugPagination';
 
 interface CurrentlyViewingState {
   currentSubitem: StructureSubItem | null;

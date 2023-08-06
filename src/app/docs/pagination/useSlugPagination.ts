@@ -1,10 +1,6 @@
 import { useState, useEffect } from 'react';
 import { structure } from '@/docs/structure';
-
-export interface PaginationSlug {
-  label: string;
-  slug: string;
-}
+import { PaginationSlug } from '@/_lib/types';
 
 interface PaginationSlugs {
   nextSlug: PaginationSlug | null;

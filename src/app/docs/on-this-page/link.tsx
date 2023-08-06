@@ -1,11 +1,7 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import { useDocsProvider } from '@/docs/_context/index';
-
-export interface IOnThisPageLink {
-  name: string;
-  href: string;
-}
+import { IOnThisPageLink } from '@/_lib/types';
 
 export function OnThisPageLink({ name, href }: IOnThisPageLink) {
   const anchorRef = useRef<HTMLAnchorElement>(null);

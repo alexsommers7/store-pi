@@ -2,15 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
-export interface INavLink {
-  name: string;
-  href: string;
-  bold?: boolean;
-  addSidebarAccent?: boolean;
-  forceActive?: boolean;
-  target?: string;
-}
+import { INavLink } from '@/_lib/types';
 
 export function NavLink({
   name,
