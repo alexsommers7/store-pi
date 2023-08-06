@@ -1,18 +1,15 @@
-import { HTTPMethods } from '@/_lib/constants';
 import {
   addProductToCurrentUserCartBody,
-  addProductToCurrentUserWishlistBody,
-  createOrUpdateReviewBody,
+  addOrRemoveProductToCurrentUserWishlistBody,
+  createReviewBody,
   createPurchaseBody,
   loginBody,
   removeProductFromCurrentUserCartBody,
-  removeProductFromCurrentUserWishlistBody,
   signupBody,
   updateCurrentUserBody,
+  updateReviewBody,
 } from '@/_lib/api-samples/sample-bodies';
 import {
-  addProductToCurrentUserCartResponse,
-  addProductToCurrentUserWishlistResponse,
   createOrUpdateReviewResponse,
   createPurchaseResponse,
   getAllBrandsResponse,
@@ -28,42 +25,13 @@ import {
   getProductReviewsResponse,
   getCurrentUserPurchaseResponse,
   getReviewResponse,
-  getAllUsersResponse,
   getCurrentUserResponse,
   loginResponse,
   signupResponse,
   updateCurrentUserResponse,
+  getUserResponse,
 } from '@/_lib/api-samples/sample-responses';
-
-export interface StructureItem {
-  label: string;
-  subitems: StructureSubItem[];
-}
-
-export interface StructureSubItem {
-  label: string;
-  slug: string;
-  desc?: string;
-  isDBTable?: boolean;
-  anchors: EndpointAnchor[] | NonEndpointAnchor[];
-}
-
-export interface EndpointAnchor {
-  label: string;
-  hash: string;
-  httpMethod: keyof typeof HTTPMethods;
-  slug: string;
-  body?: string;
-  response?: string;
-  requiresAuth?: boolean;
-  desc?: string;
-  tip?: string;
-}
-
-export interface NonEndpointAnchor {
-  label: string;
-  hash: string;
-}
+import { StructureSubItem } from '@/_lib/types';
 
 export const structure = [
   {
@@ -109,13 +77,6 @@ export const structure = [
             response: getAllProductsResponse,
           },
           {
-            label: 'Get All Products in Category',
-            hash: 'get-category-products',
-            httpMethod: 'GET',
-            slug: 'categories/:id/products',
-            response: getAllProductsInCategoryResponse,
-          },
-          {
             label: 'Get Product',
             hash: 'get-product',
             httpMethod: 'GET',
@@ -123,11 +84,32 @@ export const structure = [
             response: getProductResponse,
           },
           {
+            label: 'Get All Categories',
+            hash: 'get-categories',
+            httpMethod: 'GET',
+            slug: 'categories',
+            response: getAllCategoriesResponse,
+          },
+          {
+            label: 'Get All Products in Category',
+            hash: 'get-category-products',
+            httpMethod: 'GET',
+            slug: 'categories/:id/products',
+            response: getAllProductsInCategoryResponse,
+          },
+          {
             label: 'Get All Brands',
             hash: 'get-brands',
             httpMethod: 'GET',
             slug: 'brands',
             response: getAllBrandsResponse,
+          },
+          {
+            label: 'Get All Products in Brand',
+            hash: 'get-brand-products',
+            httpMethod: 'GET',
+            slug: 'brands/:id/products',
+            response: getAllProductsInCategoryResponse,
           },
         ],
       },
@@ -170,19 +152,21 @@ export const structure = [
             label: 'Create New Review',
             hash: 'create-review',
             httpMethod: 'POST',
-            slug: 'products/:id/reviews',
-            body: createOrUpdateReviewBody,
+            slug: 'reviews',
+            body: createReviewBody,
             response: createOrUpdateReviewResponse,
             requiresAuth: true,
+            note: `A user may only add one review per product.`,
           },
           {
             label: 'Update Review',
             hash: 'update-review',
             httpMethod: 'PATCH',
             slug: 'reviews/:id',
-            body: createOrUpdateReviewBody,
+            body: updateReviewBody,
             response: createOrUpdateReviewResponse,
             requiresAuth: true,
+            note: `You may only update a review if you are the author of the review. If the review was part of the default dataset of this API, the update will not be persisted to the db but it will respond as if it were successful.`,
           },
           {
             label: 'Delete Review',
@@ -190,21 +174,7 @@ export const structure = [
             httpMethod: 'DELETE',
             slug: 'reviews/:id',
             requiresAuth: true,
-          },
-        ],
-      },
-      {
-        label: 'Categories',
-        slug: 'categories',
-        isDBTable: true,
-        desc: 'There are six common e-commerce product categories available, each with multiple items belonging to it.',
-        anchors: [
-          {
-            label: 'Get All Categories',
-            hash: 'get-categories',
-            httpMethod: 'GET',
-            slug: 'categories',
-            response: getAllCategoriesResponse,
+            note: `You may only delete a review if you are the author of the review. If the review was part of the default dataset of this API, the deletion will not be persisted to the db but it will respond as if it were successful.`,
           },
         ],
       },
@@ -218,7 +188,7 @@ export const structure = [
             label: 'Get Current User Cart',
             hash: 'get-current-user-cart',
             httpMethod: 'GET',
-            slug: 'users/current/carts',
+            slug: 'users/current/cart',
             response: getCurrentUserCartResponse,
             requiresAuth: true,
           },
@@ -226,18 +196,21 @@ export const structure = [
             label: 'Add to Current User Cart',
             hash: 'add-to-current-user-cart',
             httpMethod: 'POST',
-            slug: 'users/current/carts',
+            slug: 'users/current/cart',
             body: addProductToCurrentUserCartBody,
-            response: addProductToCurrentUserCartResponse,
+            response: getCurrentUserCartResponse,
             requiresAuth: true,
+            note: `You must be logged in as the owner of the cart for this call to succeed. If the product already exists in the cart, the quantity will be incremented by the quantity value passed in, defaulting to 1.`,
           },
           {
             label: 'Remove From Current User Cart',
             hash: 'remove-from-current-user-cart',
-            httpMethod: 'DELETE',
-            slug: 'users/current/carts',
+            httpMethod: 'PATCH',
+            slug: 'users/current/cart',
             body: removeProductFromCurrentUserCartBody,
+            response: getCurrentUserCartResponse,
             requiresAuth: true,
+            note: `You must be logged in as the owner of the cart for this call to succeed. If the product does not exist in the cart, the call will succeed but no changes will be made to the cart. If the quantity was 1, the item will be removed from the cart.`,
           },
         ],
       },
@@ -248,12 +221,13 @@ export const structure = [
         desc: 'A total of 50 purchases exist in the database. Each purchase must belong to a user. Not every user has made a purchase, but some have made multiple.',
         anchors: [
           {
-            label: 'Get Current User Purchase',
-            hash: 'get-current-user-purchase',
+            label: 'Get Purchase',
+            hash: 'get-purchase',
             httpMethod: 'GET',
             slug: 'purchases/:id',
             response: getCurrentUserPurchaseResponse,
             requiresAuth: true,
+            note: `You must be logged in as the owner of the purchase for this call to succeed.`,
           },
           {
             label: 'Get Current User Purchases',
@@ -281,28 +255,30 @@ export const structure = [
         desc: 'Every user is assigned a wishlist. Some will have an empty wishlist, while others will have products in theirs. A user may only have one wishlist.',
         anchors: [
           {
-            label: 'Get Current User WIshlist',
+            label: 'Get Current User Wishlist',
             hash: 'get-current-user-wishlist',
             httpMethod: 'GET',
-            slug: 'users/current/wishlists',
+            slug: 'users/current/wishlist',
             response: getCurrentUserWishlistResponse,
             requiresAuth: true,
+            note: `A user may only have one wishlist.`,
           },
           {
             label: 'Add to Current User Wishlist',
             hash: 'add-to-current-user-wishlist',
             httpMethod: 'POST',
-            slug: 'users/current/wishlists',
-            body: addProductToCurrentUserWishlistBody,
-            response: addProductToCurrentUserWishlistResponse,
+            slug: 'users/current/wishlist',
+            body: addOrRemoveProductToCurrentUserWishlistBody,
+            response: getCurrentUserWishlistResponse,
             requiresAuth: true,
           },
           {
             label: 'Remove From Current User Wishlist',
             hash: 'remove-from-current-user-wishlist',
-            httpMethod: 'DELETE',
-            slug: 'users/current/wishlists',
-            body: removeProductFromCurrentUserWishlistBody,
+            httpMethod: 'PATCH',
+            slug: 'users/current/wishlist',
+            body: addOrRemoveProductToCurrentUserWishlistBody,
+            response: getCurrentUserWishlistResponse,
             requiresAuth: true,
           },
         ],
@@ -310,15 +286,16 @@ export const structure = [
       {
         label: 'Users',
         slug: 'users',
-        isDBTable: true,
+        isDBTable: false,
         desc: 'Each user object will contain general profile information, including a link to a stock photo hosted on S3.',
         anchors: [
           {
-            label: 'Get All Users',
-            hash: 'get-users',
+            label: 'Get User',
+            hash: 'get-user',
             httpMethod: 'GET',
-            slug: 'users',
-            response: getAllUsersResponse,
+            slug: 'users/:id',
+            response: getUserResponse,
+            note: `This endpoint gives admin access to data on any user in the DB. It wouldn't typically be publicly exposed, but it's available for the purposes of this API.`,
           },
           {
             label: 'Get Current User',
@@ -326,6 +303,7 @@ export const structure = [
             httpMethod: 'GET',
             slug: 'users/current',
             response: getCurrentUserResponse,
+            requiresAuth: true,
           },
           {
             label: 'Update Current User',
@@ -334,6 +312,7 @@ export const structure = [
             slug: 'users/current',
             body: updateCurrentUserBody,
             response: updateCurrentUserResponse,
+            requiresAuth: true,
           },
           {
             label: 'Delete Current User',
@@ -341,6 +320,7 @@ export const structure = [
             httpMethod: 'DELETE',
             slug: 'users/current',
             requiresAuth: true,
+            note: 'If attempting to delete an original user, this endpoint will not delete the user from the database, but it will remove the user from the browser session and log them out - removing all items from Local Storage.',
           },
         ],
       },
@@ -375,7 +355,7 @@ export const structure = [
             body: signupBody,
             response: signupResponse,
             desc: 'You may create a new user account with any email address and password, provided the email address does not already exist in the database. The new user will be persisted to the database and you may access user-specific resources with the new credentials. Upon successfully signing up, you will immediately be authenticated as the new user.',
-            tip: `Providing a photo is optional. If you would like to provide one, it must be self-hosted. If you don't provide one, a generic default will be assigned.`,
+            note: `Providing a photo is optional. If you would like to provide one, it must be self-hosted. If you don't provide one, a generic default will be assigned.`,
           },
         ],
       },
