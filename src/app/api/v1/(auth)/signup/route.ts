@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import supabase from '@/_supabase/create-client';
 import { defaultUserPhotoUrl } from '@/_lib/constants';
+import { catchError } from '@/_utils/rest-handlers';
 
 interface OptionsData {
   name: string;
@@ -39,6 +40,6 @@ export async function POST(request: Request) {
 
     return NextResponse.json({ data: data.session });
   } catch (error) {
-    return new NextResponse('An unexpected error occurred.', { status: 500 });
+    return catchError(error);
   }
 }
