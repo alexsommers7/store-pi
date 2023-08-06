@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import supabase from '@/_supabase/create-client';
 import { Context } from '@/_lib/types';
 import {
   supabaseGetWithFeatures,
@@ -13,9 +12,13 @@ import {
   addPluralityWhenApplicable,
 } from '@/_supabase/functions';
 import { publicAndPrivateRead, foreignTableMap } from '@/_lib/constants';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
 
 export async function GET(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const userData = await getUserData();
     if (!userData) return authorizationError();
 
@@ -47,6 +50,8 @@ export async function GET(request: Request, context: Context) {
 // if this ever expands, consider manually defining the routes, especially since plurality may not be consistent
 export async function POST(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const userData = await getUserData();
     if (!userData) return authorizationError();
 
@@ -115,6 +120,8 @@ export async function POST(request: Request, context: Context) {
 
 export async function PATCH(request: Request, context: Context) {
   try {
+    const supabase = createRouteHandlerClient({ cookies });
+
     const userData = await getUserData();
     if (!userData) return authorizationError();
 
