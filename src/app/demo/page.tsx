@@ -1,8 +1,10 @@
 'use client';
 
-import { SectionHeading } from '@/_components/typography/sectionHeading';
+import { useState } from 'react';
 
 export default function Demo() {
+  const [response, setResponse] = useState<string>('');
+
   const signIn = async (e: any) => {
     e.preventDefault();
 
@@ -16,7 +18,7 @@ export default function Demo() {
       });
       const json = await res.json();
 
-      alert(JSON.stringify(json));
+      setResponse(JSON.stringify(json));
     } catch (error) {
       alert(error);
     }
@@ -27,7 +29,7 @@ export default function Demo() {
       const res = await fetch('/api/v1/users/current/cart');
       const json = await res.json();
 
-      alert(JSON.stringify(json));
+      setResponse(JSON.stringify(json));
     } catch (error) {
       alert(error);
     }
@@ -42,60 +44,65 @@ export default function Demo() {
       });
       const json = await res.json();
 
-      alert(JSON.stringify(json));
+      setResponse(JSON.stringify(json));
     } catch (error) {
       alert(error);
     }
   };
 
   return (
-    <div className='w-full max-w-[58rem] border-l-2 border-l-stone-900 p-10'>
-      <SectionHeading>Demo</SectionHeading>
+    <main className='max-w-[90rem] mx-auto flex flex-col items-center'>
+      <div className='px-10 py-16 self-stretch mx-auto'>
+        <form onSubmit={signIn}>
+          <div className='flex flex-col space-y-6'>
+            <div className='flex flex-col space-y-2'>
+              <label htmlFor='email'>Email</label>
+              <input
+                id='email'
+                type='email'
+                name='email'
+                value='testtester@gmail.com'
+                className='border border-stone-500 rounded-md p-2 text-black'
+              />
+            </div>
 
-      <form onSubmit={signIn} className='mt-8 '>
-        <div className='flex flex-col space-y-6'>
-          <div className='flex flex-col space-y-2'>
-            <label htmlFor='email'>Email</label>
-            <input
-              id='email'
-              type='email'
-              name='email'
-              value='testtester@gmail.com'
-              className='border border-stone-500 rounded-md p-2 text-black'
-            />
-          </div>
+            <div className='flex flex-col space-y-2 mb-4'>
+              <label htmlFor='password'>Password</label>
+              <input
+                id='password'
+                type='password'
+                name='password'
+                value='password'
+                className='border border-stone-500 rounded-md p-2 text-black'
+              />
+            </div>
 
-          <div className='flex flex-col space-y-2 mb-4'>
-            <label htmlFor='password'>Password</label>
-            <input
-              id='password'
-              type='password'
-              name='password'
-              value='password'
-              className='border border-stone-500 rounded-md p-2 text-black'
-            />
+            <div>
+              <button type='submit' className='bg-stone-500 text-white rounded-md p-2 mt-3 w-full'>
+                Sign In
+              </button>
+            </div>
           </div>
+        </form>
 
-          <div>
-            <button type='submit' className='bg-stone-500 text-white rounded-md p-2 mt-3'>
-              Sign In
-            </button>
-          </div>
+        <div className='flex gap-3'>
+          <button
+            onClick={getCurrentUserCart}
+            className='border border-stone-500 rounded-md p-2 mt-8'
+          >
+            Get Current User Cart
+          </button>
+
+          <button onClick={addItem1ToCart} className='border border-stone-500 rounded-md p-2 mt-8'>
+            Add Item 1 To Cart
+          </button>
         </div>
-      </form>
 
-      <div className='flex gap-3'>
-        <button
-          onClick={getCurrentUserCart}
-          className='border border-stone-500 rounded-md p-2 mt-8'
-        >
-          Get Current User Cart
-        </button>
-
-        <button onClick={addItem1ToCart} className='border border-stone-500 rounded-md p-2 mt-8'>
-          Add Item 1 To Cart
-        </button>
+        <div className='mt-8 max-w-[40rem] overflow-x-scroll'>
+          <h2 className='text-2xl font-bold mb-4'>Response</h2>
+          {response && <p>{response}</p>}
+        </div>
       </div>
-    </div>
+    </main>
   );
 }
