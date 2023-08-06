@@ -3,7 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 const options = {
   auth: {
     autoRefreshToken: true,
-    persistSession: process.env.VERCEL_ENV !== 'development',
+    persistSession: true,
+    detectSessionInUrl: false,
   },
 };
 
