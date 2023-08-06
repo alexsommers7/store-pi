@@ -28,5 +28,8 @@
   },
   "devDependencies": {
     "encoding": "^0.1.13"
+  },
+  "engines": {
+    "node": "^18.16.1"
   }
 }
