@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import supabase from '@/_supabase/create-client';
 import { Context } from '@/_lib/types';
 import {
   supabaseGetWithFeatures,
@@ -7,21 +8,16 @@ import {
   apiError,
 } from '@/_utils/rest-handlers';
 import {
+  getUserData,
   generateForeignTableSelectionWhenApplicable,
   addPluralityWhenApplicable,
 } from '@/_supabase/functions';
 import { publicAndPrivateRead, foreignTableMap } from '@/_lib/constants';
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
 
 export async function GET(request: Request, context: Context) {
   try {
-    const supabase = createServerComponentClient({ cookies });
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session) return authorizationError();
+    const userData = await getUserData();
+    if (!userData) return authorizationError();
 
     const { params } = context;
     let { resource } = params;
@@ -36,7 +32,7 @@ export async function GET(request: Request, context: Context) {
 
     // ... except for these resources
     if (publicAndPrivateRead.includes(resource)) {
-      query.eq('user_id', session.user.id);
+      query.eq('user_id', userData.id);
     }
 
     const responseJson = await supabaseGetWithFeatures(query, searchParams);
@@ -51,12 +47,8 @@ export async function GET(request: Request, context: Context) {
 // if this ever expands, consider manually defining the routes, especially since plurality may not be consistent
 export async function POST(request: Request, context: Context) {
   try {
-    const supabase = createServerComponentClient({ cookies });
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session) return authorizationError();
+    const userData = await getUserData();
+    if (!userData) return authorizationError();
 
     const { params } = context;
     const { resource: resourceNameSingular } = params;
@@ -123,12 +115,8 @@ export async function POST(request: Request, context: Context) {
 
 export async function PATCH(request: Request, context: Context) {
   try {
-    const supabase = createServerComponentClient({ cookies });
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session) return authorizationError();
+    const userData = await getUserData();
+    if (!userData) return authorizationError();
 
     const { params } = context;
     const { resource: resourceNameSingular } = params;
@@ -140,11 +128,7 @@ export async function PATCH(request: Request, context: Context) {
     const {
       data: { id },
       error: resourceIdError,
-    } = await supabase
-      .from(resourceNamePlural)
-      .select()
-      .eq('user_id', session.user.id)
-      .maybeSingle();
+    } = await supabase.from(resourceNamePlural).select().eq('user_id', userData.id).maybeSingle();
 
     if (resourceIdError) return apiError(resourceIdError);
 

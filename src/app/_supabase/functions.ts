@@ -7,7 +7,7 @@ export const getColumnsWithType = cache(async (table: string) => {
   return await supabase.rpc('get_cols_with_type', { tname: table });
 });
 
-export async function getUserData(supabase?: any) {
+export async function getUserData() {
   const { data } = await supabase.auth.getSession();
   if (!data.session || !data.session.user) return null;
   return data.session.user;
