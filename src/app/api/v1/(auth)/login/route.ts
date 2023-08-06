@@ -2,6 +2,17 @@ import { NextResponse } from 'next/server';
 import supabase from '@/_supabase/create-client';
 import { catchError } from '@/_utils/rest-handlers';
 
+export async function OPTIONS() {
+  return NextResponse.next({
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+      'Access-Control-Allow-Credentials': 'true',
+    },
+  });
+}
+
 export async function POST(request: Request) {
   try {
     const { email, password } = await request.json();

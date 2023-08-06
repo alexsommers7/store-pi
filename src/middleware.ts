@@ -10,7 +10,10 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   res.headers.set('Access-Control-Allow-Origin', '*');
   res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
-  res.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.headers.set(
+    'Access-Control-Allow-Headers',
+    'authorization, x-client-info, apikey, content-type'
+  );
   res.headers.set('Access-Control-Allow-Credentials', 'true');
 
   // auth
