@@ -38,28 +38,20 @@ export async function GET(request: Request, context: Context) {
 
     const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
 
-    console.log('user id: ', user.id);
-
     // RLS handles user_id matching at DB level ...
-    const { data: data2, error: error2 } = await supabase
+    const query = supabase
       .from(resource)
       .select(selection, { count: 'exact' })
       .eq('user_id', user.id);
 
-    return NextResponse.json({ data: data2, error: error2 });
-
     // ... except for these resources
-    // if (publicAndPrivateRead.includes(resource)) {
-    //   query.eq('user_id', user.id);
-    // }
+    if (publicAndPrivateRead.includes(resource)) {
+      query.eq('user_id', user.id);
+    }
 
-    // console.log('query: ', query);
+    const responseJson = await supabaseGetWithFeatures(query, searchParams);
 
-    // const responseJson = await supabaseGetWithFeatures(query, searchParams);
-
-    // console.log('responseJson: ', responseJson);
-
-    // return NextResponse.json(responseJson);
+    return NextResponse.json(responseJson);
   } catch (error) {
     return catchError(error);
   }
