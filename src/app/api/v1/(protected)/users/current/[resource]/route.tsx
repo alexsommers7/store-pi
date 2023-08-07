@@ -22,6 +22,8 @@ export async function GET(request: Request, context: Context) {
     if (!authorization) return authorizationError();
     const jwt = authorization.split(' ')[1];
 
+    console.log('jwt: ', jwt);
+
     const supabase = createRouteHandlerClient({ cookies });
 
     const {
