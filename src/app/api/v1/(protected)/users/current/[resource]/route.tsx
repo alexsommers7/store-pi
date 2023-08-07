@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Context } from '@/_lib/types';
+import supabase from '@/_supabase/create-client';
 import {
   supabaseGetWithFeatures,
   catchError,
@@ -24,7 +25,7 @@ export async function GET(request: Request, context: Context) {
 
     console.log('jwt: ', jwt);
 
-    const supabase = createRouteHandlerClient({ cookies });
+    // const supabase = createRouteHandlerClient({ cookies });
 
     const {
       data: { user },
