@@ -6,15 +6,16 @@ export const config = {
 };
 
 export async function middleware(req: NextRequest) {
-  // enable cors
   const res = NextResponse.next();
+
+  // enable cors
+  res.headers.set('Access-Control-Allow-Credentials', 'true');
   res.headers.set('Access-Control-Allow-Origin', '*');
   res.headers.set('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS');
   res.headers.set(
     'Access-Control-Allow-Headers',
-    'authorization, x-client-info, apikey, content-type'
+    'Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   );
-  res.headers.set('Access-Control-Allow-Credentials', 'true');
 
   // auth
   const supabase = createMiddlewareClient({ req, res });

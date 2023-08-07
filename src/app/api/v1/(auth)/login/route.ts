@@ -3,17 +3,6 @@ import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 import { catchError } from '@/_utils/rest-handlers';
 
-export async function OPTIONS() {
-  return NextResponse.next({
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
-      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-      'Access-Control-Allow-Credentials': 'true',
-    },
-  });
-}
-
 export async function POST(request: Request) {
   try {
     const supabase = createRouteHandlerClient({ cookies });
