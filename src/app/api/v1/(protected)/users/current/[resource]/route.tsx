@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { Context } from '@/_lib/types';
-import supabase from '@/_supabase/create-client';
 import {
   supabaseGetWithFeatures,
   catchError,
@@ -23,9 +22,7 @@ export async function GET(request: Request, context: Context) {
     if (!authorization) return authorizationError();
     const jwt = authorization.split(' ')[1];
 
-    console.log('jwt: ', jwt);
-
-    // const supabase = createRouteHandlerClient({ cookies });
+    const supabase = createRouteHandlerClient({ cookies });
 
     const {
       data: { user },
@@ -40,6 +37,8 @@ export async function GET(request: Request, context: Context) {
     const { searchParams } = new URL(request.url);
 
     const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+
+    console.log('user id: ', user.id);
 
     // RLS handles user_id matching at DB level ...
     const query = supabase
