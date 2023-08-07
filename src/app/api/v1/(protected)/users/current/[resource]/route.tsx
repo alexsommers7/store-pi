@@ -12,11 +12,23 @@ import {
 } from '@/_supabase/server-functions';
 import { publicAndPrivateRead, foreignTableMap } from '@/_lib/constants';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 
 export async function GET(request: Request, context: Context) {
   try {
+    const headersInstance = headers();
+    const authorization = headersInstance.get('authorization');
+
+    if (!authorization) return authorizationError();
+    const jwt = authorization.split(' ')[1];
+
     const supabase = createRouteHandlerClient({ cookies });
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser(jwt);
+
+    if (!user) return authorizationError();
 
     const { params } = context;
     let { resource } = params;
@@ -27,15 +39,14 @@ export async function GET(request: Request, context: Context) {
     const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
 
     // RLS handles user_id matching at DB level ...
-    const query = supabase.from(resource).select(selection, { count: 'exact' });
+    const query = supabase
+      .from(resource)
+      .select(selection, { count: 'exact' })
+      .eq('user_id', user.id);
 
     // ... except for these resources
     if (publicAndPrivateRead.includes(resource)) {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      query.eq('user_id', session?.user.id);
+      query.eq('user_id', user.id);
     }
 
     const responseJson = await supabaseGetWithFeatures(query, searchParams);
