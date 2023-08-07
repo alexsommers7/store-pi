@@ -47,11 +47,15 @@ export async function GET(request: Request, context: Context) {
       .eq('user_id', user.id);
 
     // ... except for these resources
-    if (publicAndPrivateRead.includes(resource)) {
-      query.eq('user_id', user.id);
-    }
+    // if (publicAndPrivateRead.includes(resource)) {
+    //   query.eq('user_id', user.id);
+    // }
+
+    console.log('query: ', query);
 
     const responseJson = await supabaseGetWithFeatures(query, searchParams);
+
+    console.log('responseJson: ', responseJson);
 
     return NextResponse.json(responseJson);
   } catch (error) {
