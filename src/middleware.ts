@@ -8,6 +8,10 @@ export const config = {
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
 
+  if (req.method === 'OPTIONS') {
+    return new NextResponse(null, { status: 200 });
+  }
+
   // enable cors
   res.headers.set('Access-Control-Allow-Credentials', 'true');
   res.headers.set('Access-Control-Allow-Origin', '*');
