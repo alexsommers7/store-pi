@@ -59,7 +59,7 @@ export function generateQueryString(
 
   // for resources that are publicly readble but we still want to allow filtering by user_id (e.g. reviews)
   if (userId) {
-    queryString += `&user_id=eq.${userId}`;
+    queryString += queryString.length ? `&user_id=eq.${userId}` : `user_id=eq.${userId}`;
   }
 
   if (!searchParams) return queryString;
@@ -82,13 +82,15 @@ export function generateQueryString(
       ''
     );
     const operator = lessThan ? 'lt' : greaterThan ? 'gt' : lessThanOrEqualTo ? 'lte' : 'gte';
-    queryString += `&${field}=${operator}.${value}`;
+    queryString += queryString.length
+      ? `&${field}=${operator}.${value}`
+      : `${field}=${operator}.${value}`;
   }
 
   // filtering (equality operators)
   for (const [key, value] of searchParams) {
     if (excludeFromFiltering.includes(key)) continue;
-    queryString += `&${key}=eq.${value}`;
+    queryString += queryString.length ? `&${key}=eq.${value}` : `${key}=eq.${value}`;
   }
 
   return queryString;
