@@ -5,6 +5,8 @@ export const apiOrigin =
     ? 'http://localhost:3000/api/v1'
     : 'https://storepi.vercel.app/api/v1';
 
+export const restUrlBase = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1`;
+
 export const HTTPMethods = {
   GET: 'GET',
   POST: 'POST',
@@ -21,7 +23,7 @@ export const resourcesWithForeignTables = [
     foreignTable: 'purchase_products',
     column: 'purchase_id',
     foreignTableColumns:
-      'product_id, product_data:products(id, sku, category_id, images, brand_id, name)',
+      'product_id, quantity, product_data:products(id, sku, category_id, images, brand_id, name)',
   },
   {
     resourceName: 'carts',
@@ -39,9 +41,8 @@ export const resourcesWithForeignTables = [
   },
 ];
 
-// at the db level, these resources have public read access
-// but we want to limit the results to the current user's rows when they're accessing it here
-export const publicAndPrivateRead = ['reviews'];
+// these are resources that have public read access but we still want to allow filtering by user_id
+export const requiresUserId = ['reviews'];
 
 // for each resource, need to know the foreign table name to insert the new row into
 export const foreignTableMap: Map = {
