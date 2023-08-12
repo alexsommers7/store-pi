@@ -1,6 +1,6 @@
 # StorePI
 
-StorePI is a free, open-source REST and GraphQL API that was created for use in e-commerce prototyping, Front-End Developer talent evaluations, and anything else you can think of.
+StorePI is a free, open-source API that was created for use in e-commerce prototyping, Front-End Developer talent evaluations, and anything else you can think of.
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12907395-876b1330-5f7c-4897-ab79-0603acc76801?action=collection%2Ffork&collection-url=entityId%3D12907395-876b1330-5f7c-4897-ab79-0603acc76801%26entityType%3Dcollection%26workspaceId%3D526243f7-f864-4c95-a9d4-92825249cad6#?env%5BProd%3A%20StorePI%5D=W3sia2V5IjoiVVJMIiwidmFsdWUiOiJodHRwczovL3N0b3JlcGkuaGVyb2t1YXBwLmNvbSIsImVuYWJsZWQiOnRydWUsInR5cGUiOiJkZWZhdWx0In0seyJrZXkiOiJwYXNzd29yZCIsInZhbHVlIjoicGFzc3dvcmQiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiZGVmYXVsdCJ9LHsia2V5Ijoiand0IiwidmFsdWUiOiIiLCJlbmFibGVkIjp0cnVlLCJ0eXBlIjoiYW55In1d)
 

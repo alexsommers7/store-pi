@@ -51,6 +51,10 @@ body,
   overflow-wrap: break-word;
 }
 
+.wrap-break-anywhere {
+  overflow-wrap: anywhere;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
