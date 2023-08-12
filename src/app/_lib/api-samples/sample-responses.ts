@@ -391,115 +391,119 @@ export const getCurrentUserCartResponse = `"data": {
 }
 `;
 
-export const getCurrentUserPurchaseResponse = `"data": {
-	"paid": true,
-	"id": 9,
-	"user_id": 7,
-	"products": [
-		{
-			"item": {
-				"sku": 28,
-				"name": "Good Genes All-In-One Lactic Acid Treatment",
-				"brand_id": 38,
-				"regular_price": 142,
-				"sale_price": 122,
-				"slug": "good-genes-all-in-one-lactic-acid-treatment",
-				"id": 28
+export const getCurrentUserPurchaseResponse = `"data": [
+	{
+		"id": 77,
+		"paid": true,
+		"created_at": "2023-08-12T03:24:43.213638+00:00",
+		"total": 249.94,
+		"user_id": "b810e6fc-bb73-485f-bd42-1021c8d1b47a",
+		"purchase_products": [
+			{
+				"product_id": 1,
+				"quantity": 1,
+				"product_data": {
+					"id": 1,
+					"sku": 1,
+					"category_id": 1,
+					"images": [...],
+					"brand_id": 15,
+					"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m"
+				}
 			},
-			"quantity": 1
-		},
-		{
-			"item": {
-				"sku": 35,
-				"name": "Women's Double-Brested Trench Coat",
-				"brand_id": 20,
-				"regular_price": 190,
-				"sale_price": 93.1,
-				"slug": "women's-double-brested-trench-coat",
-				"id": 35
-			},
-			"quantity": 1
-		}
-	],
-	"date": "2021-09-08T19:38:16.496Z",
-	"total": 215.1,
-	"total_pretty": "$215.10",
-	"id": 5
-}
+			{
+				"product_id": 2,
+				"quantity": 1,
+				"product_data": {
+					"id": 2,
+					"sku": 2,
+					"category_id": 2,
+					"images": [...],
+					"brand_id": 39,
+					"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt"
+				}
+			}
+		]
+	},
+	...
+],
+"count": 1
 `;
 
-export const getCurrentUserPurchasesResponse = `"count": 1,
-"data": [
+export const getCurrentUserPurchasesResponse = `"data": [
 	{
+		"id": 77,
 		"paid": true,
-		"user_id": 3,
-		"products": [
+		"created_at": "2023-08-12T03:24:43.213638+00:00",
+		"total": 249.94,
+		"user_id": "b810e6fc-bb73-485f-bd42-1021c8d1b47a",
+		"purchase_products": [
 			{
-				"item": {
+				"product_id": 1,
+				"quantity": 1,
+				"product_data": {
+					"id": 1,
+					"sku": 1,
+					"category_id": 1,
+					"images": [...],
+					"brand_id": 15,
+					"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m"
+				}
+			},
+			{
+				"product_id": 2,
+				"quantity": 1,
+				"product_data": {
+					"id": 2,
 					"sku": 2,
-					"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt",
+					"category_id": 2,
+					"images": [...],
 					"brand_id": 39,
-					"regular_price": 119.99,
-					"sale_price": 119.99,
-					"slug": "susulv-mcl-men-shirt-men's-large-size-long-sleeve-lapel-zipper-shirt",
-					"id": 2
-				},
-				"quantity": 1
-			},
-			{
-				"item": {
-					"sku": 11,
-					"name": "Red Kap Men's Long Sleeve",
-					"brand_id": 34,
-					"regular_price": 48.3,
-					"sale_price": 30.49,
-					"slug": "red-kap-men's-long-sleeve",
-					"id": 11
-				},
-				"quantity": 1
-			},
-			{
-				"item": {
-					"sku": 3,
-					"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
-					"brand_id": 2,
-					"regular_price": 369.99,
-					"sale_price": 249.99,
-					"slug": "acer-predator-xb3-27-in.-monitor-full-hd",
-					"id": 3
-				},
-				"quantity": 1
+					"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt"
+				}
 			}
-		],
-		"date": "2022-02-06T20:09:05.660Z",
-		"total": 400.47,
-		"total_pretty": "$400.47",
-		"id": 8
+		]
+	},
+	...
+],
+"count": 5
+`;
+
+export const createPurchaseResponse = `"data": [
+	{
+		"id": 81,
+		"paid": true,
+		"created_at": "2023-08-12T03:31:03.980895+00:00",
+		"total": 249.94,
+		"user_id": "b810e6fc-bb73-485f-bd42-1021c8d1b47a",
+		"purchase_products": [
+			{
+				"product_id": 1,
+				"quantity": 1,
+				"product_data": {
+					"id": 1,
+					"sku": 1,
+					"category_id": 1,
+					"images": [...],
+					"brand_id": 15,
+					"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m"
+				}
+			},
+			{
+				"product_id": 2,
+				"quantity": 1,
+				"product_data": {
+					"id": 2,
+					"sku": 2,
+					"category_id": 2,
+					"images": [...],
+					"brand_id": 39,
+					"name": "Susulv-MCL Men Shirt Men's Large Size Long Sleeve Lapel Zipper Shirt"
+				}
+			}
+		]
 	}
 ]
-`;
-
-export const createPurchaseResponse = `"data": {
-	"paid": true,
-	"products": [
-		{
-			"item": {
-				"sku": 1,
-				"name": "HP 24 in. LED Monitor IPS Micro-edge HDMI VGA 60Hz 5ms - 24m",
-				"brand_id": 15,
-				"regular_price": 149.95,
-				"sale_price": 129.95,
-				"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m",
-				"id": 1
-			},
-			"quantity": 1
-		}
-	],
-	"date": "2021-02-24T04:57:12.443Z",
-	"total": 129.95,
-	"total_pretty": "$129.95",
-	"id": 62
-}
 `;
 
 export const getCurrentUserWishlistResponse = `"count": 1,

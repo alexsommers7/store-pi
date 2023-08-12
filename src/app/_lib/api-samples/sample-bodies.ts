@@ -41,12 +41,11 @@ export const removeProductFromCurrentUserCartBody = `// all fields are required
 "remove": true // optional, defaults to false. If false, quantity is reduced by 1. If true, item is removed from cart
 `;
 
-export const createPurchaseBody = `// all fields are required
-"products": [
+export const createPurchaseBody = `"products": [
   {
-    "product_id": 1,
-    "quantity": 1
-  }
+    "product_id": 1, // required
+    "quantity": 1 // optional, defaults to 1
+  },
 ]
 `;
 
