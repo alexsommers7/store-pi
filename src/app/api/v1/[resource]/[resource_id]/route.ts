@@ -1,29 +1,21 @@
 import { NextResponse } from 'next/server';
-import { supabaseGetWithFeatures, catchError } from '@/_utils/rest-handlers';
+import { apiError, catchError } from '@/_utils/api-errors';
 import { Context } from '@/_lib/types';
-import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/server-functions';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { postgrestFetch } from '@/_utils/rest-handlers';
 
 export async function GET(request: Request, context: Context) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
-
     const { params } = context;
     const { resource, resource_id } = params;
     const { searchParams } = new URL(request.url);
 
-    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+    searchParams.append('id', resource_id);
 
-    let query = supabase
-      .from(resource)
-      .select(selection, { count: 'exact' })
-      .eq('id', resource_id)
-      .maybeSingle();
+    const { json, error } = await postgrestFetch({ resource, searchParams });
 
-    const responseJson = await supabaseGetWithFeatures(query, searchParams, true);
+    if (error) return apiError(error);
 
-    return NextResponse.json(responseJson);
+    return NextResponse.json(json);
   } catch (error) {
     return catchError(error);
   }

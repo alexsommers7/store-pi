@@ -1,199 +1,137 @@
 import { NextResponse } from 'next/server';
 import { Context } from '@/_lib/types';
-import {
-  supabaseGetWithFeatures,
-  catchError,
-  authorizationError,
-  apiError,
-} from '@/_utils/rest-handlers';
-import {
-  generateForeignTableSelectionWhenApplicable,
-  addPluralityWhenApplicable,
-} from '@/_supabase/server-functions';
-import { publicAndPrivateRead, foreignTableMap } from '@/_lib/constants';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies, headers } from 'next/headers';
+import { postgrestFetch, getUserFromRequest, callStoredProcedure } from '@/_utils/rest-handlers';
+import { catchError, authorizationError, apiError } from '@/_utils/api-errors';
+import { addPluralityWhenApplicable } from '@/_supabase/server-functions';
+import { requiresUserId, foreignTableMap } from '@/_lib/constants';
 
 export async function GET(request: Request, context: Context) {
   try {
-    const headersInstance = headers();
-    const authorization = headersInstance.get('authorization');
+    const { user, jwt } = await getUserFromRequest();
+    if (!user || !jwt) return authorizationError();
 
-    if (!authorization) return authorizationError();
-    const jwt = authorization.split(' ')[1];
-
-    const supabase = createRouteHandlerClient({ cookies });
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser(jwt);
-
-    if (!user) return authorizationError();
-
-    const { params } = context;
-    let { resource } = params;
+    let {
+      params: { resource },
+    } = context;
     resource = addPluralityWhenApplicable(resource);
 
     const { searchParams } = new URL(request.url);
 
-    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+    const userId = requiresUserId.includes(resource) ? user.id : undefined;
 
-    // RLS handles user_id matching at DB level ...
-    const query = supabase
-      .from(resource)
-      .select(selection, { count: 'exact' })
-      .eq('user_id', user.id);
+    const { json, error } = await postgrestFetch({ resource, jwt, searchParams, userId });
 
-    // ... except for these resources
-    if (publicAndPrivateRead.includes(resource)) {
-      query.eq('user_id', user.id);
-    }
+    if (error) return apiError(error);
 
-    const responseJson = await supabaseGetWithFeatures(query, searchParams);
-
-    return NextResponse.json(responseJson);
+    return NextResponse.json(json);
   } catch (error) {
     return catchError(error);
   }
 }
 
-// as of v1, POST and PATCH are just for `/users/current/cart` and `users/current/wishlist`
-// if this ever expands, consider manually defining the routes, especially since plurality may not be consistent
 export async function POST(request: Request, context: Context) {
-  try {
-    const supabase = createRouteHandlerClient({ cookies });
-
-    const { params } = context;
-    const { resource: resourceNameSingular } = params;
-    const resourceNamePlural = `${resourceNameSingular}s`;
-
-    const requestBody = await request.json();
-
-    // get resource id based on the current user's id
-    const {
-      data: { id },
-      error: resourceIdError,
-    } = await supabase.from(resourceNamePlural).select().maybeSingle();
-
-    if (resourceIdError) return apiError(resourceIdError);
-
-    // check if item is already in cart/wishlist
-    const { data: existingItem, error: existingItemError } = await supabase
-      .from(foreignTableMap[resourceNamePlural])
-      .select()
-      .eq(`${resourceNameSingular}_id`, id)
-      .eq('product_id', requestBody.product_id)
-      .maybeSingle();
-
-    if (!existingItemError && existingItem) {
-      if (resourceNamePlural === 'carts') {
-        const { error: cartError } = await supabase.rpc('increment_cart_quantity', {
-          increment_by: requestBody.quantity || 1,
-          product_id_param: requestBody.product_id,
-          cart_id_param: existingItem.cart_id,
-        });
-
-        if (cartError) return apiError(cartError);
-      } else if (resourceNamePlural === 'wishlists') {
-        return NextResponse.json({
-          error: `Product ${requestBody.product_id} is already in your wishlist`,
-        });
-      }
-    } else {
-      // e.g. carts_id -> cart_id
-      requestBody[`${resourceNameSingular}_id`] = id;
-
-      const { error: insertError } = await supabase
-        .from(foreignTableMap[resourceNamePlural])
-        .insert([requestBody]);
-
-      if (insertError) return apiError(insertError);
-    }
-
-    // return the uddated resource
-    const selection = generateForeignTableSelectionWhenApplicable(resourceNamePlural);
-
-    const { data: updatedResource, error: updatedResourceError } = await supabase
-      .from(resourceNamePlural)
-      .select(selection)
-      .maybeSingle();
-
-    if (updatedResourceError) return apiError(updatedResourceError);
-
-    return NextResponse.json({ data: updatedResource });
-  } catch (error) {
-    return catchError(error);
-  }
+  return handlePostOrPatch(request, context, 'POST');
 }
 
 export async function PATCH(request: Request, context: Context) {
+  return handlePostOrPatch(request, context, 'PATCH');
+}
+
+// as of v1, POST and PATCH are just for `/users/current/cart` and `users/current/wishlist`
+// if this ever expands, consider manually grouping the routes, especially since plurality is not reliably consistent
+const handlePostOrPatch = async (request: Request, context: Context, method: string) => {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
+    const isPatch = method === 'PATCH';
 
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session?.user) return authorizationError();
+    const { user, jwt } = await getUserFromRequest();
+    if (!user || !jwt) return authorizationError();
 
     const { params } = context;
     const { resource: resourceNameSingular } = params;
     const resourceNamePlural = `${resourceNameSingular}s`;
+    const foreignResource = foreignTableMap[resourceNamePlural];
 
     const requestBody = await request.json();
 
     // get resource id based on the current user's id
-    const {
-      data: { id },
-      error: resourceIdError,
-    } = await supabase
-      .from(resourceNamePlural)
-      .select()
-      .eq('user_id', session.user.id)
-      .maybeSingle();
-
-    if (resourceIdError) return apiError(resourceIdError);
+    const { json, error } = await postgrestFetch({ resource: resourceNamePlural, jwt });
+    if (error) return apiError(error);
+    const user_resource_id = json?.data[0]?.id || '';
 
     // check if item is already in cart/wishlist
-    const { data: existingItem, error: existingItemError } = await supabase
-      .from(foreignTableMap[resourceNamePlural])
-      .select()
-      .eq(`${resourceNameSingular}_id`, id)
-      .eq('product_id', requestBody.product_id)
-      .maybeSingle();
+    const { json: existingItemJson, error: existingItemError } = await postgrestFetch({
+      resource: foreignResource,
+      jwt,
+      searchParams: new URLSearchParams({
+        [`${resourceNameSingular}_id`]: user_resource_id,
+        product_id: requestBody.product_id,
+      }),
+    });
 
-    if (!existingItemError && existingItem) {
+    if (isPatch && !existingItemJson?.data?.length) {
+      return apiError(
+        `Product with id ${requestBody.product_id} is not in your ${resourceNameSingular}`
+      );
+    }
+
+    if (!existingItemError && existingItemJson?.data.length) {
       if (resourceNamePlural === 'carts') {
-        const { error: cartError } = await supabase.rpc('decrease_cart_quantity', {
-          product_id_param: requestBody.product_id,
-          cart_id_param: existingItem.cart_id,
-          remove_entirely_param: requestBody.remove || false,
+        const storedProcedureParams = isPatch
+          ? { remove_entirely_param: requestBody.remove || false }
+          : { increment_by: requestBody.quantity || 1 };
+
+        const { error: cartError } = await callStoredProcedure({
+          procedureName: isPatch ? 'decrease_cart_quantity' : 'increment_cart_quantity',
+          jwt,
+          params: {
+            product_id_param: requestBody.product_id,
+            cart_id_param: existingItemJson.data[0].cart_id,
+            ...storedProcedureParams,
+          },
         });
 
         if (cartError) return apiError(cartError);
       } else if (resourceNamePlural === 'wishlists') {
-        const { error: deleteError } = await supabase
-          .from(foreignTableMap[resourceNamePlural])
-          .delete()
-          .eq(`${resourceNameSingular}_id`, id)
-          .eq('product_id', requestBody.product_id);
+        if (!isPatch)
+          return NextResponse.json({
+            error: `Product with id ${requestBody.product_id} is already in your wishlist`,
+          });
+
+        const { error: deleteError } = await postgrestFetch({
+          resource: foreignResource,
+          jwt,
+          method: 'DELETE',
+          searchParams: new URLSearchParams({
+            [`${resourceNameSingular}_id`]: user_resource_id,
+            product_id: requestBody.product_id,
+          }),
+        });
 
         if (deleteError) return apiError(deleteError);
       }
+    } else if (!isPatch) {
+      requestBody[`${resourceNameSingular}_id`] = user_resource_id; // e.g. carts_id -> cart_id
+
+      const { error } = await postgrestFetch({
+        resource: foreignResource,
+        jwt,
+        method: 'POST',
+        body: requestBody,
+      });
+
+      if (error) return apiError(error);
     }
 
     // return the updated resource
-    const selection = generateForeignTableSelectionWhenApplicable(resourceNamePlural);
-
-    const { data: updatedResource, error: updatedResourceError } = await supabase
-      .from(resourceNamePlural)
-      .select(selection)
-      .maybeSingle();
+    const { json: updatedResource, error: updatedResourceError } = await postgrestFetch({
+      resource: resourceNamePlural,
+      jwt,
+    });
 
     if (updatedResourceError) return apiError(updatedResourceError);
 
-    return NextResponse.json({ data: updatedResource });
+    return NextResponse.json(updatedResource);
   } catch (error) {
     return catchError(error);
   }
-}
+};

@@ -1,11 +1,10 @@
 import { NextResponse } from 'next/server';
 import {
   catchError,
-  modifiedOriginalResourceError,
   apiError,
   authorizationError,
-  supabaseGetWithFeatures,
-} from '@/_utils/rest-handlers';
+  modifiedOriginalResourceError,
+} from '@/_utils/api-errors';
 import { Context } from '@/_lib/types';
 import {
   generateForeignTableSelectionWhenApplicable,
@@ -30,9 +29,9 @@ export async function GET(request: Request, context: Context) {
       .eq('id', resource_id)
       .maybeSingle();
 
-    const responseJson = await supabaseGetWithFeatures(query, searchParams, true);
+    // const responseJson = await supabaseGetWithFeatures(query, searchParams, true);
 
-    return NextResponse.json(responseJson);
+    // return NextResponse.json(responseJson);
   } catch (error) {
     return catchError(error);
   }

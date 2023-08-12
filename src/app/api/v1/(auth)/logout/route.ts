@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { catchError } from '@/_utils/rest-handlers';
+import { catchError } from '@/_utils/api-errors';
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
 

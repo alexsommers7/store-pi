@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabaseAdmin } from '@/_supabase/create-client';
-import { apiError, catchError } from '@/_utils/rest-handlers';
+import { apiError, catchError } from '@/_utils/api-errors';
 import { Context } from '@/_lib/types';
 
 export async function GET(request: Request, context: Context) {

@@ -1,27 +1,16 @@
 import { NextResponse } from 'next/server';
-import {
-  catchError,
-  apiError,
-  supabaseGetWithFeatures,
-  authorizationError,
-} from '@/_utils/rest-handlers';
-import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/server-functions';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { catchError, apiError, authorizationError } from '@/_utils/api-errors';
+import { getUserFromRequest, postgrestFetch } from '@/_utils/rest-handlers';
 
 export async function GET(request: Request) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
-
     const { searchParams } = new URL(request.url);
 
-    const selection = generateForeignTableSelectionWhenApplicable('reviews', searchParams);
+    const { json, error } = await postgrestFetch({ resource: 'reviews', searchParams });
 
-    const query = supabase.from('reviews').select(selection, { count: 'exact' });
+    if (error) return apiError(error);
 
-    const responseJson = await supabaseGetWithFeatures(query, searchParams);
-
-    return NextResponse.json(responseJson);
+    return NextResponse.json(json);
   } catch (error) {
     return catchError(error);
   }
@@ -29,26 +18,22 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
-
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session?.user) return authorizationError();
+    const { user, jwt } = await getUserFromRequest();
+    if (!user || !jwt) return authorizationError();
 
     const requestBody = await request.json();
-    requestBody['user_id'] = session.user.id;
+    requestBody['user_id'] = user.id;
 
-    const { data, error } = await supabase
-      .from('reviews')
-      .insert(requestBody)
-      .select()
-      .maybeSingle();
+    const { json, error } = await postgrestFetch({
+      resource: 'reviews',
+      jwt,
+      method: 'POST',
+      body: requestBody,
+    });
 
     if (error) return apiError(error);
 
-    return NextResponse.json({ data });
+    return NextResponse.json({ data: json[0] });
   } catch (error) {
     return catchError(error);
   }

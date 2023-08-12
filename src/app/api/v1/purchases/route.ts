@@ -1,31 +1,18 @@
 import { NextResponse } from 'next/server';
-import {
-  catchError,
-  apiError,
-  supabaseGetWithFeatures,
-  authorizationError,
-} from '@/_utils/rest-handlers';
-import {
-  calculateOrderTotal,
-  generateForeignTableSelectionWhenApplicable,
-} from '@/_supabase/server-functions';
+import { catchError, apiError, authorizationError } from '@/_utils/api-errors';
+import { calculateOrderTotal } from '@/_supabase/server-functions';
 import { Product } from '@/_lib/types';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { getUserFromRequest, postgrestFetch } from '@/_utils/rest-handlers';
 
 export async function GET(request: Request) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
-
     const { searchParams } = new URL(request.url);
 
-    const selection = generateForeignTableSelectionWhenApplicable('purchases', searchParams);
+    const { json, error } = await postgrestFetch({ resource: 'purchases', searchParams });
 
-    const query = supabase.from('purchases').select(selection, { count: 'exact' });
+    if (error) return apiError(error);
 
-    const responseJson = await supabaseGetWithFeatures(query, searchParams);
-
-    return NextResponse.json(responseJson);
+    return NextResponse.json(json);
   } catch (error) {
     return catchError(error);
   }
@@ -33,24 +20,20 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
-
-    const {
-      data: { session },
-    } = await supabase.auth.getSession();
-
-    if (!session?.user) return authorizationError();
+    const { user, jwt } = await getUserFromRequest();
+    if (!user || !jwt) return authorizationError();
 
     const requestBody = await request.json();
-    requestBody['user_id'] = session.user.id;
 
     const total = await calculateOrderTotal(requestBody);
+    requestBody['total'] = total;
 
-    const { data: purchaseData, error: purchaseError } = await supabase
-      .from('purchases')
-      .insert({ user_id: session.user.id, total })
-      .select()
-      .maybeSingle();
+    const { json: purchaseData, error: purchaseError } = await postgrestFetch({
+      resource: 'purchases',
+      jwt,
+      method: 'POST',
+      body: { user_id: user.id, total },
+    });
 
     if (purchaseError) return apiError(purchaseError);
 
@@ -58,28 +41,30 @@ export async function POST(request: Request) {
       .filter((product: Product) => product.product_id)
       .map(({ product_id, quantity }: Product) => {
         return {
-          purchase_id: purchaseData.id,
+          purchase_id: purchaseData[0].id,
           product_id,
           quantity: quantity || 1,
         };
       });
 
-    const { error: purchaseProductsError } = await supabase
-      .from('purchase_products')
-      .insert(purchaseProductsPayload);
+    const { error: purchaseProductsError } = await postgrestFetch({
+      resource: 'purchase_products',
+      jwt,
+      method: 'POST',
+      body: purchaseProductsPayload,
+    });
 
     if (purchaseProductsError) return apiError(purchaseProductsError);
 
-    const { data: finalPurchaseData, error: finalPurchaseError } = await supabase
-      .from('purchases')
-      .select(
-        '*, purchase_products(product_id, quantity, product_data:products(id, name, sale_price, images))'
-      )
-      .eq('id', purchaseData.id);
+    const { json: finalPurchaseData, error: finalPurchaseError } = await postgrestFetch({
+      resource: 'purchases',
+      jwt,
+      searchParams: new URLSearchParams({ id: purchaseData[0].id }),
+    });
 
     if (finalPurchaseError) return apiError(finalPurchaseError);
 
-    return NextResponse.json({ data: finalPurchaseData });
+    return NextResponse.json({ data: finalPurchaseData.data });
   } catch (error) {
     return catchError(error);
   }
