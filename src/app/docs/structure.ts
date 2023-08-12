@@ -200,7 +200,7 @@ export const structure = [
             body: addProductToCurrentUserCartBody,
             response: getCurrentUserCartResponse,
             requiresAuth: true,
-            note: `You must be logged in as the owner of the cart for this call to succeed. If the product already exists in the cart, the quantity will be incremented by the quantity value passed in, defaulting to 1.`,
+            note: `If the product already exists in the cart, the quantity will be incremented by the quantity value passed in, defaulting to 1.`,
           },
           {
             label: 'Remove From Current User Cart',
@@ -210,7 +210,7 @@ export const structure = [
             body: removeProductFromCurrentUserCartBody,
             response: getCurrentUserCartResponse,
             requiresAuth: true,
-            note: `You must be logged in as the owner of the cart for this call to succeed. If the quantity was 1, the item will be removed from the cart.`,
+            note: `If the quantity was 1, the item will be removed from the cart.`,
           },
         ],
       },
@@ -332,14 +332,6 @@ export const structure = [
             desc: `In order to provide a variety in the data, there are multiple user accounts available. The structure of each user's email address is [firstName]@example.com, and each user's password is simply 'password'. You may log in as any of the following users: Jodi, Amy, Jean, Cody, or Daisy.`,
           },
           {
-            label: 'Log Out',
-            hash: 'log-out',
-            httpMethod: 'POST',
-            slug: 'logout',
-            requiresAuth: true,
-            desc: 'Inside a browser context, this endpoint will remove the logged in user from the browser session and log them out - removing the auth cookie.',
-          },
-          {
             label: 'Sign Up',
             hash: 'sign-up',
             httpMethod: 'POST',
@@ -347,7 +339,6 @@ export const structure = [
             body: signupBody,
             response: signupResponse,
             desc: 'You may create a new user account with any email address and password, provided the email address does not already exist in the database. The new user will be persisted to the database and you may access user-specific resources with the new credentials. Upon successfully signing up, you will immediately be authenticated as the new user.',
-            note: `Providing a photo is optional. If you would like to provide one, it must be self-hosted. If you don't provide one, a generic default will be assigned.`,
           },
         ],
       },
@@ -356,18 +347,23 @@ export const structure = [
   {
     label: 'Resources',
     subitems: [
+      // {
+      //   label: 'Demo',
+      //   slug: `${
+      //     process.env.NODE_ENV === 'development'
+      //       ? 'http://localhost:3000'
+      //       : 'https://storepi.vercel.app'
+      //   }/demo`,
+      //   anchors: [],
+      // },
       {
-        label: 'Demo',
-        slug: `${
-          process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3000'
-            : 'https://storepi.vercel.app'
-        }/demo`,
+        label: 'Open in Postman',
+        slug: 'https://documenter.getpostman.com/view/12907395/UyxjF694',
         anchors: [],
       },
       {
-        label: 'Postman Docs',
-        slug: 'https://documenter.getpostman.com/view/12907395/UyxjF694',
+        label: 'Postgrest Docs',
+        slug: 'https://postgrest.org/en/stable/index.html',
         anchors: [],
       },
     ],
