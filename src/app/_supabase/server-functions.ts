@@ -57,7 +57,7 @@ export const calculateOrderTotal = async (requestBody: any) => {
     return (
       acc +
       product.sale_price *
-        requestBody.products.find((p: Product) => p.product_id === product.id).quantity
+        (requestBody.products.find((p: Product) => p.product_id === product.id).quantity || 1)
     );
   }, 0);
 
