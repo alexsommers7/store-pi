@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import { defaultUserPhotoUrl } from '@/_lib/constants';
 import { catchError } from '@/_utils/api-errors';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import supabase from '@/_supabase/create-client';
 
 interface OptionsData {
   name: string;
@@ -11,12 +10,13 @@ interface OptionsData {
 
 export async function POST(request: Request) {
   try {
-    const supabase = createRouteHandlerClient({ cookies });
-
     const { email, password, name, photo } = await request.json();
 
-    if (!email || !password) {
-      return NextResponse.json({ error: 'Email and password are required.' }, { status: 400 });
+    if (!email || !password || !name) {
+      return NextResponse.json(
+        { error: 'Name, email, and password are required.' },
+        { status: 400 }
+      );
     }
 
     const optionsData: OptionsData = { name };
