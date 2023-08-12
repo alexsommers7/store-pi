@@ -6,7 +6,7 @@ import { Note } from '@/_components/typography/note';
 
 export function endpointMapper(structure: StructureSubItem) {
   return structure.anchors.map((anchor) => {
-    const { hash, label, httpMethod, slug, body, response, requiresAuth, desc, note } =
+    const { hash, label, httpMethod, slug, body, response, requiresAuth, note } =
       anchor as EndpointAnchor;
 
     return (
@@ -19,14 +19,14 @@ export function endpointMapper(structure: StructureSubItem) {
           requiresAuth={requiresAuth}
         />
 
-        {note && <Note noteText={note} />}
-
         {body && <SampleBody code={body} />}
 
         {response && <SampleResponse code={response} />}
 
+        {note && <Note noteText={note} />}
+
         {(httpMethod === 'DELETE' || (slug === 'logout' && !response)) && (
-          <p className='mt-4'>
+          <p className='mt-6'>
             Returns <span className='snippet'>204 No Content</span>
           </p>
         )}
