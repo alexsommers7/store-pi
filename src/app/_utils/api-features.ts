@@ -1,3 +1,5 @@
+import { generateForeignTableSelectionWhenApplicable } from '@/_supabase/server-functions';
+
 function getLimitParam(limitQueryParam: string | null): number {
   const defaultLimit = 20;
 
@@ -17,27 +19,50 @@ function getOffsetParam(offsetQueryParam: string | null): number {
 }
 
 function getSortParam(sortQueryParam: string | null): Array<[string, boolean]> {
-  if (!sortQueryParam) return [['id', true]];
+  if (!sortQueryParam) return [['', true]];
 
   return sortQueryParam.split(',').map((sort) => [sort.replace('-', ''), !sort.startsWith('-')]);
 }
 
-export function addFeaturesToQuery(query: any, searchParams: URLSearchParams) {
-  // sorting
-  const sortParams = getSortParam(searchParams.get('sort') || '');
-  sortParams.forEach(([sortColumn, sortOrder]) => {
-    query = query.order(sortColumn, { ascending: sortOrder });
-  });
+export function generateQueryString(
+  userId: string | undefined,
+  resource: string,
+  searchParams?: URLSearchParams,
+  isGet?: boolean
+) {
+  let queryString = '';
 
-  // limiting
-  const limit = getLimitParam(searchParams.get('limit') || '');
-  query = query.limit(limit);
+  if (isGet) {
+    // sorting
+    const sortParams = getSortParam(searchParams?.get('sort') || '');
+    if (sortParams[0][0]) {
+      const sortString = sortParams
+        .map(([sortColumn, sortOrder]) => `${sortColumn}.${sortOrder ? 'asc' : 'desc'}`)
+        .join(',');
+      queryString += `order=${sortString}`;
+    }
 
-  // offsetting
-  const offset = getOffsetParam(searchParams.get('offset') || '');
-  if (offset) query = query.range(offset, offset + limit - 1); // 0-indexed
+    // limiting
+    const limit = getLimitParam(searchParams?.get('limit') || '');
+    queryString += `&limit=${limit}`;
+
+    // offsetting
+    const offset = getOffsetParam(searchParams?.get('offset') || '');
+    queryString += `&offset=${offset}`;
+
+    // field selection
+    const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
+    queryString += `&select=${selection}`;
+  }
 
   const excludeFromFiltering = ['sort', 'fields', 'limit', 'offset']; // these are for organizing, not filtering
+
+  // for resources that are publicly readble but we still want to allow filtering by user_id (e.g. reviews)
+  if (userId) {
+    queryString += `&user_id=eq.${userId}`;
+  }
+
+  if (!searchParams) return queryString;
 
   // filtering (comparison operators)
   for (const [key, value] of searchParams) {
@@ -57,14 +82,14 @@ export function addFeaturesToQuery(query: any, searchParams: URLSearchParams) {
       ''
     );
     const operator = lessThan ? 'lt' : greaterThan ? 'gt' : lessThanOrEqualTo ? 'lte' : 'gte';
-    query = query[operator](field, value);
+    queryString += `&${field}=${operator}.${value}`;
   }
 
   // filtering (equality operators)
   for (const [key, value] of searchParams) {
     if (excludeFromFiltering.includes(key)) continue;
-    query = query.eq(key, value);
+    queryString += `&${key}=eq.${value}`;
   }
 
-  return query;
+  return queryString;
 }
