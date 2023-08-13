@@ -60,7 +60,7 @@ export function AnchorHeading({
   };
 
   return (
-    <div className='group relative flex flex-wrap gap-[.6rem] items-center w-max max-w-[90%] mt-8 mb-3'>
+    <div className='group relative flex flex-wrap gap-[.6rem] items-center w-max max-w-[90%] mt-10 mb-4'>
       {httpMethod && <HttpBadge httpMethod={httpMethod} />}
 
       <Link

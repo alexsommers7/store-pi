@@ -321,7 +321,7 @@ export const structure = [
         label: 'Authentication',
         slug: 'authentication',
         isDBTable: false,
-        desc: 'Log in as an existing user to view their cart, wishlist, reviews, and purchases. You may also create a new account.',
+        desc: 'Log in as an existing user to view their cart, wishlist, reviews, and purchases. You may also create an account and persist new data.',
         anchors: [
           {
             label: 'Log In',

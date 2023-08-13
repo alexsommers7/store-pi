@@ -25,7 +25,7 @@ export const removeProductFromCurrentUserCartBody = `"product_id": 16, // requir
 export const createPurchaseBody = `"products": [
   {
     "product_id": 1, // required
-    "quantity": 1 // optional, defaults to 1
+    "quantity": 2 // optional, defaults to 1
   },
 ]
 `;
@@ -39,14 +39,14 @@ export const updateCurrentUserBody = `"data": {
 "password": "..."
 `;
 
-export const signupBody = `// all fields are required with the exception of photo, which defaults to a generic avatar
-"name": "...",
+export const signupBody = `"name": "...",
 "email": "...",
 "password": "...",
-"photo": "..."
+"photo": "..." // optional, defaults to generic avatar
 `;
 
-export const loginBody = `// all fields are required	
-"email": "amy@example.com",
-"password": "password"
+export const loginBody = `// you may log in as any of the following users with the convention [name]@example.com:
+// amy, dustin, dorothy, jodi, shari, jimmy, daisy, marco, candace, casey, cody, kelly, aubrey, jean, phil, bennie, ramone, perry, and tracy 
+"email": "candace@example.com",
+"password": "password" // same for all users in the default dataset
 `;

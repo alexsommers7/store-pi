@@ -20,7 +20,7 @@ export function EndpointIntro({
 }: EndpointIntroProps) {
   return (
     <>
-      <div className='mb-6'>
+      <div className='mb-8'>
         <AnchorHeading anchorId={anchorId} httpMethod={httpMethod} requiresAuth={requiresAuth}>
           <SectionSubHeading>{label}</SectionSubHeading>
         </AnchorHeading>
