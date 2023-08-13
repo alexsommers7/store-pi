@@ -48,6 +48,7 @@ export const structure = [
           { label: 'Authorization', hash: 'authorization' },
           { label: 'Organizing Results', hash: 'organizing-results' },
           { label: 'Filtering Results', hash: 'filtering-results' },
+          { label: 'PostgREST', hash: 'postgrest' },
           { label: 'GraphQL', hash: 'graphql' },
         ],
       },

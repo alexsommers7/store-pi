@@ -15,9 +15,6 @@ import { List } from '@/_components/list';
 import { TextWithCopy } from '@/_components/typography/copyableText';
 import { DownloadIcon } from '@/_components/icons/download';
 
-// TODO: add reference of 2 vs 3 tier architecture (e.g. two tier means access directly from process.env.NEXT_PUBLIC_SUPABASE_URL, three tier means access from storepi domain)
-// https://supabase.com/docs/guides/api
-
 export default function Introduction() {
   return (
     <>
@@ -300,19 +297,15 @@ export default function Introduction() {
       </div>
 
       <div>
-        <AnchorHeading anchorId='graphql'>
-          <SectionSubHeading>GraphQL</SectionSubHeading>
+        <AnchorHeading anchorId='postgrest'>
+          <SectionSubHeading>PostgREST</SectionSubHeading>
         </AnchorHeading>
 
         <p className='mb-6'>
-          Thanks to its reliance on Supabase, StorePI comes with{' '}
-          <TextLink
-            href='https://supabase.github.io/pg_graphql/supabase/#http-request'
-            label='pg_graphql'
-            newTab
-          />{' '}
-          - a PostgreSQL extension that enables querying the database with GraphQL using a single
-          SQL function. The following variables will be needed:
+          Under the hood, StorePI makes use of{' '}
+          <TextLink href='https://postgrest.org/en/v7.0.0/' label='PostgREST' newTab /> to provide
+          an intuitive REST API. However, if you prefer to skip a layer and access the database
+          directly, you can do so via PostgREST by using the following variables:
         </p>
 
         <GenericTable>
@@ -348,17 +341,42 @@ export default function Introduction() {
             </TableRow>
           </tbody>
         </GenericTable>
+      </div>
 
-        <p className='flex gap-2 mt-6'>
-          <a
-            href='/supabase_graphiql.html'
-            className='underline transition-colors hover:text-indigo-300 text-indigo-400'
-            download
-          >
-            <DownloadIcon />
-          </a>
-          <span>Download the GraphiQL snippet to explore the GraphQL schema in-browser</span>
+      <div>
+        <AnchorHeading anchorId='graphql'>
+          <SectionSubHeading>GraphQL</SectionSubHeading>
+        </AnchorHeading>
+
+        <p className='mb-4'>
+          Also thanks to its reliance on Supabase, StorePI comes with{' '}
+          <TextLink
+            href='https://supabase.github.io/pg_graphql/supabase/#http-request'
+            label='pg_graphql'
+            newTab
+          />{' '}
+          - a PostgreSQL extension that enables querying the database with GraphQL using a single
+          SQL function. Reference the variables in the{' '}
+          <TextLink href='introduction#postgrest' label='PostgREST section' /> to get started.
         </p>
+
+        <Note
+          showNote={false}
+          noteText={
+            <p className='flex gap-2'>
+              <a
+                href='/supabase_graphiql.html'
+                className='underline transition-colors hover:text-indigo-300 text-indigo-400'
+                download
+              >
+                <DownloadIcon />
+              </a>
+              <span>
+                You may also download the GraphiQL snippet to explore the GraphQL schema in-browser
+              </span>
+            </p>
+          }
+        />
       </div>
     </>
   );
