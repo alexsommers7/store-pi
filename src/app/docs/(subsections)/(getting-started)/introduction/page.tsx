@@ -13,7 +13,7 @@ import { authorizedRequestHeader } from '@/_lib/api-samples/sample-bodies';
 import { Note } from '@/_components/typography/note';
 import { List } from '@/_components/list';
 import { TextWithCopy } from '@/_components/typography/copyableText';
-import { DownloadIcon } from '@/_components/icons/download';
+import { DownloadButton } from '@/_components/buttons/download';
 
 export default function Introduction() {
   return (
@@ -347,7 +347,6 @@ export default function Introduction() {
         <AnchorHeading anchorId='graphql'>
           <SectionSubHeading>GraphQL</SectionSubHeading>
         </AnchorHeading>
-
         <p className='mb-4'>
           Also thanks to its reliance on Supabase, StorePI comes with{' '}
           <TextLink
@@ -363,18 +362,12 @@ export default function Introduction() {
         <Note
           showNote={false}
           noteText={
-            <p className='flex gap-2'>
-              <a
-                href='/supabase_graphiql.html'
-                className='underline transition-colors hover:text-indigo-300 text-indigo-400'
-                download
-              >
-                <DownloadIcon />
-              </a>
+            <span className='flex gap-2'>
+              <DownloadButton href='/supabase_graphiql.html' />
               <span>
                 You may also download the GraphiQL snippet to explore the GraphQL schema in-browser
               </span>
-            </p>
+            </span>
           }
         />
       </div>
