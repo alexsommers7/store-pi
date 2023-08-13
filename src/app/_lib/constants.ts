@@ -20,25 +20,23 @@ export const defaultUserPhotoUrl =
 
 export const resourcesWithForeignTables = [
   {
+    resourceName: 'products',
+    foreignTableQuery: 'brand:brands(name), category:categories(name)',
+  },
+  {
     resourceName: 'purchases',
-    foreignTable: 'purchase_products',
-    column: 'purchase_id',
-    foreignTableColumns:
-      'product_id, quantity, product_data:products(id, sku, category_id, images, brand_id, name)',
+    foreignTableQuery:
+      'purchase_products(product_id, quantity, product_data:products(id, sku, category:categories(name), images, brand:brands(name), name))',
   },
   {
     resourceName: 'carts',
-    foreignTable: 'cart_products',
-    column: 'cart_id',
-    foreignTableColumns:
-      'product_id, quantity, product_data:products(id, sku, category_id, images, brand_id, name, regular_price, sale_price)',
+    foreignTableQuery:
+      'cart_products(product_id, quantity, product_data:products(id, sku, category:categories(name), brand:brands(name), images, name, regular_price, sale_price))',
   },
   {
     resourceName: 'wishlists',
-    foreignTable: 'wishlist_products',
-    column: 'wishlist_id',
-    foreignTableColumns:
-      'product_id, product_data:products(id, sku, category_id, images, brand_id, name, regular_price, sale_price)',
+    foreignTableQuery:
+      'wishlist_products(product_id, product_data:products(id, sku, category:categories(name), images, brand:brands(name), name, regular_price, sale_price))',
   },
 ];
 

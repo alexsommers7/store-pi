@@ -7,18 +7,20 @@ export const generateForeignTableSelectionWhenApplicable = (
   resource: string,
   searchParams?: URLSearchParams
 ) => {
+  let selection = searchParams?.get('fields') || '*';
+
   const isAccessingJoinedResource = resourcesWithForeignTables.some(
     ({ resourceName }) => resourceName === resource
   );
-  let selection = searchParams?.get('fields') || '*';
 
   if (isAccessingJoinedResource) {
-    const curResource = resourcesWithForeignTables.find(
+    const resources = resourcesWithForeignTables.filter(
       ({ resourceName }) => resourceName === resource
     );
-    if (curResource) {
-      selection = `${selection}, ${curResource.foreignTable}(${curResource.foreignTableColumns})`;
-    }
+
+    selection = `${selection}, ${resources
+      .map(({ foreignTableQuery }) => foreignTableQuery)
+      .join(', ')}`;
   }
 
   return selection;
