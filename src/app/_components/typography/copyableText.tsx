@@ -1,11 +1,13 @@
 import { CopyButton } from '@/_components/buttons/copy';
 
-export function UrlWithCopy({
+export function TextWithCopy({
   children,
   textToCopy,
+  useSnippetStyling = true,
 }: {
   children: JSX.Element | JSX.Element[] | string | string[];
   textToCopy: string;
+  useSnippetStyling?: boolean;
 }) {
   return (
     <div className='group relative flex items-center'>
@@ -13,7 +15,13 @@ export function UrlWithCopy({
         <CopyButton textToCopy={textToCopy} />
       </div>
 
-      <p className='snippet mt-1 max-w-full scollbar-thin overflow-x-auto'>{children}</p>
+      <p
+        className={`${
+          useSnippetStyling ? 'snippet' : ''
+        } mt-1 max-w-full scollbar-thin overflow-x-auto`}
+      >
+        {children}
+      </p>
     </div>
   );
 }

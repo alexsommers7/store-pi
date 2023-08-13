@@ -1,6 +1,6 @@
 import { AnchorHeading } from '@/_components/typography/anchorHeading';
 import { SectionSubHeading } from '@/_components/typography/sectionSubHeading';
-import { UrlWithCopy } from '@/_components/typography/copyableLink';
+import { TextWithCopy } from '@/_components/typography/copyableText';
 import { apiOrigin, HTTPMethods } from '@/_lib/constants';
 
 interface EndpointIntroProps {
@@ -25,9 +25,9 @@ export function EndpointIntro({
           <SectionSubHeading>{label}</SectionSubHeading>
         </AnchorHeading>
 
-        <UrlWithCopy textToCopy={`${apiOrigin}/${slug}`}>
+        <TextWithCopy textToCopy={`${apiOrigin}/${slug}`}>
           {apiOrigin}/{slug}
-        </UrlWithCopy>
+        </TextWithCopy>
       </div>
     </>
   );
