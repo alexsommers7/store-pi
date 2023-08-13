@@ -366,6 +366,11 @@ export const structure = [
         slug: 'https://postgrest.org/en/stable/index.html',
         anchors: [],
       },
+      {
+        label: 'pg_graphql Docs',
+        slug: 'https://supabase.github.io/pg_graphql/supabase/#http-request',
+        anchors: [],
+      },
     ],
   },
 ];

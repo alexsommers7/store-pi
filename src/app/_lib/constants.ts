@@ -6,6 +6,7 @@ export const apiOrigin =
     : 'https://storepi.vercel.app/api/v1';
 
 export const restUrlBase = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1`;
+export const graphqlUrlBase = `${process.env.NEXT_PUBLIC_SUPABASE_URL}/graphql/v1`;
 
 export const HTTPMethods = {
   GET: 'GET',

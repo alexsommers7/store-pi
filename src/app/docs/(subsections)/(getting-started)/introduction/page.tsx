@@ -9,14 +9,14 @@ import { GenericTable } from '@/_components/table';
 import { TableHead } from '@/_components/table/head';
 import { TableRow } from '@/_components/table/row';
 import { TableCell } from '@/_components/table/cell';
-import {
-  authorizedRequestHeader,
-  graphqlLogin,
-  graphqlQuery,
-} from '@/_lib/api-samples/sample-bodies';
+import { authorizedRequestHeader } from '@/_lib/api-samples/sample-bodies';
 import { Note } from '@/_components/typography/note';
 import { List } from '@/_components/list';
-import { spawn } from 'child_process';
+import { graphqlUrlBase } from '@/_lib/constants';
+import { TextWithCopy } from '@/_components/typography/copyableText';
+
+// TODO: add reference of 2 vs 3 tier architecture (e.g. two tier means access directly from process.env.NEXT_PUBLIC_SUPABASE_URL, three tier means access from storepi domain)
+// https://supabase.com/docs/guides/api
 
 export default function Introduction() {
   return (
@@ -24,18 +24,19 @@ export default function Introduction() {
       <SectionHeading>Introduction</SectionHeading>
 
       <p>
-        StorePI is a free, open-source REST and GraphQL API that was created for use in e-commerce
-        prototyping, Front-End Developer talent evaluations, and anything else you can think of. The
-        API and accompanying documentation was built with <span className='snippet'>Next.js</span>,{' '}
+        StorePI is a free, open-source API that was created for use in e-commerce prototyping,
+        Front-End Developer talent evaluations, and anything else you can think of. The API and
+        accompanying documentation was built with <span className='snippet'>Next.js</span>,{' '}
         <span className='snippet'>Typescript</span>, <span className='snippet'>Tailwind CSS</span>,{' '}
-        <span className='snippet'>Vercel</span>, and <span className='snippet'>Supabase</span>.
+        <span className='snippet'>Supabase</span>, and <span className='snippet'>Vercel</span>.
       </p>
 
       <p>
         It provides resources such as <span className='snippet'>products</span>,{' '}
         <span className='snippet'>reviews</span>, <span className='snippet'>users</span>,{' '}
         <span className='snippet'>carts</span>, <span className='snippet'>purchases</span>, and
-        more. Endpoints are provided to perform CRUD operations on each of these resources.
+        more. Endpoints are provided to perform CRUD operations on each of these resources, both as
+        an anonymous user and as an authenticated user.
       </p>
 
       <Image
@@ -48,9 +49,11 @@ export default function Introduction() {
       />
 
       <Note
+        showNote={false}
+        largeMargin={false}
         noteText={
           <span>
-            If you&apos;re the Postman type, you can find that version of the REST documentation{' '}
+            If you&apos;re the Postman type, you can find that version of the documentation{' '}
             <TextLink
               href='https://documenter.getpostman.com/view/12907395/UyxjF694'
               label='here'
@@ -91,13 +94,14 @@ export default function Introduction() {
 
       <Note
         showNote={false}
+        largeMargin={false}
         noteText={
           <span>
             While creating your own user is recommended, you may also perform any of the above
             actions as one of the users from the original dataset. When doing so, the endpoint will
             still respond as if the request were successful, but your data will not be persisted.
-            See <TextLink href='docs/authentication#log-in' label='logging in' /> for information on
-            how to authenticate as one of these users.
+            See <TextLink href='authentication#log-in' label='logging in' /> for information on how
+            to authenticate as one of these users.
           </span>
         }
       />
@@ -117,24 +121,16 @@ export default function Introduction() {
 
         <p className='mb-4'>
           Certain requests require a JWT for authorization. Requests that do require the token are
-          indicated as such by the <Lock /> icon. As a general rule, any REST or GraphQL request
-          that is reading or writing to a current user&apos;s resources will require the bearer
-          token:
+          indicated as such by the <Lock /> icon. As a general rule, any request that is reading or
+          writing to a <em>current user&apos;s</em> resources will require the bearer token:
         </p>
 
         <Code code={authorizedRequestHeader} />
 
-        <p className='mt-4 mb-4'>
-          For REST calls, a token can be obtained via the{' '}
-          <TextLink href='/docs/authentication#log-in' label='log in' /> endpoint. For GraphQL
-          calls, you can obtain a token via the <span className='snippet'>login</span> query:
-        </p>
-
-        <Code code={graphqlLogin} />
-
         <p className='mt-4'>
-          In both situations, the token will be returned in the response body and will be valid for
-          12 hours.
+          A bearer token can be obtained via the{' '}
+          <TextLink href='/docs/authentication#log-in' label='log in' /> endpoint, where it will be
+          returned in the request body and be valid for 12 hours.
         </p>
       </div>
 
@@ -145,9 +141,7 @@ export default function Introduction() {
 
         <p className='mb-6'>
           The following query parameters can optionally be appended to all{' '}
-          <span className='snippet'>GET</span> requests. The same applies to GraphQL requests, with
-          the exception of <span className='snippet'>fields</span> due to the nature of GraphQL
-          queries.
+          <span className='snippet'>GET</span> requests.
         </p>
 
         <div className='overflow-x-auto scrollbar-thin'>
@@ -164,9 +158,8 @@ export default function Introduction() {
                   <span className='snippet'>sort</span>
                 </TableCell>
                 <TableCell wrap>
-                  Sort the query results by one or more fields (comma-delimited). Sorting defaults
-                  to chronological order. Use <span className='snippet'>-</span> to indicate
-                  descending order.
+                  Sort the query results by one or more fields (comma-delimited). Use{' '}
+                  <span className='snippet'>-</span> to indicate descending order.
                 </TableCell>
                 <TableCell>
                   <span className='snippet'>?sort=-sale_price,-regular_price</span>
@@ -213,6 +206,8 @@ export default function Introduction() {
 
           <div className='mt-8'>
             <Note
+              showNote={false}
+              largeMargin={false}
               noteText={
                 <span>
                   If the <span className='snippet'>limit</span> or{' '}
@@ -309,28 +304,58 @@ export default function Introduction() {
           <SectionSubHeading>GraphQL</SectionSubHeading>
         </AnchorHeading>
 
-        <p className='mb-4'>
-          StorePI includes a GraphQL API powered by Apollo Server, offering compatibility with any
-          GraphQL client, including the popular Apollo Client.
+        <p className='mb-6'>
+          Thanks to its reliance on Supabase, StorePI comes with{' '}
+          <span className='snippet'>pg_graphql</span> - a PostgreSQL extension that enables querying
+          the database with GraphQL using a single SQL function. The following variables will be
+          needed:
         </p>
 
-        <p className='mb-4'>
-          Every request has its equivalent GraphQL query/mutation accessible at
-          <span className='snippet'>/graphql</span>. You may pass in the same query parameters as
-          REST calls, with the exception of fields. Here&apos;s a sample React and Apollo Client
-          query with those arguments in action:
-        </p>
+        <GenericTable>
+          <TableHead>
+            <th className='uppercase p-3 w-1/3'>Variable</th>
+            <th className='uppercase p-3 w-2/3'>Value</th>
+          </TableHead>
 
-        <Code code={graphqlQuery} />
+          <tbody>
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>PROJECT_REF</span>
+              </TableCell>
+              <TableCell wrap>
+                <TextWithCopy textToCopy='wkzyrrbzyyljtvkayjyn' useSnippetStyling={false}>
+                  wkzyrrbzyyljtvkayjyn
+                </TextWithCopy>
+              </TableCell>
+            </TableRow>
 
-        <p className='mt-4'>
-          To explore and test all available GraphQL queries and mutations, visit the{' '}
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>API_KEY</span>
+              </TableCell>
+              <TableCell wrap>
+                <TextWithCopy
+                  textToCopy={process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}
+                  useSnippetStyling={false}
+                >
+                  {process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string}
+                </TextWithCopy>
+              </TableCell>
+            </TableRow>
+          </tbody>
+        </GenericTable>
+
+        <p className='mt-6'>
+          Head to{' '}
           <TextLink
-            href='https://studio.apollographql.com/sandbox/explorer/?endpoint=https://storepi.herokuapp.com/graphql'
-            label='Apollo Sandbox'
-          />
-          .
+            href='https://supabase.github.io/pg_graphql/supabase/#http-request'
+            label='the pg_graphql docs'
+            newTab
+          />{' '}
+          for more information.
         </p>
+
+        {/* TODO: provide download for local graphiql file */}
       </div>
     </>
   );
