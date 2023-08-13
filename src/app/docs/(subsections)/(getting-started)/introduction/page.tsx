@@ -12,8 +12,8 @@ import { TableCell } from '@/_components/table/cell';
 import { authorizedRequestHeader } from '@/_lib/api-samples/sample-bodies';
 import { Note } from '@/_components/typography/note';
 import { List } from '@/_components/list';
-import { graphqlUrlBase } from '@/_lib/constants';
 import { TextWithCopy } from '@/_components/typography/copyableText';
+import { DownloadIcon } from '@/_components/icons/download';
 
 // TODO: add reference of 2 vs 3 tier architecture (e.g. two tier means access directly from process.env.NEXT_PUBLIC_SUPABASE_URL, three tier means access from storepi domain)
 // https://supabase.com/docs/guides/api
@@ -306,9 +306,13 @@ export default function Introduction() {
 
         <p className='mb-6'>
           Thanks to its reliance on Supabase, StorePI comes with{' '}
-          <span className='snippet'>pg_graphql</span> - a PostgreSQL extension that enables querying
-          the database with GraphQL using a single SQL function. The following variables will be
-          needed:
+          <TextLink
+            href='https://supabase.github.io/pg_graphql/supabase/#http-request'
+            label='pg_graphql'
+            newTab
+          />{' '}
+          - a PostgreSQL extension that enables querying the database with GraphQL using a single
+          SQL function. The following variables will be needed:
         </p>
 
         <GenericTable>
@@ -345,17 +349,16 @@ export default function Introduction() {
           </tbody>
         </GenericTable>
 
-        <p className='mt-6'>
-          Head to{' '}
-          <TextLink
-            href='https://supabase.github.io/pg_graphql/supabase/#http-request'
-            label='the pg_graphql docs'
-            newTab
-          />{' '}
-          for more information.
+        <p className='flex gap-2 mt-6'>
+          <a
+            href='/supabase_graphiql.html'
+            className='underline transition-colors hover:text-indigo-300 text-indigo-400'
+            download
+          >
+            <DownloadIcon />
+          </a>
+          <span>Download the GraphiQL snippet to explore the GraphQL schema in-browser</span>
         </p>
-
-        {/* TODO: provide download for local graphiql file */}
       </div>
     </>
   );
