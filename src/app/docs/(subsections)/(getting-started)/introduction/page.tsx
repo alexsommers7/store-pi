@@ -304,8 +304,8 @@ export default function Introduction() {
         <p className='mb-6'>
           Under the hood, StorePI makes use of{' '}
           <TextLink href='https://postgrest.org/en/v7.0.0/' label='PostgREST' newTab /> to provide
-          an intuitive REST API. However, if you prefer to skip a layer and access the database
-          directly, you can do so via PostgREST by using the following variables:
+          an intuitive REST API. However, if you prefer to skip a layer and access the data using
+          their syntax, you can do so by making use of the following variables:
         </p>
 
         <GenericTable>
