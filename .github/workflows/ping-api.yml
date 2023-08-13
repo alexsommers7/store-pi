@@ -1,0 +1,17 @@
+name: Ping API Every 5 Days
+
+on:
+  schedule:
+    - cron: "0 0 */5 * *"
+
+jobs:
+  ping-api:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Ping API
+        run: |
+          curl -X GET https://storepi.vercel.app/api/v1/products
