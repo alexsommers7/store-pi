@@ -10,6 +10,8 @@ export const getAllProductsResponse = `"count": 50,
 		"brand": { "name": "..." },
 		"regular_price": 149.95,
 		"sale_price": 129.95,
+		"reviews_quantity": 7,
+		"reviews_average": 4.51,
 		"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
 		"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m",
 		"specs": [...],
@@ -26,6 +28,8 @@ export const getAllProductsResponse = `"count": 50,
 		"brand": { "name": "..." },
 		"regular_price": 88.99,
 		"sale_price": 88.99,
+		"reviews_quantity": 5,
+		"reviews_average": 3.54,
 		"description": "The heart of this luxurious perfume features two accords: the ruby orchid and the red vanilla bean accord, giving the fragrance a unequivocal sensuality, enhanced by the fresh scent of peach, floral, and vanilla fragrance.",
 		"slug": "flowerbomb-ruby-orchid-eau-de-parfum",
 		"specs": [...],
@@ -42,6 +46,8 @@ export const getAllProductsResponse = `"count": 50,
 		"brand": { "name": "..." },
 		"regular_price": 119.99,
 		"sale_price": 47.99,
+		"reviews_quantity": 2,
+		"reviews_average": 2.50,
 		"description": "Experience comfort, durability, and versatility with this World Rug Gallery Modern Large Floral Flowers Indoor Outdoor rug.",
 		"slug": "world-rug-gallery-modern-large-floral-flowers-indoor-outdoor-rug",
 		"specs": [...],
@@ -63,6 +69,8 @@ export const getProductResponse = `"data": {
 	"brand": { "name": "..." },
 	"regular_price": 149.95,
 	"sale_price": 129.95,
+	"reviews_quantity": 7,
+	"reviews_average": 4.51,
 	"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
 	"specs": [...],
 	"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m"
@@ -256,6 +264,8 @@ export const getAllProductsInCategoryResponse = `"count": 10,
 		"brand": { "name": "..." },
 		"regular_price": 149.95,
 		"sale_price": 129.95,
+		"reviews_quantity": 7,
+		"reviews_average": 4.51,
 		"description": "Enjoy more desk space than you ever thought possible with this ultra-slim HP display. The attractive, micro-edge design adds stylish beauty to any environment, and provides for a seamless multi-monitor setup.",
 		"specs": [...],
 		"slug": "hp-24-in.-led-monitor-ips-micro-edge-hdmi-vga-60hz-5ms-24m",
@@ -272,6 +282,8 @@ export const getAllProductsInCategoryResponse = `"count": 10,
 		"brand": { "name": "..." },
 		"regular_price": 369.99,
 		"sale_price": 249.99,
+		"reviews_quantity": 4,
+		"reviews_average": 4.87,
 		"description": "Bring on the blitz. Turbo-charged refresh rates will fuel your need for gaming speed with this captivating 27 inch dislay.",
 		"specs": [...],
 		"slug": "acer-predator-xb3-27-in.-monitor-full-hd",
@@ -288,6 +300,8 @@ export const getAllProductsInCategoryResponse = `"count": 10,
 		"brand": { "name": "..." },
 		"regular_price": 99.99,
 		"sale_price": 69.99,
+		"reviews_quantity": 7,
+		"reviews_average": 4.5
 		"description": "Get an intelligent little pal to remind you of the incoming calls, text messages, apps, and calendars, alarm clock, weather forecast, and support control the music playback & camera on your smartphone.",
 		"specs": [...],
 		"slug": "amazfit-gts-2-mini-smart-watch",
@@ -309,6 +323,8 @@ export const getAllProductsInBrandResponse = `"count": 2,
 		"brand": { "name": "..." },
 		"regular_price": 259.99,
 		"sale_price": 229.99,
+		"reviews_quantity": 7,
+		"reviews_average": 4.5
 		"description": "Cut from light-catching foiled jersey, Lauren Ralph Lauren's breathtaking evening gown is designed with a sexy slit at the skirt and a waist-defining self-belt, which is accented with a rhinestone-embellished buckle.",
 		"slug": "foiled-jersey-sleeveless-gown",
 		"specs": [...],
@@ -327,6 +343,8 @@ export const getAllProductsInBrandResponse = `"count": 2,
 		"brand": { "name": "..." },
 		"regular_price": 190,
 		"sale_price": 93.1,
+		"reviews_quantity": 7,
+		"reviews_average": 4.5
 		"description": "Lauren Ralph Lauren's signature raincoat is designed with a double-breasted silhouette that's belted at the waist for a defined figure.",
 		"slug": "women-s-double-breasted-trench-coat",
 		"specs": [...],
@@ -356,6 +374,8 @@ export const getCurrentUserCartResponse = `"data": {
 				"name": "Acer Predator XB3 - 27 in. Monitor Full HD",
 				"regular_price": 369.99,
 				"sale_price": 249.99
+				"reviews_quantity": 4,
+				"reviews_average": 4.87,
 			}
 		},
 		{
@@ -370,6 +390,8 @@ export const getCurrentUserCartResponse = `"data": {
 				"name": "Men's Sonoma Goods For Life Supersoft Modern-Fit Raglan Tee & Jogger Pants Pajama Set",
 				"regular_price": 54.99,
 				"sale_price": 21.6
+				"reviews_quantity": 3,
+				"reviews_average": 4.45
 			}
 		},
 		{
@@ -384,6 +406,8 @@ export const getCurrentUserCartResponse = `"data": {
 				"name": "Lakitu Sky World Expansion Toy Set",
 				"regular_price": 39.99,
 				"sale_price": 39
+				"reviews_quantity": 9,
+				"reviews_average": 4.62
 			}
 		},
 		...
@@ -525,6 +549,8 @@ export const getCurrentUserWishlistResponse = `"count": 1,
 					"name": "Morden Fort Modern Contemporary Love Seat",
 					"regular_price": 669,
 					"sale_price": 600
+					"reviews_quantity": 6,
+					"reviews_average": 3.95
 				}
 			},
 			{
@@ -538,6 +564,8 @@ export const getCurrentUserWishlistResponse = `"count": 1,
 					"name": "Facefx 360 Anti-Aging Device",
 					"regular_price": 189,
 					"sale_price": 160.65
+					"reviews_quantity": 7,
+					"reviews_average": 4.26
 				}
 			},
 			{
@@ -551,6 +579,8 @@ export const getCurrentUserWishlistResponse = `"count": 1,
 					"name": "6-Pc. Wake Up With Me Complete Brightening Morning Routine",
 					"regular_price": 177,
 					"sale_price": 177
+					"reviews_quantity": 10,
+					"reviews_average": 4.63
 				}
 			},
 			{
@@ -564,6 +594,8 @@ export const getCurrentUserWishlistResponse = `"count": 1,
 					"name": "Women's Plaid Single-Breasted Walker Coat",
 					"regular_price": 400,
 					"sale_price": 239.99
+					"reviews_quantity": 1,
+					"reviews_average": 4.00
 				}
 			}
 		]
