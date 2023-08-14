@@ -56,8 +56,6 @@ function mapFilterParamsToQueryString(searchParams: URLSearchParams, queryString
     queryString += queryString.length ? `&${filterString}` : `${filterString}`;
   }
 
-  console.log(queryString);
-
   return queryString;
 }
 
