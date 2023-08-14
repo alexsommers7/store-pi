@@ -24,6 +24,43 @@ function getSortParam(sortQueryParam: string | null): Array<[string, boolean]> {
   return sortQueryParam.split(',').map((sort) => [sort.replace('-', ''), !sort.startsWith('-')]);
 }
 
+function mapFilterParamsToQueryString(searchParams: URLSearchParams, queryString: string): string {
+  const excludeFromFiltering = ['sort', 'fields', 'limit', 'offset']; // these are for organizing, not filtering
+
+  for (const [key, value] of searchParams) {
+    if (excludeFromFiltering.includes(key)) continue;
+
+    // comparison operators
+    const lessThan = key.endsWith('_less_than');
+    const greaterThan = key.endsWith('_greater_than');
+    const lessThanOrEqualTo = key.endsWith('_less_than_or_equal_to');
+    const greaterThanOrEqualTo = key.endsWith('_greater_than_or_equal_to');
+
+    let filterString = '';
+
+    if (lessThan || greaterThan || lessThanOrEqualTo || greaterThanOrEqualTo) {
+      excludeFromFiltering.push(key);
+
+      const field = key.replace(
+        /_(less_than|greater_than|less_than_or_equal_to|greater_than_or_equal_to)$/,
+        ''
+      );
+      const operator = lessThan ? 'lt' : greaterThan ? 'gt' : lessThanOrEqualTo ? 'lte' : 'gte';
+
+      filterString = `${field}=${operator}.${value}`;
+    } else {
+      // equality operators
+      filterString = value.includes(',') ? `${key}=in.(${value})` : `${key}=eq.${value}`;
+    }
+
+    queryString += queryString.length ? `&${filterString}` : `${filterString}`;
+  }
+
+  console.log(queryString);
+
+  return queryString;
+}
+
 export function generateQueryString(
   userId: string | undefined,
   resource: string,
@@ -55,8 +92,6 @@ export function generateQueryString(
     queryString += `&select=${selection}`;
   }
 
-  const excludeFromFiltering = ['sort', 'fields', 'limit', 'offset']; // these are for organizing, not filtering
-
   // for resources that are publicly readble but we still want to allow filtering by user_id (e.g. reviews)
   if (userId) {
     queryString += queryString.length ? `&user_id=eq.${userId}` : `user_id=eq.${userId}`;
@@ -64,34 +99,7 @@ export function generateQueryString(
 
   if (!searchParams) return queryString;
 
-  // filtering (comparison operators)
-  for (const [key, value] of searchParams) {
-    if (excludeFromFiltering.includes(key)) continue;
+  const queryStringWithFilters = mapFilterParamsToQueryString(searchParams, queryString);
 
-    const lessThan = key.endsWith('_less_than');
-    const greaterThan = key.endsWith('_greater_than');
-    const lessThanOrEqualTo = key.endsWith('_less_than_or_equal_to');
-    const greaterThanOrEqualTo = key.endsWith('_greater_than_or_equal_to');
-
-    if (!lessThan && !greaterThan && !lessThanOrEqualTo && !greaterThanOrEqualTo) continue;
-
-    excludeFromFiltering.push(key);
-
-    const field = key.replace(
-      /_(less_than|greater_than|less_than_or_equal_to|greater_than_or_equal_to)$/,
-      ''
-    );
-    const operator = lessThan ? 'lt' : greaterThan ? 'gt' : lessThanOrEqualTo ? 'lte' : 'gte';
-    queryString += queryString.length
-      ? `&${field}=${operator}.${value}`
-      : `${field}=${operator}.${value}`;
-  }
-
-  // filtering (equality operators)
-  for (const [key, value] of searchParams) {
-    if (excludeFromFiltering.includes(key)) continue;
-    queryString += queryString.length ? `&${key}=eq.${value}` : `${key}=eq.${value}`;
-  }
-
-  return queryString;
+  return queryStringWithFilters;
 }

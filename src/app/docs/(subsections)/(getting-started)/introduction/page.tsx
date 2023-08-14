@@ -292,6 +292,18 @@ export default function Introduction() {
                 <span className='snippet'>?sale_price_less_than_or_equal_to=200</span>
               </TableCell>
             </TableRow>
+
+            <TableRow>
+              <TableCell>
+                <span className='snippet'>[field]=[value1],[value2]</span>
+              </TableCell>
+              <TableCell wrap>
+                Check if the field&apos;s value is equal to any of the given values.
+              </TableCell>
+              <TableCell>
+                <span className='snippet'>?category_id=1,2</span>
+              </TableCell>
+            </TableRow>
           </tbody>
         </GenericTable>
       </div>
