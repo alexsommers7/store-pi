@@ -36,14 +36,23 @@ export default function Introduction() {
         an anonymous user and as an authenticated user.
       </p>
 
-      <Image
-        src='/images/storepi-demo.png'
-        width={1280}
-        height={720}
-        className='rounded-sm opacity-0 animate-fadeIn'
-        alt='StorePI demo'
-        priority
-      />
+      <figure>
+        <a
+          href='https://demo-storepi.netlify.app/'
+          target='_blank'
+          rel='noreferrer'
+          title='View StorePI demo in a new tab'
+        >
+          <Image
+            src='/images/storepi-demo.png'
+            width={1280}
+            height={720}
+            className='rounded-sm opacity-0 animate-fadeIn'
+            alt='StorePI demo'
+            priority
+          />
+        </a>
+      </figure>
 
       <Note
         showNote={false}

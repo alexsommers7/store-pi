@@ -348,15 +348,6 @@ export const structure = [
   {
     label: 'Resources',
     subitems: [
-      // {
-      //   label: 'Demo',
-      //   slug: `${
-      //     process.env.NODE_ENV === 'development'
-      //       ? 'http://localhost:3000'
-      //       : 'https://storepi.vercel.app'
-      //   }/demo`,
-      //   anchors: [],
-      // },
       {
         label: 'Open in Postman',
         slug: 'https://documenter.getpostman.com/view/12907395/UyxjF694',
