@@ -17,7 +17,7 @@ A default dataset is provided with this API. It consists of 19 users (each with 
 That said, you do have the ability to interact with the database and persist your custom data with select resources. Notably, You may sign up as a new user and perform any of the following actions as your new user:
 
 - Log in
-- Modify your profile, email, or password
+- Modify your profile
 - Create/edit reviews
 - Add/remove cart items
 - Add/remove wishlist items
@@ -50,7 +50,7 @@ The following query parameters can optionally be appended to all `GET` requests.
 | `sort`    | Sort the query results by one or more fields (comma-delimited). Use `-` to indicate descending order. | `?sort=-sale_price,-regular_price` |
 | `fields`  | Filter the query results to one or more specific fields (comma-delimited).                            | `?fields=name,sale_price`          |
 | `limit`   | Limit the query results. Defaults to `20`.                                                            | `?limit=10`                        |
-| `offset`  | Paginate the query results. Defaults to `1`.                                                          | `?offset=2`                        |
+| `offset`  | Paginate the query results. Defaults to `0`.                                                          | `?offset=2`                        |
 
 > If the `limit` or `offset` parameter is passed, the response json will contain a `nextOffset` value if not already at the end.
 

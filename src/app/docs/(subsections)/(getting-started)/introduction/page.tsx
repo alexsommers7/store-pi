@@ -90,7 +90,7 @@ export default function Introduction() {
       <List>
         <>
           <li>Log in</li>
-          <li>Modify your profile, email, or password </li>
+          <li>Modify your profile </li>
           <li>Create/edit reviews</li>
           <li>Add/remove cart items</li>
           <li>Add/remove wishlist items</li>
@@ -201,7 +201,7 @@ export default function Introduction() {
                   <span className='snippet'>offset</span>
                 </TableCell>
                 <TableCell wrap>
-                  Paginate the query results. Defaults to <span className='snippet'>1</span>.
+                  Paginate the query results. Defaults to <span className='snippet'>0</span>.
                 </TableCell>
                 <TableCell>
                   <span className='snippet'>?offset=2</span>
