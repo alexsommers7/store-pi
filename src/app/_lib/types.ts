@@ -22,6 +22,7 @@ export interface INavLink {
   addSidebarAccent?: boolean;
   forceActive?: boolean;
   target?: string;
+  title?: string;
 }
 
 export interface IOnThisPageLink {

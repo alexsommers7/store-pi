@@ -11,6 +11,7 @@ export function NavLink({
   addSidebarAccent = false,
   forceActive = false,
   target,
+  title,
 }: INavLink) {
   const pathname = usePathname();
   const isActive = pathname === href || pathname.startsWith(`${href}/`);
@@ -28,6 +29,7 @@ export function NavLink({
         className={isActive ? activeClasses : inactiveClasses}
         href={href}
         target={target || '_self'}
+        title={title || ''}
       >
         {bold ? <strong>{name}</strong> : <span>{name}</span>}
       </Link>

@@ -17,13 +17,21 @@ export function Navigation() {
 
         <div>
           <ul className='flex gap-6'>
-            <li className='border-r-2 border-r-stone-900 pr-6'>
+            <li className='border-r-2 border-r-stone-900 px-6'>
               <NavLink name='Docs' href='/docs' />
+            </li>
+            <li className='border-r-2 border-r-stone-900 pr-6'>
+              <NavLink
+                name='Demo'
+                href='https://demo-storepi.netlify.app/'
+                target='_blank'
+                title='View StorePI demo in a new tab'
+              />
             </li>
             <li>
               <a
                 href='https://github.com/alexsommers7/store-pi'
-                aria-label='View project repository on GitHub'
+                title='View project repository on GitHub'
               >
                 <svg
                   viewBox='0 0 24 24'
