@@ -18,7 +18,7 @@ export const generateForeignTableSelectionWhenApplicable = (
       ({ resourceName }) => resourceName === resource
     );
 
-    selection = `${selection}, ${resources
+    selection = `${selection},${resources
       .map(({ foreignTableQuery }) => foreignTableQuery)
       .join(', ')}`;
   }

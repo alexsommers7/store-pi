@@ -24,6 +24,11 @@ export const resourcesWithForeignTables = [
     foreignTableQuery: 'brand:brands(name), category:categories(name)',
   },
   {
+    resourceName: 'reviews',
+    foreignTableQuery:
+      'user:users(name, photo), product:products(id, sku, category:categories(name), images, brand:brands(name), name)',
+  },
+  {
     resourceName: 'purchases',
     foreignTableQuery:
       'purchase_products(product_id, quantity, product_data:products(id, sku, category:categories(name), images, brand:brands(name), name))',
