@@ -79,15 +79,15 @@ export function generateQueryString(
 
     // limiting
     const limit = getLimitParam(searchParams?.get('limit') || '');
-    queryString += `&limit=${limit}`;
+    queryString += queryString.length ? `&limit=${limit}` : `limit=${limit}`;
 
     // offsetting
     const offset = getOffsetParam(searchParams?.get('offset') || '');
-    queryString += `&offset=${offset}`;
+    queryString += queryString.length ? `&offset=${offset}` : `offset=${offset}`;
 
     // field selection
     const selection = generateForeignTableSelectionWhenApplicable(resource, searchParams);
-    queryString += `&select=${selection}`;
+    queryString += queryString.length ? `&select=${selection}` : `select=${selection}`;
   }
 
   // for resources that are publicly readble but we still want to allow filtering by user_id (e.g. reviews)
