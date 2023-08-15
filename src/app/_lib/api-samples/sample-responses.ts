@@ -86,14 +86,14 @@ export const getAllReviewsResponse = `"count": 160,
 		"review": "The monitor was easy to set up and all the cables were included in the box to connect it. The stand itself is very minimalistic and has height base tilt swivel adjustment. The speakers in it are decent for them being monitor speakers, much better than the previous version. The color accuracy was true straight out of the box and didn't require any adjustments, unlike the previous one I bought from this series. The only down side to the whole monitor are the monitor controls, which are on the back and are hard to reach.",
 		"rating": 4,
 		"user_id": 9,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 3,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -109,14 +109,14 @@ export const getAllReviewsResponse = `"count": 160,
 		"review": "Bought this as a gift for my boyfriend for Christmas and he loved it! Plush came in great condition and has good detailing to it. If you're a fan of the character and series it's a must buy for any plushie collection.",
 		"rating": 5,
 		"user_id": 11,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 41,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -132,14 +132,14 @@ export const getAllReviewsResponse = `"count": 160,
 		"review": "Awesome robe, I didn't want a heavyweight boxers rope. This one is light to wear around the house in all seasons. I work from home and wear this lightweight robe everyday.",
 		"rating": 4,
 		"user_id": 17,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 34,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -159,14 +159,14 @@ export const getReviewResponse = `"data": {
 	"review": "Beautiful chairs, they are very comfy as well! When you first sit in them they are on the tougher side but after a few seconds it softens up. I would highly recommend these chairs. Easy to put together - the packaging was supreme and the shipping was super quick! Highly impressed all around!",
 	"rating": 5,
 	"user_id": 5,
-	"user" {
-		"name" "...",
+	"user": {
+		"name": "...",
 		"photo": "..."
 	},
 	"product_id": 49,
 	"product": {
 		"id": 1,
-		"sku" 18,
+		"sku": 18,
 		"images": [...],
 		"name": "...",
 		"category": { "name": "..." },
@@ -186,14 +186,14 @@ export const getProductReviewsResponse = `"count": 6,
 		"review": "Exactly what it looked like in the picture. Size and color is perfect. Highly recommend!",
 		"rating": 5,
 		"user_id": 7,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 7,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -209,14 +209,14 @@ export const getProductReviewsResponse = `"count": 6,
 		"review": "Nice colors and fits just right! Glad that it's non-slip and that I'll be able to wash it.",
 		"rating": 5,
 		"user_id": 10,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 7,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -232,14 +232,14 @@ export const getProductReviewsResponse = `"count": 6,
 		"review": "Non-slip works great! Just wish it were a bit more durable but overall a solid purchase.",
 		"rating": 4,
 		"user_id": 19,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 7,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -261,14 +261,14 @@ export const getCurrentUserReviewsResponse = `"count": 11,
 		"review": "Perfect monitor if you Know how to calibrate it! HDR isn't great though. Worth it once you calibrate with RGB color hues & saturation. So good many settings.",
 		"rating": 4,
 		"user_id": 3,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 3,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -284,14 +284,14 @@ export const getCurrentUserReviewsResponse = `"count": 11,
 		"review": "I've had this couch for about 2 weeks now. I wanted to try it out and give an honest review. Its so beautiful and durable. I love that the cushion is very comfortable and yet durable. I dont think it will cave in any time soon. Soft velvet fabric used gives a soft feel. It arrived without any damages. It is actually a bigger couch than I initially thought. Do not hesitate to buy this you will not regret it. Assembly is very easy and takes less than 10 minutes. I would recommend this sofa based on looks as well as comfort.",
 		"rating": 5,
 		"user_id": 3,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 10,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -307,14 +307,14 @@ export const getCurrentUserReviewsResponse = `"count": 11,
 		"review": "Unfortunately, my microfleece top didn't hold up in the washing machine. After only 2 washes the stitching along a part of the neck opening came undone. I was very disappointed because the top was very soft and comfortable to wear. I expected better from this brand. I ordered the black in one size larger than what I would usually wear based on other reviews re: sizing.",
 		"rating": 3,
 		"user_id": 3,
-		"user" {
-			"name" "...",
+		"user": {
+			"name": "...",
 			"photo": "..."
 		},
 		"product_id": 5,
 		"product": {
 			"id": 1,
-			"sku" 18,
+			"sku": 18,
 			"images": [...],
 			"name": "...",
 			"category": { "name": "..." },
@@ -335,13 +335,13 @@ export const createOrUpdateReviewResponse = `"data": {
 	"rating": 5,
 	"product_id": 1,
 	"user_id": 3,
-	"user" {
-		"name" "...",
+	"user": {
+		"name": "...",
 		"photo": "..."
 	},
 	"product": {
 		"id": 1,
-		"sku" 18,
+		"sku": 18,
 		"images": [...],
 		"name": "...",
 		"category": { "name": "..." },
