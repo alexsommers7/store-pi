@@ -321,6 +321,13 @@ export const structure = [
             response: updateCurrentUserResponse,
             requiresAuth: true,
           },
+          {
+            label: 'Delete Current User',
+            hash: 'delete-current-user',
+            httpMethod: 'DELETE',
+            slug: 'users/current',
+            requiresAuth: true,
+          },
         ],
       },
       {
