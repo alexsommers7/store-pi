@@ -1,7 +1,7 @@
 import { getSlugStructure } from '@/docs/structure';
 import { SectionHeading } from '@/_components/typography/sectionHeading';
 import { AnchorHeading } from '@/_components/typography/anchorHeading';
-import { endpointList } from '@/docs/endpoint-list';
+import { endpointList } from '@/docs/[slug]/endpoint-list';
 import { DocsPagination } from '@/docs/pagination/index';
 import { AvailableFields } from '@/docs/_components/availableFields';
 import { getAllSubitems } from '@/docs/structure';
