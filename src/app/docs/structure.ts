@@ -25,10 +25,10 @@ import {
   getProductReviewsResponse,
   getCurrentUserPurchaseResponse,
   getReviewResponse,
-  getCurrentUserResponse,
   loginResponse,
   signupResponse,
   updateCurrentUserResponse,
+  getAllUsersResponse,
   getUserResponse,
 } from '@/_lib/api-samples/sample-responses';
 import { StructureSubItem } from '@/_lib/types';
@@ -291,19 +291,25 @@ export const structure = [
         desc: 'Each user object will contain general profile information, including a link to a stock photo hosted on S3.',
         anchors: [
           {
+            label: 'Get All Users',
+            hash: 'get-users',
+            httpMethod: 'GET',
+            slug: 'users',
+            response: getAllUsersResponse,
+          },
+          {
             label: 'Get User',
             hash: 'get-user',
             httpMethod: 'GET',
             slug: 'users/:id',
             response: getUserResponse,
-            note: `This endpoint gives admin access to data on any user in the DB. It wouldn't typically be publicly exposed, but it's available for the purposes of this API.`,
           },
           {
             label: 'Get Current User',
             hash: 'get-current-user',
             httpMethod: 'GET',
             slug: 'users/current',
-            response: getCurrentUserResponse,
+            response: getUserResponse,
             requiresAuth: true,
           },
           {
@@ -330,7 +336,7 @@ export const structure = [
             slug: 'login',
             body: loginBody,
             response: loginResponse,
-            desc: `In order to provide a variety in the data, there are multiple user accounts available. The structure of each user's email address is [firstName]@example.com, and each user's password is simply 'password'. You may log in as any of the following users: Jodi, Amy, Jean, Cody, or Daisy.`,
+            note: `You may do a GET request to /api/v1/users to retrieve a list of users from the original dataset. They all share the same password of 'password'.`,
           },
           {
             label: 'Sign Up',

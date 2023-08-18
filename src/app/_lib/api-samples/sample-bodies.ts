@@ -42,8 +42,6 @@ export const signupBody = `"name": "...",
 "photo": "..." // optional, defaults to generic avatar
 `;
 
-export const loginBody = `// you may log in as any of the following users with the convention [name]@example.com:
-// amy, dustin, dorothy, jodi, shari, jimmy, daisy, marco, candace, casey, cody, kelly, aubrey, jean, phil, bennie, ramone, perry, and tracy 
-"email": "candace@example.com",
+export const loginBody = `"email": "candace@example.com",
 "password": "password" // same for all users in the default dataset
 `;

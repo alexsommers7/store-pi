@@ -582,8 +582,7 @@ export const getCurrentUserPurchaseResponse = `"data": [
 		]
 	},
 	...
-],
-"count": 1
+]
 `;
 
 export const getCurrentUserPurchasesResponse = `"data": [
@@ -662,8 +661,7 @@ export const createPurchaseResponse = `"data": [
 ]
 `;
 
-export const getCurrentUserWishlistResponse = `"count": 1,
-"data": [
+export const getCurrentUserWishlistResponse = `"data": [
 	{
 		"id": 10,
 		"created_at": "2023-07-22T16:38:03.784318+00:00",
@@ -735,79 +733,26 @@ export const getCurrentUserWishlistResponse = `"count": 1,
 ]
 `;
 
-export const getUserResponse = `"data": {
-	"id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
-	"aud": "authenticated",
-	"role": "authenticated",
-	"email": "bennie@example.com",
-	"email_confirmed_at": "2023-07-26T23:54:05.329292Z",
-	"phone": "",
-	"confirmed_at": "2023-07-26T23:54:05.329292Z",
-	"last_sign_in_at": "2023-08-02T00:49:02.782389Z",
-	"app_metadata": {
-		"provider": "email",
-		"providers": [
-			"email"
-		]
-	},
-	"user_metadata": {
-		"name": "Bennie Walton",
+export const getAllUsersResponse = `"data": [
+	{
+		"id": 1,
+		"name": "Amy Neal",
 		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/default.png"
 	},
-	"identities": [
-		{
-			"id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
-			"user_id": "09fddc50-4fb9-4b6c-9864-0f7f38121efe",
-			"identity_data": {
-				"email": "bennie@example.com",
-				"sub": "09fddc50-4fb9-4b6c-9864-0f7f38121efe"
-			},
-			"provider": "email",
-			"last_sign_in_at": "2023-07-26T23:54:05.32753Z",
-			"created_at": "2023-07-26T23:54:05.32757Z",
-			"updated_at": "2023-07-26T23:54:05.32757Z"
-		}
-	],
-	"created_at": "2023-07-26T23:54:05.326573Z",
-	"updated_at": "2023-08-02T00:49:08.118995Z"
-}
+	{
+		"id": 2,
+		"name": "Marco Lawrence",
+		"photo": "https://storepi-media.s3.us-west-1.amazonaws.com/img/users/default.png"
+	},
+	...
+],
+"count": 19
 `;
 
-export const getCurrentUserResponse = `"user": {
-	"id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
-	"aud": "authenticated",
-	"role": "authenticated",
-	"email": "...",
-	"email_confirmed_at": "2023-07-26T23:51:23.362501Z",
-	"phone": "",
-	"confirmed_at": "2023-07-26T23:51:23.362501Z",
-	"last_sign_in_at": "2023-08-02T00:29:41.255867Z",
-	"app_metadata": {
-		"provider": "email",
-		"providers": [
-			"email"
-		]
-	},
-	"user_metadata": {
-		"name": "...",
-		"photo": "..."
-	},
-	"identities": [
-		{
-			"id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
-			"user_id": "c0df7068-b85e-4ea7-a69c-286272ee083b",
-			"identity_data": {
-				"email": "...",
-				"sub": "c0df7068-b85e-4ea7-a69c-286272ee083b"
-			},
-			"provider": "email",
-			"last_sign_in_at": "2023-07-26T23:51:23.360882Z",
-			"created_at": "2023-07-26T23:51:23.360919Z",
-			"updated_at": "2023-07-26T23:51:23.360919Z"
-		}
-	],
-	"created_at": "2023-07-26T23:51:23.359971Z",
-	"updated_at": "2023-08-02T00:29:41.25763Z"
+export const getUserResponse = `"data": {
+	"id": 28,
+	"name": "New User",
+	"photo": null
 }
 `;
 
@@ -819,47 +764,76 @@ export const updateCurrentUserResponse = `"data": {
 `;
 
 export const signupResponse = `"data": {
+	"user": {
+		"id": "3d27c4ed-de5c-4357-95b9-b9d319295395",
+		"aud": "authenticated",
+		"role": "authenticated",
+		"email": "new_user@example.com",
+		"email_confirmed_at": "2023-08-17T04:02:53.985079597Z",
+		"phone": "",
+		"last_sign_in_at": "2023-08-17T04:02:53.989617556Z",
+		"app_metadata": {
+			"provider": "email",
+			"providers": [
+				"email"
+			]
+		},
+		"user_metadata": {},
+		"identities": [
+			{
+				"id": "3d27c4ed-de5c-4357-95b9-b9d319295395",
+				"user_id": "3d27c4ed-de5c-4357-95b9-b9d319295395",
+				"identity_data": {
+					"email": "new_user@example.com",
+					"sub": "3d27c4ed-de5c-4357-95b9-b9d319295395"
+				},
+				"provider": "email",
+				"last_sign_in_at": "2023-08-17T04:02:53.982465875Z",
+				"created_at": "2023-08-17T04:02:53.982499Z",
+				"updated_at": "2023-08-17T04:02:53.982499Z"
+			}
+		],
+		"created_at": "2023-08-17T04:02:53.980215Z",
+		"updated_at": "2023-08-17T04:02:53.992795Z"
+	},
 	"session": {
-		"access_token": "...",
+		"access_token": "eyJhbGciOiJIUzI1NiIsImtpZCI6IlBSVkZGT2RhTWpXYlVVMW8iLCJ0eXAiOiJKV1QifQ.eyJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNjkyMjg4MTczLCJpYXQiOjE2OTIyNDQ5NzMsImlzcyI6Imh0dHBzOi8vd2t6eXJyYnp5eWxqdHZrYXlqeW4uc3VwYWJhc2UuY28vYXV0aC92MSIsInN1YiI6IjNkMjdjNGVkLWRlNWMtNDM1Ny05NWI5LWI5ZDMxOTI5NTM5NSIsImVtYWlsIjoibmV3X3VzZXJAZXhhbXBsZS5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7fSwicm9sZSI6ImF1dGhlbnRpY2F0ZWQiLCJhYWwiOiJhYWwxIiwiYW1yIjpbeyJtZXRob2QiOiJwYXNzd29yZCIsInRpbWVzdGFtcCI6MTY5MjI0NDk3M31dLCJzZXNzaW9uX2lkIjoiOWQ2NWMyOTYtYjNiMy00NWRmLTkzMWQtYTJjOWRmZGRkYmU2In0.5dVzDJ_X27gZ-2v4cHEyiV53-X8jaLEy2C06A_TCihk",
 		"token_type": "bearer",
-		"expires_in": 3600,
-		"refresh_token": "...",
+		"expires_in": 43200,
+		"refresh_token": "L19zo5paz0_hzuVyhTYRtw",
 		"user": {
-			"id": "...",
+			"id": "3d27c4ed-de5c-4357-95b9-b9d319295395",
 			"aud": "authenticated",
 			"role": "authenticated",
-			"email": "...",
-			"email_confirmed_at": "2023-07-28T01:31:13.232370811Z",
+			"email": "new_user@example.com",
+			"email_confirmed_at": "2023-08-17T04:02:53.985079597Z",
 			"phone": "",
-			"last_sign_in_at": "2023-07-28T01:31:13.234699387Z",
+			"last_sign_in_at": "2023-08-17T04:02:53.989617556Z",
 			"app_metadata": {
 				"provider": "email",
 				"providers": [
 					"email"
 				]
 			},
-			"user_metadata": {
-				"name": "...",
-				"photo": "..."
-			},
+			"user_metadata": {},
 			"identities": [
 				{
-					"id": "...",
-					"user_id": "...",
+					"id": "3d27c4ed-de5c-4357-95b9-b9d319295395",
+					"user_id": "3d27c4ed-de5c-4357-95b9-b9d319295395",
 					"identity_data": {
-						"email": "...",
-						"sub": "..."
+						"email": "new_user@example.com",
+						"sub": "3d27c4ed-de5c-4357-95b9-b9d319295395"
 					},
 					"provider": "email",
-					"last_sign_in_at": "2023-07-28T01:31:13.231112903Z",
-					"created_at": "2023-07-28T01:31:13.231173Z",
-					"updated_at": "2023-07-28T01:31:13.231173Z"
+					"last_sign_in_at": "2023-08-17T04:02:53.982465875Z",
+					"created_at": "2023-08-17T04:02:53.982499Z",
+					"updated_at": "2023-08-17T04:02:53.982499Z"
 				}
 			],
-			"created_at": "2023-07-28T01:31:13.228634Z",
-			"updated_at": "2023-07-28T01:31:13.236371Z"
+			"created_at": "2023-08-17T04:02:53.980215Z",
+			"updated_at": "2023-08-17T04:02:53.992795Z"
 		},
-		"expires_at": 1690511472
+		"expires_at": 1692288173
 	}
 }
 `;

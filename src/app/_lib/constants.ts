@@ -15,9 +15,6 @@ export const HTTPMethods = {
   DELETE: 'DELETE',
 };
 
-export const defaultUserPhotoUrl =
-  'https://storepi-media.s3.us-west-1.amazonaws.com/img/users/default.png';
-
 export const resourcesWithForeignTables = [
   {
     resourceName: 'products',

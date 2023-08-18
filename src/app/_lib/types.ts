@@ -64,3 +64,7 @@ export interface Product {
   product_id: number;
   quantity: number;
 }
+
+export interface UserObject {
+  user_id?: string;
+}

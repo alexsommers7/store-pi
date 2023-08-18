@@ -26,7 +26,7 @@ export function authorizationError() {
 export function modifiedOriginalResourceError() {
   return NextResponse.json(
     {
-      message: `You attempted to modify an original resourec. Your data won't be persisted, but here's a 200 response for your troubles.`,
+      message: `You attempted to modify an original resource. Your data won't be persisted, but here's a 200 response for your troubles.`,
     },
     { status: 200 }
   );
