@@ -4,7 +4,7 @@ import { SampleBody } from '@/docs/_components/sampleBody';
 import { SampleResponse } from '@/docs/_components/sampleResponse';
 import { Note } from '@/_components/typography/note';
 
-export function endpointMapper(structure: StructureSubItem) {
+export function endpointList(structure: StructureSubItem) {
   return structure.anchors.map((anchor) => {
     const { hash, label, httpMethod, slug, body, response, requiresAuth, note } =
       anchor as EndpointAnchor;

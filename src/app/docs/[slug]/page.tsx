@@ -1,7 +1,7 @@
 import { getSlugStructure } from '@/docs/structure';
 import { SectionHeading } from '@/_components/typography/sectionHeading';
 import { AnchorHeading } from '@/_components/typography/anchorHeading';
-import { endpointMapper } from '@/docs/endpoint-mapper';
+import { endpointList } from '@/docs/endpoint-list';
 import { DocsPagination } from '@/docs/pagination/index';
 import { AvailableFields } from '@/docs/_components/availableFields';
 import { getAllSubitems } from '@/docs/structure';
@@ -23,7 +23,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       <section className='flex flex-col gap-y-6 py-4 px-6 min-[1151px]:p-10'>
         <SectionHeading>{label}</SectionHeading>
 
-        {endpointMapper(sectionStructure)}
+        {endpointList(sectionStructure)}
 
         {sectionStructure.isDBTable && (
           <>
