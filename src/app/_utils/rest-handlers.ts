@@ -1,7 +1,8 @@
 import { generateQueryString } from '@/_utils/api-features';
 import { HTTPMethods, restUrlBase } from '@/_lib/constants';
-import { cookies, headers } from 'next/headers';
-import { User, createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import { headers } from 'next/headers';
+import supabase from '@/_supabase/create-client';
+import { User } from '@supabase/auth-helpers-nextjs';
 
 interface ResponseJson {
   data: any;
@@ -41,9 +42,21 @@ const anonHeaders = {
   Prefer: 'count=exact',
 };
 
+const generateAnonHeaders = (method?: keyof typeof HTTPMethods) => {
+  const obj = { ...anonHeaders };
+
+  obj.Prefer = 'count=exact';
+
+  if (['POST', 'PATCH'].includes(method?.toUpperCase() || '')) {
+    obj.Prefer = 'return=representation';
+  }
+
+  return obj;
+};
+
 const generateAuthHeaders = (jwt: string, method?: keyof typeof HTTPMethods) => {
   const obj = {
-    ...anonHeaders,
+    ...generateAnonHeaders(method),
     Authorization: `Bearer ${jwt}`,
   };
 
@@ -95,7 +108,11 @@ export const postgrestFetch = async ({
     const contentRange = res.headers.get('content-range');
     const count = contentRange ? Number(contentRange.split('/')[1]) : null;
 
-    const responseJson: ResponseJson = { data: json, count };
+    const responseJson: ResponseJson = { data: json };
+
+    if (count && count > 1) {
+      responseJson.count = count;
+    }
 
     if (responseJson.data.length && (searchParams?.get('limit') || searchParams?.get('offset'))) {
       responseJson.nextOffset =
@@ -114,8 +131,6 @@ export const postgrestFetch = async ({
 };
 
 export const getUserFromRequest = async (): Promise<GetUserFromRequestReturn> => {
-  const supabase = createRouteHandlerClient({ cookies });
-
   const headersInstance = headers();
   const authorization = headersInstance.get('authorization');
 

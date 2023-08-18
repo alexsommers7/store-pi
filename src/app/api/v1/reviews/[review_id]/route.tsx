@@ -44,7 +44,7 @@ export async function PATCH(request: Request, context: Context) {
       searchParams: new URLSearchParams({ id: review_id }),
     });
 
-    if (selectError) return apiError(selectError);
+    if (selectError || !selectJson.data.length) return apiError(selectError || 'Not found');
 
     if (isOriginalResource(selectJson.data[0].created_at)) {
       return modifiedOriginalResourceError();
@@ -105,6 +105,8 @@ export async function DELETE(request: Request, context: Context) {
       searchParams: new URLSearchParams({ id: review_id }),
     });
 
+    if (error) return apiError(error);
+
     const { error: storedProcedureError } = await callStoredProcedure({
       procedureName: 'update_product_review_stats',
       jwt,
@@ -115,9 +117,6 @@ export async function DELETE(request: Request, context: Context) {
 
     if (storedProcedureError) return apiError(storedProcedureError);
 
-    if (error) return apiError(error);
-
-    // return 204 no content
     return new NextResponse(null, { status: 204 });
   } catch (error) {
     return catchError(error);

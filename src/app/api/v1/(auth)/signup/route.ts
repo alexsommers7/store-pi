@@ -1,12 +1,7 @@
 import { NextResponse } from 'next/server';
-import { defaultUserPhotoUrl } from '@/_lib/constants';
-import { catchError } from '@/_utils/api-errors';
+import { apiError, catchError } from '@/_utils/api-errors';
+import { postgrestFetch } from '@/_utils/rest-handlers';
 import supabase from '@/_supabase/create-client';
-
-interface OptionsData {
-  name: string;
-  photo?: string;
-}
 
 export async function POST(request: Request) {
   try {
@@ -19,15 +14,9 @@ export async function POST(request: Request) {
       );
     }
 
-    const optionsData: OptionsData = { name };
-    if (photo) optionsData.photo = photo;
-
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
-      options: {
-        data: optionsData,
-      },
     });
 
     if (error || !data) {
@@ -37,11 +26,18 @@ export async function POST(request: Request) {
       );
     }
 
-    if (data.user && !data.user.user_metadata.photo) {
-      data.user.user_metadata.photo = defaultUserPhotoUrl;
-    }
+    // doing this here instead of a supabase function because ...
+    // need access to request body and don't want to store it in auth.users
+    const { error: userError } = await postgrestFetch({
+      resource: 'users',
+      method: 'POST',
+      jwt: data.session?.access_token,
+      body: { user_id: data.user?.id, name, photo },
+    });
 
-    return NextResponse.json({ data: data.session });
+    if (userError) return apiError(userError);
+
+    return NextResponse.json({ data });
   } catch (error) {
     return catchError(error);
   }

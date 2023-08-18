@@ -1,7 +1,6 @@
 import { resourcesWithForeignTables } from '@/_lib/constants';
 import { Product } from '@/_lib/types';
-import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import supabase from '@/_supabase/create-client';
 
 export const generateForeignTableSelectionWhenApplicable = (
   resource: string,
@@ -41,8 +40,6 @@ export const addPluralityWhenApplicable = (resource: string) => {
 };
 
 export const calculateOrderTotal = async (requestBody: any) => {
-  const supabase = createRouteHandlerClient({ cookies });
-
   if (!requestBody.products) return 0;
 
   const { data: productPricingData, error: productPricingError } = await supabase
