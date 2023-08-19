@@ -33,7 +33,7 @@ export const createPurchaseBody = `"products": [
 export const addOrRemoveProductToCurrentUserWishlistBody = `"product_id": 3 // required`;
 
 export const updateCurrentUserBody = `"name": "...",
-  "photo": "..."
+"photo": "..."
 `;
 
 export const signupBody = `"name": "...",
