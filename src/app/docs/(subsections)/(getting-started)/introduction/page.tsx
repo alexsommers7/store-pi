@@ -216,7 +216,7 @@ export default function Introduction() {
               largeMargin={false}
               noteText={
                 <span>
-                  Each <span className='snippet'>GET</span> request will contain a{' '}
+                  Each <span className='snippet'>GET</span> response will contain a{' '}
                   <span className='snippet'>count</span> value that indicates the total number of
                   items that match the given query. If the <span className='snippet'>limit</span> or{' '}
                   <span className='snippet'>offset</span> parameter was passed, it will also contain

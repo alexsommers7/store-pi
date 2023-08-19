@@ -1,4 +1,4 @@
-import { TextLink } from '../navigation/textLink';
+import { TextLink } from '@/_components/navigation/textLink';
 
 export function Footer() {
   return (

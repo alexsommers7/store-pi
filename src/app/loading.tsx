@@ -1,4 +1,4 @@
-import { RollerLoader } from './_components/loaders/roller';
+import { RollerLoader } from '@/_components/loaders/roller';
 
 export default function Loading() {
   return (
