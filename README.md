@@ -52,7 +52,7 @@ The following query parameters can optionally be appended to all `GET` requests.
 | `limit`   | Limit the query results. Defaults to `20`.                                                            | `?limit=10`                        |
 | `offset`  | Paginate the query results. Defaults to `0`.                                                          | `?offset=2`                        |
 
-> If the `limit` or `offset` parameter is passed, the response json will contain a `nextOffset` value if not already at the end.
+> Each GET request will contain a `count` value that indicates the total number of items that match the given query. If the `limit` or `offset` parameter was passed, it will also contain a `nextOffset` value.
 
 ## Filtering Results
 
