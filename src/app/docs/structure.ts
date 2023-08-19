@@ -287,7 +287,7 @@ export const structure = [
       {
         label: 'Users',
         slug: 'users',
-        isDBTable: false,
+        isDBTable: true,
         desc: 'Each user object will contain general profile information, including a link to a stock photo hosted on S3.',
         anchors: [
           {
