@@ -55,6 +55,10 @@ body,
   overflow-wrap: anywhere;
 }
 
+.min-height-minus-nav-and-footer {
+  min-height: calc(100vh - 160px);
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
