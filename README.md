@@ -16,12 +16,12 @@ A default dataset is provided with this API. It consists of 19 users (each with 
 
 That said, you do have the ability to interact with the database and persist your custom data with select resources. Notably, You may sign up as a new user and perform any of the following actions as your new user:
 
-- Log in
-- Modify your profile
-- Create/edit reviews
-- Add/remove cart items
-- Add/remove wishlist items
-- Create a new purchase
+-   Log in
+-   Modify your profile
+-   Create/edit reviews
+-   Add/remove cart items
+-   Add/remove wishlist items
+-   Create a new purchase
 
 While creating your own user is recommended, you may also perform any of the above actions as one of the users from the original dataset. When doing so, the endpoint will still respond as if the request were successful, but your data will not be persisted. See logging in for information on how to authenticate as one of these users.
 
@@ -84,7 +84,7 @@ Also thanks to its reliance on Supabase, StorePI comes with [pg_graphql](https:/
 
 ### Prerequisites
 
-Node v16.14.0
+Node v22.16.0+
 
 ### Installs dependencies, compiles, and hot-reloads for development
 
